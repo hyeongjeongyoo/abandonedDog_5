@@ -12,5 +12,7 @@ public class Define {
 														+ "careAddr, orgNm, chargeNm, officetel) "
 														+ "values "
 														+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+
+	public static final String SIDO_PARSING_DATA = " insert into sido(orgCd, orgdownNm) values (?, ?) ";
 	
 }
