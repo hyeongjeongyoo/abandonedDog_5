@@ -13,7 +13,7 @@ public class Sigungu {
 	public static final int DAEJEON = 6300000;
 	public static final int ULSAN = 6310000;
 	public static final int GYEONGGI = 6410000;
-	public static final int GWANGONE = 6530000;
+	public static final int GANGONE = 6530000;
 	public static final int CHUNGCHEONG_NOTRH = 6430000;
 	public static final int CHUNGCHEONG_SOUTH = 6440000;
 	public static final int JEONBUK = 6540000;
