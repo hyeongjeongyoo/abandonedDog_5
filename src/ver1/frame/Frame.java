@@ -88,9 +88,6 @@ public class Frame extends JFrame {
 		abandonment.addTab("보호소 찾기", searchShelter);
 		
 		main.setUI(emptyTap());
-		board.setUI(emptyTap());
-		missing.setUI(emptyTap());
-		abandonment.setUI(emptyTap());
 		
 		add(main);
 	}
