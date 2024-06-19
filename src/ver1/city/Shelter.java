@@ -1,48 +1,58 @@
 package ver1.city;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
+import ver1.jdbc.DBConnectionManager;
 
 public class Shelter {
-
-	// 보호소
-	//public static final int SEOUL_HOMEPROTECT = 6119999;
-	public static final int SEOUL_GANGNAM = 3220000;
-	public static final int SEOUL_GANGDONG = 3240000;
-	public static final int SEOUL_GANGBUK = 3080000;
-	public static final int SEOUL_GANGSEO = 3150000;
-	//public static final int SEOUL_HOMEPROTECT = 3200000;
 	
-	
-
-	
-	
-	public static String shelter(int upr_cd, int org_cd) {
+	public static String shelter(String uprCd, String orgCd) {
 		String url = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter"
-				+ "?upr_cd=" + Sigungu.sigungu(upr_cd)
-				+ "&org_cd=" + org_cd
+				+ "?upr_cd=" + uprCd
+				+ "&org_cd=" + orgCd
 				+ "&serviceKey=palsG47GgfoxfBI5IvepO%2Bs%2BzSWEnnxl74qGa%2FkxbmgoHz4R%2BNYSYXYxeaPeMmUgYDU1V%2BevDZ3g6IoveoEGHQ%3D%3D"
 				+ "&_type=json";
 		
-		return null;
+		return url;
 	}
-	
-	
-	
-	
-	public static void main(String[] args) {
+
+	public static List<String> addShelter() {
 		
-		Map<String, Integer> sigungu = new HashMap<String, Integer>();
-		sigungu.put("서울특별시", 6119999);
+		List<String> list = new ArrayList<>();
 		
-	}// end of main
-	
-	
-	
-	
-	
-	
+		Map<String, String> sigungu = new HashMap<>();
+		try {
+			Connection conn = DBConnectionManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM sigungu ");
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				sigungu.put(rs.getString("orgCd"), rs.getString("uprCd"));
+			}
+
+			Iterator<Map.Entry<String, String>> itr = sigungu.entrySet().iterator();
+			
+			while(itr.hasNext()) {
+				Map.Entry<String, String> entry = itr.next();
+				list.add(String.format(entry.getKey())+ "," + String.format(entry.getValue()));
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
 	
 }// end of class

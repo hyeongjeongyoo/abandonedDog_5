@@ -21,7 +21,7 @@ public class ApiParsing {
 	public static void main(String[] args) throws IOException {
 
 
-		for(int i = 1; i < 339; i++) {
+		for(int i = 158; i < 339; i++) {
 		URL url = new URL(ParsingUrl.AbandonmentPublic(20210101, 20240618, i));
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
