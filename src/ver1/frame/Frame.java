@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import ver1.panel.FreeBoard;
+import ver1.panel.MissingBoard;
 
 public class Frame extends JFrame {
 
@@ -21,7 +22,7 @@ public class Frame extends JFrame {
 	private JTabbedPane login;
 
 	private FreeBoard freeBoard;
-	private JPanel missingBoard;
+	private MissingBoard missingBoard;
 	private JPanel registerAdopt;
 	private JPanel reviewAdopt;
 	private JPanel abanAnimalList;
@@ -46,7 +47,7 @@ public class Frame extends JFrame {
 		login = new JTabbedPane();
 
 		freeBoard = new FreeBoard();
-		missingBoard = new JPanel();
+		missingBoard = new MissingBoard();
 		registerAdopt = new JPanel();
 		reviewAdopt = new JPanel();
 		abanAnimalList = new JPanel();
