@@ -1,82 +1,159 @@
 package ver1.panel;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableModel;
-
-import ver1.frame.Frame;
+import javax.swing.table.TableColumn;
 
 public class MissingBoard extends JPanel {
 
-    private JPanel dogPanel;
-    private JPanel catPanel;
-    private JTabbedPane pane;
-
     private JButton registrationBtn;
+    private JButton nextPageBtn;
+    private JButton prevPageBtn;
+    private JTable dogTable;
+    private JScrollPane dogScroll;
+    private TableColumn column;
+    private int currentPage = 0;
+    private int rowsPerPage = 30; // 한 페이지에 표시할 행 수
+    private DefaultTableModel model;
+    private Object[][] dogData;
 
     public MissingBoard() {
         initData();
         setInitLayout();
         addEventLayout();
+        updateTable();
     }
 
     public void initData() {
-        dogPanel = new JPanel();
-        catPanel = new JPanel();
         registrationBtn = new JButton("등록");
-        pane = new JTabbedPane();
+        nextPageBtn = new JButton("다음 페이지");
+        prevPageBtn = new JButton("이전 페이지");
 
         // 강아지와 고양이의 샘플 데이터
-        String[] columnNames = {"id", "kindCd", "colorCd", "age", "sexCd", "specialMark","1111111111","1111111111","1111111111","1111111111"};
-        Object[][] dogData = {
-                {1, "[개] 비숑 프리제", "흰색", "2016년생", "F", "24-6-1-17 많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
-                // 필요에 따라 더 많은 행 추가 가능
-        };
-        Object[][] catData = {
-                {"위스커스", "시암 고양이", 3},
-                // 필요에 따라 더 많은 행 추가 가능
+        String[] columnNames = {"id", "kindCd", "colorCd", "age", "sexCd", "specialMark"};
+        dogData = new Object[][] {
+                {1, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {3, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {4, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {5, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {6, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {7, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {8, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {9, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {10, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {11, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {12,"[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {13, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {30, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {31, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
+                {45, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"}
         };
 
         // 각 패널에 JTable 생성 및 샘플 데이터 추가
-        JTable dogTable = new JTable(new DefaultTableModel(dogData, columnNames));
-        JTable catTable = new JTable(new DefaultTableModel(catData, columnNames));
-
-        // 패널에 JTable 추가
-        JScrollPane dogScroll = new JScrollPane(dogTable);
-        dogScroll.setSize(1000,600);
-        dogPanel.add(dogScroll);  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
-        catPanel.add(new JScrollPane(catTable));  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
-
-        pane.setUI(Frame.emptyTap());
-        
-        
+        model = new DefaultTableModel(dogData, columnNames);
+        dogTable = new JTable(model);
+        dogScroll = new JScrollPane(dogTable);
+        column = dogTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
     }
 
     public void setInitLayout() {
         setLayout(null);
 
+        //
+        column.setPreferredWidth(500); // 원하는 기본 너비 설정
+        column.setMinWidth(300); // 최소 너비 설정
+        column.setMaxWidth(800); // 최대 너비 설정
+        
+        // 컬럼 헤더 이동 불가
+        dogTable.getTableHeader().setReorderingAllowed(false);
+
         registrationBtn.setBounds(1040, 0, 60, 30);
         add(registrationBtn);
 
-        dogPanel.setBackground(Color.orange);
-        catPanel.setBackground(Color.BLUE);
-
-        pane.setBounds(75, 10, 1025, 580);
-        pane.add("강아지", dogPanel);
-        pane.add("고양이", catPanel);
-
+        dogScroll.setBounds(20, 50, 1000, 503);
+        add(dogScroll);  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
         
-        add(pane);
+        prevPageBtn.setBounds(20, 560, 120, 30);
+        nextPageBtn.setBounds(150, 560, 120, 30);
+        add(prevPageBtn);
+        add(nextPageBtn);
     }
 
     public void addEventLayout() {
-        // Add event handling code here if needed
+        nextPageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	currentPage++;
+                	updateTable();
+				} catch (NegativeArraySizeException e2) {
+					currentPage--;
+					JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
+            }
+        });
+
+        prevPageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+                if (currentPage > 0) {
+                    currentPage--;
+                }
+                updateTable();
+            }
+        });
+    }
+
+    private void updateTable() {
+        DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[]{"id", "kindCd", "colorCd", "age", "sexCd", "specialMark"});
+        dogTable.setModel(newModel);
+
+        column = dogTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
+        column.setPreferredWidth(500); // 원하는 기본 너비 설정
+        column.setMinWidth(300); // 최소 너비 설정
+        column.setMaxWidth(800); // 최대 너비 설정
+    }
+
+    private Object[][] getPageData() {
+        int start = currentPage * rowsPerPage;
+        int end = Math.min(start + rowsPerPage, dogData.length);
+        Object[][] pageData = new Object[end - start][];
+        for (int i = start; i < end; i++) {
+            pageData[i - start] = dogData[i];
+        }
+        return pageData;
     }
 }
