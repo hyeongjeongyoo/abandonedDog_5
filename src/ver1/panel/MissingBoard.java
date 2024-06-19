@@ -11,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableModel;
 
+import ver1.frame.Frame;
+
 public class MissingBoard extends JPanel {
 
     private JPanel dogPanel;
@@ -52,21 +54,7 @@ public class MissingBoard extends JPanel {
         dogPanel.add(dogScroll);  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
         catPanel.add(new JScrollPane(catTable));  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
 
-        pane.setUI(new BasicTabbedPaneUI() {
-            @Override
-            protected void installDefaults() {
-                super.installDefaults();
-                tabAreaInsets.left = 0;
-            }
-            
-            @Override
-            protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-            }
-            
-            @Override
-            protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-            }
-        });
+        pane.setUI(Frame.emptyTap());
         
         
     }

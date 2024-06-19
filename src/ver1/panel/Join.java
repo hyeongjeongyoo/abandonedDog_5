@@ -99,7 +99,7 @@ public class Join extends JFrame {
 		add(passwordField);
 		add(brithField);
 		add(joinBtn);
-		add(joinBackgroundImg);
+//		add(joinBackgroundImg);
 		add(joinGo);
 	}
 

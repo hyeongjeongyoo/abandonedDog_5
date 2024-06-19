@@ -1,11 +1,13 @@
 package ver1.frame;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
@@ -85,15 +87,35 @@ public class Frame extends JFrame {
 		abandonment.addTab("유기 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
 		
-		// 보호소 찾기
-		// 동물병원찾기
-		main.addTab("로그인", login);
-
+		main.setUI(emptyTap());
+		board.setUI(emptyTap());
+		missing.setUI(emptyTap());
+		abandonment.setUI(emptyTap());
+		
 		add(main);
 	}
 
 	private void addEventListener() {
 
+	}
+	
+	public static BasicTabbedPaneUI emptyTap() {
+		BasicTabbedPaneUI emptyTap = new BasicTabbedPaneUI() {
+            @Override
+            protected void installDefaults() {
+                super.installDefaults();
+                tabAreaInsets.left = 0;
+            }
+            
+            @Override
+            protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
+            }
+            
+            @Override
+            protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
+            }
+        };
+		return emptyTap;
 	}
 
 	public static void main(String[] args) {

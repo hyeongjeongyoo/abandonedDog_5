@@ -118,7 +118,7 @@ public class Login extends JFrame{
     		public void mousePressed(MouseEvent e) {
     	        setVisible(false);
     	        Join join = new Join();
-    	        join.setVisible(true);
+//    	        join.setVisible(true);
     		}
     	});
     }
