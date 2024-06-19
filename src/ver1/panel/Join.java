@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -30,6 +29,8 @@ public class Join extends JFrame {
 	private JTextField nameField;
 	private JTextField passwordField;
 	private JTextField brithField;
+	private JTextField phoneNum;
+	private JTextField employeeNum;
 
 	private JLabel joinBtn;
 	private final int BTN_WIDTH = 240;
@@ -54,16 +55,22 @@ public class Join extends JFrame {
 		nameField = new JTextField("이름", 10);
 		passwordField = new JTextField("PASSWORD", 50);
 		brithField = new JTextField("생년월일", 50);
-		joinGo = new JButton("회원가입");
+		phoneNum = new JTextField("전화번호", 50);
+		employeeNum = new JTextField("직원번호", 50);
 
 		nameField.setFont(font);
 		passwordField.setFont(font);
+		brithField.setFont(font);
+		phoneNum.setFont(font);
+		employeeNum.setFont(font);
 		nameField.setForeground(Color.DARK_GRAY);
 		passwordField.setForeground(Color.DARK_GRAY);
-		joinGo.setForeground(Color.DARK_GRAY);
+		brithField.setForeground(Color.DARK_GRAY);
+		phoneNum.setForeground(Color.DARK_GRAY);
+		employeeNum.setForeground(Color.DARK_GRAY);
 
 		setTitle("어서오묘 데러가개 회원가입");
-		setSize(440, 1000);
+		setSize(440, 500);
 		setContentPane(joinBackgroundImg);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -79,29 +86,25 @@ public class Join extends JFrame {
 		nameField.setBounds(95, 126, 240, 40);
 		passwordField.setBounds(95, 170, 240, 40);
 		brithField.setBounds(95, 213, 240, 40);
+		phoneNum.setBounds(95, 256, 240, 40);
+		employeeNum.setBounds(95, 298, 240, 40);
 
 		logo.setSize(79, 79);
 		logo.setLocation(170, 25);
 		logo.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 모양 변경
 
 		joinBtn.setSize(BTN_WIDTH, BTN_HEIGHT);
-		joinBtn.setLocation(95, 880);
+		joinBtn.setLocation(95, 350);
 		joinBtn.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 모양 변경
-
-		joinGo.setSize(110, 15);
-		joinGo.setLocation(256, 980);
-		joinGo.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 모양 변경
-		joinGo.setBorder(null);
-		joinGo.setContentAreaFilled(false);
-		joinGo.setFont(font2);
 
 		add(logo);
 		add(nameField);
 		add(passwordField);
 		add(brithField);
+		add(phoneNum);
+		add(brithField);
+		add(employeeNum);
 		add(joinBtn);
-//		add(joinBackgroundImg);
-		add(joinGo);
 	}
 
 	private void addEventListener() {
@@ -109,6 +112,30 @@ public class Join extends JFrame {
     		@Override
     		public void mousePressed(MouseEvent e) {
     			nameField.setText("");
+    		}
+    	});
+		passwordField.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mousePressed(MouseEvent e) {
+    			passwordField.setText("");
+    		}
+    	});
+		brithField.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mousePressed(MouseEvent e) {
+    			brithField.setText("");
+    		}
+    	});
+		phoneNum.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mousePressed(MouseEvent e) {
+    			phoneNum.setText("");
+    		}
+    	});
+		employeeNum.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mousePressed(MouseEvent e) {
+    			employeeNum.setText("");
     		}
     	});
 		joinGo.addMouseListener(new MouseAdapter() {
