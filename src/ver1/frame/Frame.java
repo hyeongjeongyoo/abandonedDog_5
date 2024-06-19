@@ -1,6 +1,7 @@
 package ver1.frame;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,6 +37,9 @@ public class Frame extends JFrame {
 	}
 
 	private void initData() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("img/fav.png")); // 파비콘
+        setTitle("어서오묘 데러가개");
+        
 		font = new Font("Noto Sans KR", Font.BOLD, 15);
 
 		main = new JTabbedPane();
@@ -53,7 +57,6 @@ public class Frame extends JFrame {
 		abanAnimalList = new JPanel();
 		registerAnimal = new JPanel();
 		searchShelter = new JPanel();
-
 	}
 
 	private void setInitLayout() {

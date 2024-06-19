@@ -18,7 +18,7 @@ public class FreeBoard extends JPanel{
 		setLayout(new BorderLayout());
 		
 		JLabel title = new JLabel("자유게시판", SwingConstants.CENTER);
-		title.setFont(new Font("NotoSansKR", Font.BOLD,20));
+		title.setFont(new Font("Noto Sans KR", Font.BOLD,20));
 		title.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		add(title,BorderLayout.NORTH);
 		
