@@ -1,12 +1,18 @@
 package ver1.panel;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -15,13 +21,23 @@ public class MissingBoard extends JPanel {
     private JButton registrationBtn;
     private JButton nextPageBtn;
     private JButton prevPageBtn;
-    private JTable dogTable;
-    private JScrollPane dogScroll;
+    private JButton refrashBtn;
+    
+    private JTable animalTable;
+    private JScrollPane animalScroll;
     private TableColumn column;
+    
     private int currentPage = 0;
     private int rowsPerPage = 30; // 한 페이지에 표시할 행 수
+    
     private DefaultTableModel model;
     private Object[][] dogData;
+    
+    private JTextField searchText;
+    private JButton searchBtn;
+    private JComboBox<String> searchComboBox;
+    
+    String[] columnNames = {"id", "kindCd", "colorCd", "age", "sexCd", "specialMark"};
 
     public MissingBoard() {
         initData();
@@ -31,12 +47,17 @@ public class MissingBoard extends JPanel {
     }
 
     public void initData() {
+    	
+    	searchText = new JTextField();
+    	searchBtn = new JButton("검색");
+    	searchComboBox = new JComboBox<>();
+    	
         registrationBtn = new JButton("등록");
         nextPageBtn = new JButton("다음 페이지");
         prevPageBtn = new JButton("이전 페이지");
+        refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
         // 강아지와 고양이의 샘플 데이터
-        String[] columnNames = {"id", "kindCd", "colorCd", "age", "sexCd", "specialMark"};
         dogData = new Object[][] {
                 {1, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
                 {2, "[개] 비숑 프리제", "흰색", "2016년생", "F", "많이 활발해요~사람도 엄청 좋아해요~근처에 사는아이 같아요~~"},
@@ -83,9 +104,9 @@ public class MissingBoard extends JPanel {
 
         // 각 패널에 JTable 생성 및 샘플 데이터 추가
         model = new DefaultTableModel(dogData, columnNames);
-        dogTable = new JTable(model);
-        dogScroll = new JScrollPane(dogTable);
-        column = dogTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
+        animalTable = new JTable(model);
+        animalScroll = new JScrollPane(animalTable);
+        column = animalTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
     }
 
     public void setInitLayout() {
@@ -97,13 +118,29 @@ public class MissingBoard extends JPanel {
         column.setMaxWidth(800); // 최대 너비 설정
         
         // 컬럼 헤더 이동 불가
-        dogTable.getTableHeader().setReorderingAllowed(false);
+        animalTable.getTableHeader().setReorderingAllowed(false);
+        
+        searchText.setBounds(895, 25, 200, 22);
+        add(searchText);
+        
+        searchBtn.setBounds(1099, 25, 59, 20);
+        add(searchBtn);
+        
+        searchComboBox.setBounds(810, 25, 80, 20);
+        searchComboBox.setModel(new DefaultComboBoxModel<String>(columnNames));
+        add(searchComboBox);
 
-        registrationBtn.setBounds(1040, 0, 60, 30);
+        registrationBtn.setBounds(1099, 560, 60, 30);
         add(registrationBtn);
+        
+        refrashBtn.setBounds(20, 0, 50, 50);
+        refrashBtn.setBorderPainted(false);
+        refrashBtn.setContentAreaFilled(false);
+        refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(refrashBtn);
 
-        dogScroll.setBounds(20, 50, 1000, 503);
-        add(dogScroll);  // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
+        animalScroll.setBounds(20, 50, 1140, 503);
+        add(animalScroll);
         
         prevPageBtn.setBounds(20, 560, 120, 30);
         nextPageBtn.setBounds(150, 560, 120, 30);
@@ -129,6 +166,10 @@ public class MissingBoard extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
             	
+            	if(currentPage == 0) {
+            		JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+            	}
+            	
                 if (currentPage > 0) {
                     currentPage--;
                 }
@@ -139,9 +180,9 @@ public class MissingBoard extends JPanel {
 
     private void updateTable() {
         DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[]{"id", "kindCd", "colorCd", "age", "sexCd", "specialMark"});
-        dogTable.setModel(newModel);
+        animalTable.setModel(newModel);
 
-        column = dogTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
+        column = animalTable.getColumnModel().getColumn(5); // "specialMark" 컬럼
         column.setPreferredWidth(500); // 원하는 기본 너비 설정
         column.setMinWidth(300); // 최소 너비 설정
         column.setMaxWidth(800); // 최대 너비 설정
