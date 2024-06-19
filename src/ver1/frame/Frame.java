@@ -20,7 +20,6 @@ public class Frame extends JFrame {
 
 	private JPanel freeBoard;
 	private JPanel missingBoard;
-	private JPanel abanBoard;
 	private JPanel registerAdopt;
 	private JPanel reviewAdopt;
 	private JPanel abanAnimalList;
@@ -46,7 +45,6 @@ public class Frame extends JFrame {
 
 		freeBoard = new JPanel();
 		missingBoard = new JPanel();
-		abanBoard = new JPanel();
 		registerAdopt = new JPanel();
 		reviewAdopt = new JPanel();
 		abanAnimalList = new JPanel();
@@ -61,7 +59,6 @@ public class Frame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// 유기동물 등록
 		main.addTab("홈", home);
 		main.setFont(font);
 		home.setFont(font);
@@ -69,18 +66,14 @@ public class Frame extends JFrame {
 		missing.setFont(font);
 		abandonment.setFont(font);
 
-		// 임시보호 신청
 		main.addTab("게시판", board);
 		board.addTab("자유게시판", freeBoard);
 		board.addTab("실종게시판", missingBoard);
-		board.addTab("유기게시판", abanBoard);
 
-		// 실종등록/제보
 		main.addTab("입양", missing);
 		missing.addTab("입양 신청", registerAdopt);
 		missing.addTab("입양 후기", reviewAdopt);
 		
-		// 상태확인
 		main.addTab("보호소", abandonment);
 		abandonment.addTab("유기 동물 목록", abanAnimalList);
 		abandonment.addTab("유기 동물 등록", registerAnimal);
