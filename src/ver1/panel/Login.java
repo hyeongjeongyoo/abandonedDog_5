@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,6 +23,9 @@ public class Login extends JFrame{
 	
 	Login login;
 	Join join2;
+	
+	private String id = "root";
+	private String password = "asd123";
 	
 	private JPanel loginBackgroundImg;
 	
@@ -38,6 +42,7 @@ public class Login extends JFrame{
 
     Font font = new Font("Noto Sans KR", Font.BOLD, 15);
     Font font2 = new Font("Noto Sans KR", Font.BOLD, 12);
+    
     public Login() {
         initData();
         setInitLayout();
@@ -99,6 +104,8 @@ public class Login extends JFrame{
         add(join);
     }
 
+
+    
     private void addEventListener() {
         // 이벤트 리스너 추가할 부분
     	idField.addMouseListener(new MouseAdapter() {
@@ -121,9 +128,56 @@ public class Login extends JFrame{
 //    	        join.setVisible(true);
     		}
     	});
+    	loginBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	 String enteredId = idField.getText();
+                 String enteredPassword = passwordField.getText();
+
+                 if (enteredId.equals(id) && enteredPassword.equals(password)) {
+                     JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
+                     setVisible(false);
+                 } else{
+                     JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+                 } 
+                	 
+            }
+    	});
     }
 
-    public static void main(String[] args) {
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public JTextField getIdField() {
+		return idField;
+	}
+
+	public void setIdField(JTextField idField) {
+		this.idField = idField;
+	}
+
+	public JTextField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JTextField passwordField) {
+		this.passwordField = passwordField;
+	}
+
+	public static void main(String[] args) {
         new Login();
     }
 

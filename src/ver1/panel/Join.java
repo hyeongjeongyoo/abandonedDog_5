@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -110,7 +111,23 @@ public class Join extends JFrame {
     			nameField.setText("");
     		}
     	});
-	}
+		joinGo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	 String enteredId = nameField.getText();
+                 String enteredPassword = passwordField.getText();
+
+
+                 if(enteredId.equals(nameField) == enteredId.equals(nameField)) {
+                 	 //JOptionPane.showMessageDialog(null, "아이디 중복입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+                  } 
+                	 
+            }
+    	});
+		
+
+    }
+	
 	
 	public static void main(String[] args) {
 		new Join();
