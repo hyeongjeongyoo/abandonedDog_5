@@ -59,8 +59,9 @@ public class ApiParsing2 {
 			int count = 0;
 			for (JsonShelterDTO.item item : dto.response.body.items.item) {
 				PreparedStatement pstmt = connect.prepareStatement(Define.SHELTER);
-				pstmt.setString(1, item.careRegNo);
-				pstmt.setString(2, item.careNm);
+				pstmt.setString(1, orgCd);
+				pstmt.setString(2, item.careRegNo);
+				pstmt.setString(3, item.careNm);
 				pstmt.executeUpdate();
 				count++;
 			}

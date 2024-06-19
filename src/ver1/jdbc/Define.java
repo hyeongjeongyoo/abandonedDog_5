@@ -17,6 +17,6 @@ public class Define {
 	
 	public static final String SIGUNGU_PARSING_DATA = " insert into sigungu(uprCd, orgCd, orgdownNm) values (?, ?, ?) ";
 	
-	public static final String SHELTER = "insert into shelter(careRegNo, careNm) values (?, ?)";
+	public static final String SHELTER = "insert into shelter(orgCd, careRegNo, careNm) values (?, ?, ?)";
 	
 }
