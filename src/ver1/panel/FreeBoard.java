@@ -1,13 +1,19 @@
 package ver1.panel;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -16,13 +22,23 @@ public class FreeBoard extends JPanel {
 	private JButton registrationBtn;
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
-	private JTable dogTable;
-	private JScrollPane dogScroll;
+	private JButton refrashBtn;
+
+	private JTable animalTable;
+	private JScrollPane animalScroll;
 	private TableColumn column;
+
 	private int currentPage = 0;
 	private int rowsPerPage = 30; // 한 페이지에 표시할 행 수
+
 	private DefaultTableModel model;
 	private Object[][] dogData;
+
+	private JTextField searchText;
+	private JButton searchBtn;
+	private JLabel title;
+
+	String[] columnNames = { "id", "title", "contents" };
 
 	public FreeBoard() {
 		initData();
@@ -32,23 +48,24 @@ public class FreeBoard extends JPanel {
 	}
 
 	public void initData() {
+		searchText = new JTextField();
+		searchBtn = new JButton("검색");
+		title = new JLabel("Title");
+
 		registrationBtn = new JButton("등록");
 		nextPageBtn = new JButton("다음 페이지");
 		prevPageBtn = new JButton("이전 페이지");
+		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
-		// 자유게시판 샘플데이터
-		String[] columnNames = { "id", "title", "contents" };
-		dogData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" }, 
-				{ 2, "인사 오지게 박습니다", "등업 신청이요~" },
+		dogData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" }, { 2, "인사 오지게 박습니다", "등업 신청이요~" },
 				{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
 
 		};
 
-		// 각 패널에 JTable 생성 및 샘플 데이터 추가
 		model = new DefaultTableModel(dogData, columnNames);
-		dogTable = new JTable(model);
-		dogScroll = new JScrollPane(dogTable);
-		column = dogTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
+		animalTable = new JTable(model);
+		animalScroll = new JScrollPane(animalTable);
+		column = animalTable.getColumnModel().getColumn(2); // "contents" 컬럼
 	}
 
 	public void setInitLayout() {
@@ -60,13 +77,28 @@ public class FreeBoard extends JPanel {
 		column.setMaxWidth(800); // 최대 너비 설정
 
 		// 컬럼 헤더 이동 불가
-		dogTable.getTableHeader().setReorderingAllowed(false);
+		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		registrationBtn.setBounds(1040, 0, 60, 30);
+		searchText.setBounds(895, 25, 200, 22);
+		add(searchText);
+
+		searchBtn.setBounds(1099, 25, 59, 20);
+		add(searchBtn);
+
+		title.setBounds(860, 25, 80, 20);
+		add(title);
+
+		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);
 
-		dogScroll.setBounds(20, 50, 1000, 503);
-		add(dogScroll); // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
+		refrashBtn.setBounds(20, 0, 50, 50);
+		refrashBtn.setBorderPainted(false);
+		refrashBtn.setContentAreaFilled(false);
+		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		add(refrashBtn);
+
+		animalScroll.setBounds(20, 50, 1140, 503);
+		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);
 		nextPageBtn.setBounds(150, 560, 120, 30);
@@ -75,40 +107,47 @@ public class FreeBoard extends JPanel {
 	}
 
 	public void addEventLayout() {
-		nextPageBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					currentPage++;
-					updateTable();
-				} catch (NegativeArraySizeException e2) {
-					currentPage--;
-					JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-		});
+		 nextPageBtn.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                try {
+	                	currentPage++;
+	                	updateTable();
+					} catch (NegativeArraySizeException e2) {
+						currentPage--;
+						JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+					}
+	            }
+	        });
 
-		prevPageBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (currentPage > 0) {
-					currentPage--;
-				}
-				updateTable();
-			}
-		});
+	        prevPageBtn.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	
+	            	if(currentPage == 0) {
+	            		JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+	            	}
+	            	
+	                if (currentPage > 0) {
+	                    currentPage--;
+	                }
+	                updateTable();
+	            }
+	        });
 	}
 
 	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(getPageData(),
-				new String[] { "id", "title", "contents"});
-		dogTable.setModel(newModel);
+		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "title", "contents" });
+		animalTable.setModel(newModel);
 
-		column = dogTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
-		column.setPreferredWidth(500); // 원하는 기본 너비 설정
+		column = animalTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
+		column.setPreferredWidth(800); // 원하는 기본 너비 설정
 		column.setMinWidth(300); // 최소 너비 설정
 		column.setMaxWidth(800); // 최대 너비 설정
+		
+		column = animalTable.getColumnModel().getColumn(0);
+		column.setMinWidth(40);
+		column.setMaxWidth(40);
 	}
 
 	private Object[][] getPageData() {
