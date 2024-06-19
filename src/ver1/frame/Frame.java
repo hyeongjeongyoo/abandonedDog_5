@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import ver1.panel.FreeBoard;
+
 public class Frame extends JFrame {
 
 	private Font font;
@@ -18,7 +20,7 @@ public class Frame extends JFrame {
 	private JTabbedPane abandonment;
 	private JTabbedPane login;
 
-	private JPanel freeBoard;
+	private FreeBoard freeBoard;
 	private JPanel missingBoard;
 	private JPanel registerAdopt;
 	private JPanel reviewAdopt;
@@ -43,7 +45,7 @@ public class Frame extends JFrame {
 		abandonment = new JTabbedPane();
 		login = new JTabbedPane();
 
-		freeBoard = new JPanel();
+		freeBoard = new FreeBoard();
 		missingBoard = new JPanel();
 		registerAdopt = new JPanel();
 		reviewAdopt = new JPanel();
