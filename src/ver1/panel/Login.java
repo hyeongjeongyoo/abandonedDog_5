@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import lombok.Data;
+import ver1.frame.Frame;
 
 @Data
 public class Login extends JFrame {
@@ -81,6 +82,8 @@ public class Login extends JFrame {
 
 		idField.setBounds(95, 126, 240, 40);
 		passwordField.setBounds(95, 170, 240, 40);
+		
+		loginBackgroundImg.setBackground(Color.white);
 
 		logo.setSize(79, 79);
 		logo.setLocation(170, 25);
@@ -133,6 +136,7 @@ public class Login extends JFrame {
 				if (enteredId.equals(id) && enteredPassword.equals(password)) {
 					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
+					new Frame();
 				} else {
 					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
@@ -152,6 +156,7 @@ public class Login extends JFrame {
 			if (enteredId.equals(id) && enteredPassword.equals(password)) {
 				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				setVisible(false); // 로그인 성공 시 현재 창을 숨김
+				new Frame();
 			} else {
 				JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 			}

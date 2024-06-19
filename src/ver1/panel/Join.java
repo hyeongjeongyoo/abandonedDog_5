@@ -82,6 +82,8 @@ public class Join extends JFrame {
 		setResizable(false); // 사이즈 조절 불가
 		setLocationRelativeTo(null); // 가운데 배치
 		setVisible(true);
+		
+		joinBackgroundImg.setBackground(Color.white);
 
 		nameField.setBounds(95, 126, 240, 40);
 		passwordField.setBounds(95, 170, 240, 40);
@@ -138,19 +140,19 @@ public class Join extends JFrame {
     			employeeNum.setText("");
     		}
     	});
-		joinGo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	 String enteredId = nameField.getText();
-                 String enteredPassword = passwordField.getText();
-
-
-                 if(enteredId.equals(nameField) == enteredId.equals(nameField)) {
-                 	 //JOptionPane.showMessageDialog(null, "아이디 중복입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
-                  } 
-                	 
-            }
-    	});
+//		joinGo.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//            	 String enteredId = nameField.getText();
+//                 String enteredPassword = passwordField.getText();
+//
+//
+//                 if(enteredId.equals(nameField) == enteredId.equals(nameField)) {
+//                 	 //JOptionPane.showMessageDialog(null, "아이디 중복입니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+//                  } 
+//                	 
+//            }
+//    	});
 		
 
     }
