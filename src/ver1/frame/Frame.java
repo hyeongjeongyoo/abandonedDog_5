@@ -10,6 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import ver1.panel.ReviewAdopt;
+import ver1.panel.VisitAnimal;
 import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
 
@@ -19,17 +20,15 @@ public class Frame extends JFrame {
 
 	private JTabbedPane main;
 
-	private JTabbedPane home;
 	private JTabbedPane board;
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
-	private JTabbedPane login;
 
+	private VisitAnimal visitAnimal;
 	private ReviewAdopt adoptReviewBoard;
 	private FreeBoard freeBoard;
 	private MissingBoard missingBoard;
 	private JPanel registerAdopt;
-	private JPanel reviewAdopt;
 	private JPanel abanAnimalList;
 	private JPanel registerAnimal;
 	private JPanel searchShelter;
@@ -48,18 +47,15 @@ public class Frame extends JFrame {
 
 		main = new JTabbedPane();
 
-		home = new JTabbedPane();
 		board = new JTabbedPane();
 		missing = new JTabbedPane();
 		abandonment = new JTabbedPane();
-		login = new JTabbedPane();
 
-		
+		visitAnimal = new VisitAnimal();
 		adoptReviewBoard = new ReviewAdopt();
 		freeBoard = new FreeBoard();
 		missingBoard = new MissingBoard();
 		registerAdopt = new JPanel();
-		reviewAdopt = new JPanel();
 		abanAnimalList = new JPanel();
 		registerAnimal = new JPanel();
 		searchShelter = new JPanel();
@@ -71,12 +67,12 @@ public class Frame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		main.addTab("홈", home);
 		main.setFont(font);
-		home.setFont(font);
 		board.setFont(font);
 		missing.setFont(font);
 		abandonment.setFont(font);
+		
+		main.addTab("홈", visitAnimal);
 
 		main.addTab("게시판", board);
 		board.addTab("자유게시판", freeBoard);
