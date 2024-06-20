@@ -12,10 +12,11 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import ver1.panel.ApplyAdoptBoard;
 import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
-import ver1.panel.abanAnimalList;
+import ver1.panel.RegisterAnimal;
 import ver1.panel.ReviewAdopt;
 import ver1.panel.ShelterSearch;
 import ver1.panel.VisitAnimal;
+import ver1.panel.abanAnimalList;
 
 public class BoardFrame extends JFrame {
 
@@ -35,7 +36,7 @@ public class BoardFrame extends JFrame {
 	private MissingBoard missingBoard;
 	private JPanel registerAdopt;
 	private JPanel abanAnimalList;
-	private JPanel registerAnimal;
+	private RegisterAnimal registerAnimal;
 	private ShelterSearch searchShelter;
 
 	public BoardFrame() {
@@ -64,7 +65,7 @@ public class BoardFrame extends JFrame {
 		missingBoard = new MissingBoard();
 		registerAdopt = new JPanel();
 		abanAnimalList = new JPanel();
-		registerAnimal = new JPanel();
+		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
 	}
 

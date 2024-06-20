@@ -17,7 +17,8 @@ public class RegisterAnimal extends JPanel {
 	private JComboBox<String> boxSex;
 	private JComboBox<String> boxNeuter;
 	private JTextField textSpecialMark;
-	private JRadioButton boxEmp;
+	private JRadioButton boxEmp1;
+	private JRadioButton boxEmp2;
 
 	private JLabel labelId;
 	private JLabel labelKind;
@@ -60,7 +61,8 @@ public class RegisterAnimal extends JPanel {
 		boxSex = new JComboBox<>(new String[]{"수컷", "암컷"});
 		boxNeuter = new JComboBox<>(new String[] {"Y", "N", "U"});
 		textSpecialMark = new JTextField(20);
-		boxEmp = new JRadioButton();
+		boxEmp1 = new JRadioButton("선택1");
+		boxEmp2 = new JRadioButton("선택2");
 
 		labelId = new JLabel("아이디");
 		innerPanel.add(labelId);
@@ -113,9 +115,11 @@ public class RegisterAnimal extends JPanel {
 
 		labelEmp = new JLabel("소속보호소");
 		innerPanel.add(labelEmp);
-		innerPanel.add(boxEmp);
+		innerPanel.add(boxEmp1);
+		innerPanel.add(boxEmp2);
 		labelEmp.setBounds(50, 410, 500, 40);
-		boxEmp.setBounds(130, 410, 500, 30);
+		boxEmp1.setBounds(130, 415, 70, 30);
+		boxEmp2.setBounds(200, 415, 70, 30);
 
 		add(innerPanel);
 		add(innerPanel, BorderLayout.CENTER);
@@ -137,7 +141,8 @@ public class RegisterAnimal extends JPanel {
 	            String sex = (String) boxSex.getSelectedItem();
 	            String neuter = (String) boxNeuter.getSelectedItem();
 	            String specialMark = textSpecialMark.getText();
-	            String emp = boxEmp.isSelected() ? "사용함" : "사용안함";
+	            String emp1 = boxEmp1.isSelected() ? "사용함" : "사용안함";
+	            String emp2 = boxEmp2.isSelected() ? "사용함" : "사용안함";
 		});
 	}
 
