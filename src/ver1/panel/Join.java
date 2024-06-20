@@ -30,7 +30,8 @@ public class Join extends JFrame {
 	private JTextField passwordField;
 	private JTextField brithField;
 	private JTextField phoneNum;
-	private JTextField employeeNum;
+	private JTextField memberNum;
+	private JTextField memberName;
 
 	private JLabel joinBtn;
 	private final int BTN_WIDTH = 240;
@@ -56,21 +57,24 @@ public class Join extends JFrame {
 		passwordField = new JTextField("PASSWORD", 50);
 		brithField = new JTextField("생년월일", 50);
 		phoneNum = new JTextField("전화번호", 50);
-		employeeNum = new JTextField("직원번호", 50);
+		memberNum = new JTextField("소속번호", 50);
+		memberName = new JTextField("소속이름", 50);
 
 		nameField.setFont(font);
 		passwordField.setFont(font);
 		brithField.setFont(font);
 		phoneNum.setFont(font);
-		employeeNum.setFont(font);
+		memberNum.setFont(font);
+		memberName.setFont(font);
 		nameField.setForeground(Color.DARK_GRAY);
 		passwordField.setForeground(Color.DARK_GRAY);
 		brithField.setForeground(Color.DARK_GRAY);
 		phoneNum.setForeground(Color.DARK_GRAY);
-		employeeNum.setForeground(Color.DARK_GRAY);
+		memberNum.setForeground(Color.DARK_GRAY);
+		memberName.setForeground(Color.DARK_GRAY);
 
 		setTitle("어서오묘 데러가개 회원가입");
-		setSize(440, 500);
+		setSize(440, 550);
 		setContentPane(joinBackgroundImg);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -88,15 +92,16 @@ public class Join extends JFrame {
 		nameField.setBounds(95, 126, 240, 40);
 		passwordField.setBounds(95, 170, 240, 40);
 		brithField.setBounds(95, 213, 240, 40);
-		phoneNum.setBounds(95, 256, 240, 40);
-		employeeNum.setBounds(95, 298, 240, 40);
+		phoneNum.setBounds(95, 257, 240, 40);
+		memberNum.setBounds(95, 300, 240, 40);
+		memberName.setBounds(95, 345, 240, 40);
 
 		logo.setSize(79, 79);
 		logo.setLocation(170, 25);
 		logo.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 모양 변경
 
 		joinBtn.setSize(BTN_WIDTH, BTN_HEIGHT);
-		joinBtn.setLocation(95, 350);
+		joinBtn.setLocation(95, 400);
 		joinBtn.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 모양 변경
 
 		add(logo);
@@ -105,7 +110,8 @@ public class Join extends JFrame {
 		add(brithField);
 		add(phoneNum);
 		add(brithField);
-		add(employeeNum);
+		add(memberNum);
+		add(memberName);
 		add(joinBtn);
 	}
 
@@ -134,10 +140,16 @@ public class Join extends JFrame {
     			phoneNum.setText("");
     		}
     	});
-		employeeNum.addMouseListener(new MouseAdapter() {
+		memberNum.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mousePressed(MouseEvent e) {
-    			employeeNum.setText("");
+    			memberNum.setText("");
+    		}
+    	});
+		memberName.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mousePressed(MouseEvent e) {
+    			memberName.setText("");
     		}
     	});
 //		joinGo.addMouseListener(new MouseAdapter() {
