@@ -109,33 +109,42 @@ public class FreeBoard extends JPanel {
 	}
 
 	public void addEventLayout() {
-		 nextPageBtn.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                try {
-	                	currentPage++;
-	                	updateTable();
-					} catch (NegativeArraySizeException e2) {
-						currentPage--;
-						JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-					}
-	            }
-	        });
+		nextPageBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					currentPage++;
+					updateTable();
+				} catch (NegativeArraySizeException e2) {
+					currentPage--;
+					JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 
-	        prevPageBtn.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	
-	            	if(currentPage == 0) {
-	            		JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-	            	}
-	            	
-	                if (currentPage > 0) {
-	                    currentPage--;
-	                }
-	                updateTable();
-	            }
-	        });
+		prevPageBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (currentPage == 0) {
+					JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+				if (currentPage > 0) {
+					currentPage--;
+				}
+				updateTable();
+			}
+		});
+
+		registrationBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new CreateFreeBoard();
+
+			}
+		});
 	}
 
 	private void updateTable() {
@@ -146,7 +155,7 @@ public class FreeBoard extends JPanel {
 		column.setPreferredWidth(800); // 원하는 기본 너비 설정
 		column.setMinWidth(300); // 최소 너비 설정
 		column.setMaxWidth(800); // 최대 너비 설정
-		
+
 		column = animalTable.getColumnModel().getColumn(0);
 		column.setMinWidth(40);
 		column.setMaxWidth(40);
