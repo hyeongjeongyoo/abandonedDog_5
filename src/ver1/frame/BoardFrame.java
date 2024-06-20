@@ -30,6 +30,7 @@ public class BoardFrame extends JFrame {
 	private JTabbedPane board;
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
+	private JTabbedPane myPage;
 
 	private ApplyAdoptBoard applyAdoptBoard;
 	private abanAnimalList abanAnimalListboard;
@@ -59,6 +60,7 @@ public class BoardFrame extends JFrame {
 		board = new JTabbedPane(JTabbedPane.LEFT);
 		missing = new JTabbedPane(JTabbedPane.LEFT);
 		abandonment = new JTabbedPane(JTabbedPane.LEFT);
+		myPage = new JTabbedPane(JTabbedPane.LEFT);
 
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
@@ -96,6 +98,7 @@ public class BoardFrame extends JFrame {
 		board.setOpaque(true);
 		missing.setOpaque(true);
 		abandonment.setOpaque(true);
+		myPage.setOpaque(true);
 		
 	    main.setBackground(Color.white);
 	    board.setBackground(Color.white);
@@ -118,6 +121,8 @@ public class BoardFrame extends JFrame {
 		abandonment.addTab("보호 동물 조회", abanAnimalListboard);
 		abandonment.addTab("보호 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
+		
+		main.addTab("마이페이지", myPage);
 
 		main.setUI(new BasicTabbedPaneUI() {
 			@Override
