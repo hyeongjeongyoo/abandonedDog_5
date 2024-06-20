@@ -3,6 +3,7 @@ package ver1.frame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -93,6 +94,7 @@ public class BoardFrame extends JFrame {
 		UIManager.put("TabbedPane.contentAreaColor", Color.white);
 		UIManager.put("TabbedPane.selected", Color.white);
 		UIManager.put("TabbedPane.background", Color.white);
+		UIManager.put("TabbedPane.tabInsets", new Insets(50, 10, 0, 10));
 
 		main.setOpaque(true);
 		board.setOpaque(true);
@@ -122,7 +124,7 @@ public class BoardFrame extends JFrame {
 		abandonment.addTab("보호 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
 		
-		main.addTab("마이페이지", myPage);
+		main.addTab(null, new ImageIcon("img/MyPage.png"), myPage, null);
 
 		main.setUI(new BasicTabbedPaneUI() {
 			@Override
@@ -142,13 +144,14 @@ public class BoardFrame extends JFrame {
 			}
 		});
 
+		main.setFocusable(false);
 		add(main);
 	}
 
 	private void addEventListener() {
 
 	}
-
+	
 	public static void main(String[] args) {
 		new BoardFrame();
 	}
