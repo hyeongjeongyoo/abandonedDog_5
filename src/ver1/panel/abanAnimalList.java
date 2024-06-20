@@ -1,8 +1,9 @@
 package ver1.panel;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -71,14 +72,32 @@ public class abanAnimalList extends JPanel {
 	}
 
 	public void setInitLayout() {
-		// 테이블을 JScrollPane에 추가하여 스크롤 가능하게 함
-		JScrollPane scrollPaneTable = new JScrollPane(table);
-		add(scrollPaneTable, BorderLayout.CENTER);
+		// GridBagLayout 설정
+		setLayout(new GridBagLayout());
 
-		// JList를 JPanel에 넣어서 SOUTH에 추가
-		JPanel listPanel = new JPanel(new BorderLayout());
-		listPanel.add(new JScrollPane(infoList), BorderLayout.CENTER);
-		add(listPanel, BorderLayout.SOUTH);
+		// 테이블을 JScrollPane에 넣어서 패널에 추가
+		JScrollPane scrollPaneTable = new JScrollPane(table);
+		GridBagConstraints gbcTable = new GridBagConstraints();
+		gbcTable.gridx = 0;
+		gbcTable.gridy = 0;
+		gbcTable.gridwidth = 1;
+		gbcTable.gridheight = 1;
+		gbcTable.weightx = 1.0;
+		gbcTable.weighty = 1.0;
+		gbcTable.fill = GridBagConstraints.BOTH;
+		add(scrollPaneTable, gbcTable);
+
+		// JList를 JScrollPane에 넣어서 패널에 추가 (특정 위치)
+		JScrollPane scrollPaneList = new JScrollPane(infoList);
+		GridBagConstraints gbcList = new GridBagConstraints();
+		gbcList.gridx = 0;
+		gbcList.gridy = 1;
+		gbcList.gridwidth = 1;
+		gbcList.gridheight = 1;
+		gbcList.weightx = 1.0;
+		gbcList.weighty = 0.2; // JList가 차지하는 세로 공간 비율 조정
+		gbcList.fill = GridBagConstraints.BOTH;
+		add(scrollPaneList, gbcList);
 	}
 
 	public void addEventLayout() {
