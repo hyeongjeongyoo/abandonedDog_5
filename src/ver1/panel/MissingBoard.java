@@ -20,10 +20,10 @@ import javax.swing.table.TableColumn;
 
 import ver1.DAO.MissingBoardDAO;
 import ver1.DTO.MissingBoardDTO;
+import ver1.jdbc.Define;
 
 public class MissingBoard extends JPanel {
 
-	private JButton registrationBtn;
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
 	private JButton refrashBtn;
@@ -57,19 +57,17 @@ public class MissingBoard extends JPanel {
 		searchBtn = new JButton("검색");
 		searchComboBox = new JComboBox<>();
 
-		registrationBtn = new JButton("등록");
 		nextPageBtn = new JButton("다음 페이지");
 		prevPageBtn = new JButton("이전 페이지");
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
 		// 데이터 불러오기
-		animalData = MissingBoardDAO.getMissingDTOList();
+		animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
 
 		model = new DefaultTableModel(convertToPageData(), columnNames);
 		animalTable = new JTable(model);
 		animalScroll = new JScrollPane(animalTable);
 
-		searchComboBox.setModel(new DefaultComboBoxModel<>(columnNames));
 	}
 
 	public void setInitLayout() {
@@ -87,9 +85,6 @@ public class MissingBoard extends JPanel {
 		searchComboBox.setBounds(810, 25, 80, 20);
 		add(searchComboBox);
 
-		registrationBtn.setBounds(1099, 560, 60, 30);
-		add(registrationBtn);
-
 		refrashBtn.setBounds(20, 0, 50, 50);
 		refrashBtn.setBorderPainted(false);
 		refrashBtn.setContentAreaFilled(false);
@@ -104,6 +99,7 @@ public class MissingBoard extends JPanel {
 		add(prevPageBtn);
 		add(nextPageBtn);
 
+		searchComboBox.setModel(new DefaultComboBoxModel<>(columnNames));
 	}
 
 	public void addEventLayout() {
@@ -131,6 +127,48 @@ public class MissingBoard extends JPanel {
 					currentPage--;
 					updateTable();
 				}
+			}
+		});
+		
+		refrashBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
+				currentPage = 0;
+				updateTable();
+			}
+		});
+		
+		searchBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(searchComboBox.getSelectedIndex() == 0) {
+					try {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else if (searchComboBox.getSelectedIndex() == 1) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 2) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 3) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 4) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 5) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 6) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 7) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 8) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+				}
+				currentPage = 0;
+				updateTable();
 			}
 		});
 	}
