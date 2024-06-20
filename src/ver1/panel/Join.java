@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,7 +41,6 @@ public class Join extends JFrame {
 	private final int BTN_WIDTH = 240;
 	private final int BTN_HEIGHT = 45;
 
-	private JButton joinGo;
 
 	Font font = new Font("Noto Sans KR", Font.BOLD, 15);
 	Font font2 = new Font("Noto Sans KR", Font.BOLD, 12);
@@ -123,6 +121,7 @@ public class Join extends JFrame {
 		add(memberNum);
 		add(memberName);
 		add(joinBtn);
+		add(joinBackgroundImg);
 	}
 
 	private void addEventListener() {
