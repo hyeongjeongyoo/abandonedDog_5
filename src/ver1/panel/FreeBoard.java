@@ -1,5 +1,6 @@
 package ver1.panel;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,6 +71,7 @@ public class FreeBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
+		setBackground(Color.white);
 
 		//
 		column.setPreferredWidth(500); // 원하는 기본 너비 설정

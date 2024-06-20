@@ -82,6 +82,7 @@ public class ShelterSearch extends JPanel {
     
     public void setInitLayout() {
         setLayout(null);
+        setBackground(Color.white);
         
         innerPanel1.setBounds(50, 50, 0, 0);
         innerPanel1.setLayout(null);

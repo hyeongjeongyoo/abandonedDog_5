@@ -74,6 +74,7 @@ public class abanAnimalList extends JPanel {
 	public void setInitLayout() {
 		// GridBagLayout 설정
 		setLayout(new GridBagLayout());
+		setBackground(Color.white);
 
 		// 테이블을 JScrollPane에 넣어서 패널에 추가
 		JScrollPane scrollPaneTable = new JScrollPane(table);

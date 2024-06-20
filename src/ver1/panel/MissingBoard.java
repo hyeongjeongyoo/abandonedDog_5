@@ -1,5 +1,6 @@
 package ver1.panel;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,6 +78,7 @@ public class MissingBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
+		setBackground(Color.white);
 
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);

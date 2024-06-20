@@ -140,6 +140,8 @@ public class ApplyAdoptBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
+		setBackground(Color.white);
+		
 		innerPanel.setLayout(null);
 		innerPanel.setBounds(100, 50, 980, 450);
 

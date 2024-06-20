@@ -38,6 +38,7 @@ public class VisitAnimal extends JPanel implements Runnable {
 
 	private void setInitLayout() {
 		setLayout(null);
+		setBackground(Color.white);
 		innerP.setBounds(50, 50, 600, 100);
 		innerP.add(animation);
 		add(innerP);

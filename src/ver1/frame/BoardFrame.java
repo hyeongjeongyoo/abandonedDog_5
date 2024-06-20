@@ -1,12 +1,15 @@
 package ver1.frame;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import ver1.panel.ApplyAdoptBoard;
@@ -34,10 +37,10 @@ public class BoardFrame extends JFrame {
 	private ReviewAdopt adoptReviewBoard;
 	private FreeBoard freeBoard;
 	private MissingBoard missingBoard;
-	private JPanel registerAdopt;
-	private JPanel abanAnimalList;
 	private RegisterAnimal registerAnimal;
 	private ShelterSearch searchShelter;
+
+	private JPanel emptyPanel;
 
 	public BoardFrame() {
 		initData();
@@ -60,18 +63,18 @@ public class BoardFrame extends JFrame {
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
 		visitAnimal = new VisitAnimal();
-		
+
 		// TODO 프레임 작업 중지
 //		Thread thread = new Thread(visitAnimal);
 //		thread.start();
-		
+
 		adoptReviewBoard = new ReviewAdopt();
 		freeBoard = new FreeBoard();
 		missingBoard = new MissingBoard();
-		registerAdopt = new JPanel();
-		abanAnimalList = new JPanel();
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
+
+		emptyPanel = new JPanel();
 	}
 
 	private void setInitLayout() {
@@ -84,20 +87,36 @@ public class BoardFrame extends JFrame {
 		board.setFont(font);
 		missing.setFont(font);
 		abandonment.setFont(font);
+		
+		UIManager.put("TabbedPane.contentAreaColor", Color.white);
+		UIManager.put("TabbedPane.selected", Color.white);
+		UIManager.put("TabbedPane.background", Color.white);
 
-		main.addTab("홈", visitAnimal);
+		main.setOpaque(true);
+		board.setOpaque(true);
+		missing.setOpaque(true);
+		abandonment.setOpaque(true);
+		
+	    main.setBackground(Color.white);
+	    board.setBackground(Color.white);
+	    missing.setBackground(Color.white);
+	    abandonment.setBackground(Color.white);
 
-		main.addTab("게시판", board);
+		main.addTab(null, new ImageIcon("img/Home.png"), visitAnimal, null);
+
+		main.addTab(null, new ImageIcon("img/Board.png"), board, null);
 		board.addTab("자유게시판", freeBoard);
-		board.addTab("실종게시판", missingBoard);
+		board.addTab("보호게시판", missingBoard);
+		board.setBackground(Color.white);
 
-		main.addTab("입양", missing);
+		main.addTab(null, new ImageIcon("img/Adopt.png"), missing, null);
+		main.add(emptyPanel, 0);
 		missing.addTab("입양 신청", applyAdoptBoard);
 		missing.addTab("입양 후기", adoptReviewBoard);
 
-		main.addTab("보호소", abandonment);
-		abandonment.addTab("유기 동물 목록", abanAnimalListboard);
-		abandonment.addTab("유기 동물 등록", registerAnimal);
+		main.addTab(null, new ImageIcon("img/Shelter.png"), abandonment, null);
+		abandonment.addTab("보호 동물 조회", abanAnimalListboard);
+		abandonment.addTab("보호 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
 
 		main.setUI(new BasicTabbedPaneUI() {

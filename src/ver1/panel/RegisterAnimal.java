@@ -42,6 +42,7 @@ public class RegisterAnimal extends JPanel {
 
 	private void initData() {
 		setLayout(null);
+		setBackground(Color.white);
 	    
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
