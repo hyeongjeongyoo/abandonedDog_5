@@ -15,7 +15,9 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import ver1.panel.ApplyAdoptBoard;
 import ver1.panel.FreeBoard;
+import ver1.panel.InterestPat;
 import ver1.panel.MissingBoard;
+import ver1.panel.MyWriter;
 import ver1.panel.RegisterAnimal;
 import ver1.panel.ReviewAdopt;
 import ver1.panel.ShelterSearch;
@@ -41,6 +43,8 @@ public class BoardFrame extends JFrame {
 	private MissingBoard missingBoard;
 	private RegisterAnimal registerAnimal;
 	private ShelterSearch searchShelter;
+	private InterestPat interestPat;
+	private MyWriter myWriter;
 
 	private JPanel emptyPanel;
 
@@ -76,6 +80,8 @@ public class BoardFrame extends JFrame {
 		missingBoard = new MissingBoard();
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
+		interestPat = new InterestPat();
+		myWriter = new MyWriter();
 
 		emptyPanel = new JPanel();
 	}
@@ -90,7 +96,8 @@ public class BoardFrame extends JFrame {
 		board.setFont(font);
 		missing.setFont(font);
 		abandonment.setFont(font);
-		
+		myPage.setFont(font);
+
 		UIManager.put("TabbedPane.contentAreaColor", Color.white);
 		UIManager.put("TabbedPane.selected", Color.white);
 		UIManager.put("TabbedPane.background", Color.white);
@@ -101,11 +108,11 @@ public class BoardFrame extends JFrame {
 		missing.setOpaque(true);
 		abandonment.setOpaque(true);
 		myPage.setOpaque(true);
-		
-	    main.setBackground(Color.white);
-	    board.setBackground(Color.white);
-	    missing.setBackground(Color.white);
-	    abandonment.setBackground(Color.white);
+
+		main.setBackground(Color.white);
+		board.setBackground(Color.white);
+		missing.setBackground(Color.white);
+		abandonment.setBackground(Color.white);
 
 		main.addTab(null, new ImageIcon("img/Home.png"), visitAnimal, null);
 
@@ -122,8 +129,10 @@ public class BoardFrame extends JFrame {
 		abandonment.addTab("보호 동물 조회", abanAnimalListboard);
 		abandonment.addTab("보호 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
-		
+
 		main.addTab(null, new ImageIcon("img/MyPage.png"), myPage, null);
+		myPage.addTab("관심있는 동물", interestPat);
+		myPage.addTab("내가 쓴 게시글", myWriter);
 
 		main.setUI(new BasicTabbedPaneUI() {
 			@Override
@@ -142,7 +151,7 @@ public class BoardFrame extends JFrame {
 					boolean isSelected) {
 			}
 		});
-		
+
 		board.setUI(new BasicTabbedPaneUI() {
 			@Override
 			protected void installDefaults() {
@@ -160,7 +169,7 @@ public class BoardFrame extends JFrame {
 					boolean isSelected) {
 			}
 		});
-		
+
 		board.setFocusable(false);
 		main.setFocusable(false);
 		add(main);
@@ -169,7 +178,7 @@ public class BoardFrame extends JFrame {
 	private void addEventListener() {
 
 	}
-	
+
 	public static void main(String[] args) {
 		new BoardFrame();
 	}
