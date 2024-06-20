@@ -3,6 +3,8 @@ package ver1.panel;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -171,10 +174,48 @@ public class MissingBoard extends JPanel {
 				updateTable();
 			}
 		});
+		
+		searchText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(searchComboBox.getSelectedIndex() == 0) {
+						try {
+							animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+						} catch (NumberFormatException e2) {
+							JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+						}
+					} else if (searchComboBox.getSelectedIndex() == 1) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 2) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 3) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 4) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 5) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 6) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 7) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 8) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+					}
+					currentPage = 0;
+					updateTable();
+				}
+			}
+		});
 	}
 
 	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(), columnNames);
+		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(), columnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		animalTable.setModel(newModel);
 
 		// TableColumn 넓이 고정
@@ -183,6 +224,9 @@ public class MissingBoard extends JPanel {
 		column = animalTable.getColumnModel().getColumn(0);
 		column.setMinWidth(65);
 		column.setMaxWidth(65);
+		DefaultTableCellRenderer genderRenderer = new DefaultTableCellRenderer();
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
 		
 		// 품종
 		column = animalTable.getColumnModel().getColumn(1);
@@ -213,11 +257,15 @@ public class MissingBoard extends JPanel {
 		column = animalTable.getColumnModel().getColumn(6);
 		column.setMinWidth(35);
 		column.setMaxWidth(35);
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
 		
 		// 중성화
 		column = animalTable.getColumnModel().getColumn(7);
 		column.setMinWidth(45);
 		column.setMaxWidth(45);
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
 	}
 
 	private Object[][] convertToPageData() {

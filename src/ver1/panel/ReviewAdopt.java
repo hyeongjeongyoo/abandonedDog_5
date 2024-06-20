@@ -1,28 +1,41 @@
 package ver1.panel;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 public class ReviewAdopt extends JPanel {
-
 	private JButton registrationBtn;
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
-	private JTable dogTable;
-	private JScrollPane dogScroll;
+	private JButton refrashBtn;
+
+	private JTable animalTable;
+	private JScrollPane animalScroll;
 	private TableColumn column;
+
 	private int currentPage = 0;
 	private int rowsPerPage = 30; // 한 페이지에 표시할 행 수
+
 	private DefaultTableModel model;
-	private Object[][] dogData;
+	private Object[][] reviewData;
+
+	private JTextField searchText;
+	private JButton searchBtn;
+	private JLabel title;
+
+	String[] columnNames = { "id", "title", "contents", "writer", "date" };
 
 	public ReviewAdopt() {
 		initData();
@@ -32,23 +45,25 @@ public class ReviewAdopt extends JPanel {
 	}
 
 	public void initData() {
+		searchText = new JTextField();
+		searchBtn = new JButton("검색");
+		title = new JLabel("Title");
+
 		registrationBtn = new JButton("등록");
 		nextPageBtn = new JButton("다음 페이지");
 		prevPageBtn = new JButton("이전 페이지");
+		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
-		// 자유게시판 샘플데이터
-		String[] columnNames = { "id", "title", "contents", "writer", "date" };
-		dogData = new Object[][] { { 1, "우리 푸푸", "푸푸는 잘먹고 잘싸고 잘지내고있엉요", "푸푸맘", "2024-06-20" },
+		reviewData = new Object[][] { { 1, "우리 푸푸", "푸푸는 잘먹고 잘싸고 잘지내고있엉요", "푸푸맘", "2024-06-20" },
 				{ 2, "세상에서 가장 귀여운 놈", "3개월전에 데려온 놈놈이 너무 귀여워요 ", "샤넬백", "2024-01-13" },
 				{ 3, "누룽지의 성장일기 ", "누룽지는 점점 누래지고 있어용", "숭늉", "2023-12-25" },
 
 		};
 
-		// 각 패널에 JTable 생성 및 샘플 데이터 추가
-		model = new DefaultTableModel(dogData, columnNames);
-		dogTable = new JTable(model);
-		dogScroll = new JScrollPane(dogTable);
-		column = dogTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
+		model = new DefaultTableModel(reviewData, columnNames);
+		animalTable = new JTable(model);
+		animalScroll = new JScrollPane(animalTable);
+		column = animalTable.getColumnModel().getColumn(2); // "contents" 컬럼
 	}
 
 	public void setInitLayout() {
@@ -60,13 +75,28 @@ public class ReviewAdopt extends JPanel {
 		column.setMaxWidth(800); // 최대 너비 설정
 
 		// 컬럼 헤더 이동 불가
-		dogTable.getTableHeader().setReorderingAllowed(false);
+		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		registrationBtn.setBounds(1040, 0, 60, 30);
+		searchText.setBounds(895, 25, 200, 22);
+		add(searchText);
+
+		searchBtn.setBounds(1099, 25, 59, 20);
+		add(searchBtn);
+
+		title.setBounds(860, 25, 80, 20);
+		add(title);
+
+		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);
 
-		dogScroll.setBounds(20, 50, 1000, 503);
-		add(dogScroll); // 스크롤 가능하도록 JScrollPane으로 감싸줍니다.
+		refrashBtn.setBounds(20, 0, 50, 50);
+		refrashBtn.setBorderPainted(false);
+		refrashBtn.setContentAreaFilled(false);
+		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		add(refrashBtn);
+
+		animalScroll.setBounds(20, 50, 1140, 503);
+		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);
 		nextPageBtn.setBounds(150, 560, 120, 30);
@@ -92,6 +122,10 @@ public class ReviewAdopt extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				if (currentPage == 0) {
+					JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
+
 				if (currentPage > 0) {
 					currentPage--;
 				}
@@ -101,22 +135,25 @@ public class ReviewAdopt extends JPanel {
 	}
 
 	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(getPageData(),
-				new String[] { "id", "title", "contents", "writer", "date" });
-		dogTable.setModel(newModel);
+		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "title", "contents" });
+		animalTable.setModel(newModel);
 
-		column = dogTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
-		column.setPreferredWidth(500); // 원하는 기본 너비 설정
+		column = animalTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
+		column.setPreferredWidth(800); // 원하는 기본 너비 설정
 		column.setMinWidth(300); // 최소 너비 설정
 		column.setMaxWidth(800); // 최대 너비 설정
+
+		column = animalTable.getColumnModel().getColumn(0);
+		column.setMinWidth(40);
+		column.setMaxWidth(40);
 	}
 
 	private Object[][] getPageData() {
 		int start = currentPage * rowsPerPage;
-		int end = Math.min(start + rowsPerPage, dogData.length);
+		int end = Math.min(start + rowsPerPage, reviewData.length);
 		Object[][] pageData = new Object[end - start][];
 		for (int i = start; i < end; i++) {
-			pageData[i - start] = dogData[i];
+			pageData[i - start] = reviewData[i];
 		}
 		return pageData;
 	}

@@ -60,6 +60,8 @@ public class BoardFrame extends JFrame {
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
 		visitAnimal = new VisitAnimal();
+		Thread thread = new Thread(visitAnimal);
+		thread.start();
 		adoptReviewBoard = new ReviewAdopt();
 		freeBoard = new FreeBoard();
 		missingBoard = new MissingBoard();
@@ -95,17 +97,7 @@ public class BoardFrame extends JFrame {
 		abandonment.addTab("유기 동물 등록", registerAnimal);
 		abandonment.addTab("보호소 찾기", searchShelter);
 
-		main.setUI(emptyTap());
-
-		add(main);
-	}
-
-	private void addEventListener() {
-
-	}
-
-	public static BasicTabbedPaneUI emptyTap() {
-		BasicTabbedPaneUI emptyTap = new BasicTabbedPaneUI() {
+		main.setUI(new BasicTabbedPaneUI() {
 			@Override
 			protected void installDefaults() {
 				super.installDefaults();
@@ -121,8 +113,13 @@ public class BoardFrame extends JFrame {
 			protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 					boolean isSelected) {
 			}
-		};
-		return emptyTap;
+		});
+
+		add(main);
+	}
+
+	private void addEventListener() {
+
 	}
 
 	public static void main(String[] args) {

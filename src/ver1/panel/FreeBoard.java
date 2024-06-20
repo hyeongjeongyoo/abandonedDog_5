@@ -32,7 +32,7 @@ public class FreeBoard extends JPanel {
 	private int rowsPerPage = 30; // 한 페이지에 표시할 행 수
 
 	private DefaultTableModel model;
-	private Object[][] dogData;
+	private Object[][] freeData;
 
 	private JTextField searchText;
 	private JButton searchBtn;
@@ -57,12 +57,12 @@ public class FreeBoard extends JPanel {
 		prevPageBtn = new JButton("이전 페이지");
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
-		dogData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" }, { 2, "인사 오지게 박습니다", "등업 신청이요~" },
+		freeData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" }, { 2, "인사 오지게 박습니다", "등업 신청이요~" },
 				{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
 
 		};
 
-		model = new DefaultTableModel(dogData, columnNames);
+		model = new DefaultTableModel(freeData, columnNames);
 		animalTable = new JTable(model);
 		animalScroll = new JScrollPane(animalTable);
 		column = animalTable.getColumnModel().getColumn(2); // "contents" 컬럼
@@ -152,10 +152,10 @@ public class FreeBoard extends JPanel {
 
 	private Object[][] getPageData() {
 		int start = currentPage * rowsPerPage;
-		int end = Math.min(start + rowsPerPage, dogData.length);
+		int end = Math.min(start + rowsPerPage, freeData.length);
 		Object[][] pageData = new Object[end - start][];
 		for (int i = start; i < end; i++) {
-			pageData[i - start] = dogData[i];
+			pageData[i - start] = freeData[i];
 		}
 		return pageData;
 	}

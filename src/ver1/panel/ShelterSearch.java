@@ -21,8 +21,6 @@ import javax.swing.table.TableColumn;
 
 public class ShelterSearch extends JPanel {
 
-    private JButton nextPageBtn;
-    private JButton prevPageBtn;
     private JButton magnifierBtn;
     
     private JPanel innerPanel1; 
@@ -51,8 +49,6 @@ public class ShelterSearch extends JPanel {
     public void initData() {
         searchText = new JTextField();
         
-        nextPageBtn = new JButton("다음 페이지");
-        prevPageBtn = new JButton("이전 페이지");
         magnifierBtn = new JButton(new ImageIcon("img/magnifier.png"));
         innerPanel1 = new JPanel();
         
@@ -108,40 +104,10 @@ public class ShelterSearch extends JPanel {
         careScroll.setBounds(160, 150, 800, 280);
         innerPanel1.add(careScroll);
         
-        prevPageBtn.setBounds(20, 560, 120, 30);
-        nextPageBtn.setBounds(150, 560, 120, 30);
-        add(prevPageBtn);
-        add(nextPageBtn);
         
     }
     
     public void addEventLayout() {
-        nextPageBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    currentPage++;
-                    updateTable();
-                } catch (NegativeArraySizeException e2) {
-                    currentPage--;
-                    JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        });
-
-        prevPageBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(currentPage == 0) {
-                    JOptionPane.showMessageDialog(null, "처음 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-                }
-                
-                if (currentPage > 0) {
-                    currentPage--;
-                }
-                updateTable();
-            }
-        });
     }
     
     private void updateTable() {

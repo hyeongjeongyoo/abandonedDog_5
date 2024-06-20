@@ -26,5 +26,6 @@ public class Define {
 		
 		return query;
 	}
-			//JOIN_VIEW_ANIMAL_DETAILS =
+	
+	public static final String MAIN_PHOTO = " select popfile from photo order by rand() limit 1 ";
 }

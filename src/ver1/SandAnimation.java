@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SandAnimation extends JPanel implements Runnable {
-    private String text = "오늘 찾아온 친구들";
+    private String text = "뭐라고 적을까요?";
     private int charIndex = 0;
     private int[] yPositions;
     private Random random = new Random();
@@ -75,7 +75,7 @@ public class SandAnimation extends JPanel implements Runnable {
                 }
 
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(15);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
