@@ -9,10 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-import ver1.panel.ReviewAdopt;
-import ver1.panel.VisitAnimal;
 import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
+import ver1.panel.RegisterAdoptBoard;
+import ver1.panel.ReviewAdopt;
+import ver1.panel.VisitAnimal;
 
 public class BoardFrame extends JFrame {
 
@@ -24,6 +25,7 @@ public class BoardFrame extends JFrame {
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
 
+	private RegisterAdoptBoard registerAdoptBoard;
 	private VisitAnimal visitAnimal;
 	private ReviewAdopt adoptReviewBoard;
 	private FreeBoard freeBoard;
@@ -51,6 +53,7 @@ public class BoardFrame extends JFrame {
 		missing = new JTabbedPane();
 		abandonment = new JTabbedPane();
 
+		registerAdoptBoard = new RegisterAdoptBoard();
 		visitAnimal = new VisitAnimal();
 		adoptReviewBoard = new ReviewAdopt();
 		freeBoard = new FreeBoard();
@@ -71,7 +74,7 @@ public class BoardFrame extends JFrame {
 		board.setFont(font);
 		missing.setFont(font);
 		abandonment.setFont(font);
-		
+
 		main.addTab("홈", visitAnimal);
 
 		main.addTab("게시판", board);
@@ -79,7 +82,7 @@ public class BoardFrame extends JFrame {
 		board.addTab("실종게시판", missingBoard);
 
 		main.addTab("입양", missing);
-		missing.addTab("입양 신청", registerAdopt);
+		missing.addTab("입양 신청", registerAdoptBoard);
 		missing.addTab("입양 후기", adoptReviewBoard);
 
 		main.addTab("보호소", abandonment);
