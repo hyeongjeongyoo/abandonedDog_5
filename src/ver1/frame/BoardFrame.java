@@ -53,9 +53,9 @@ public class BoardFrame extends JFrame {
 
 		main = new JTabbedPane();
 
-		board = new JTabbedPane();
-		missing = new JTabbedPane();
-		abandonment = new JTabbedPane();
+		board = new JTabbedPane(JTabbedPane.LEFT);
+		missing = new JTabbedPane(JTabbedPane.LEFT);
+		abandonment = new JTabbedPane(JTabbedPane.LEFT);
 
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
@@ -75,7 +75,7 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void setInitLayout() {
-		setSize(1200, 700);
+		setSize(1400, 900);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
