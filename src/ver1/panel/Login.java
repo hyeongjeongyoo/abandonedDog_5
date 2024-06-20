@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import lombok.Data;
-import ver1.frame.Frame;
 import ver1.frame.BoardFrame;
 
 @Data

@@ -17,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import lombok.Data;
-import ver1.frame.Frame;
 
 @Data
 public class Join extends JFrame {
@@ -121,7 +120,6 @@ public class Join extends JFrame {
 		add(memberNum);
 		add(memberName);
 		add(joinBtn);
-		add(joinBackgroundImg);
 	}
 
 	private void addEventListener() {
