@@ -143,6 +143,12 @@ public class Login extends JFrame {
 
 			}
 		});
+		idField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				idField.setText("");
+			}
+		});
 		passwordField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
