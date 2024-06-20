@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import lombok.Data;
+import ver1.DAO.LoginDAO;
+import ver1.DTO.LoginDTO;
 import ver1.frame.BoardFrame;
 
 @Data
@@ -25,9 +27,6 @@ public class Login extends JFrame {
 
 	Login login;
 	Join join2;
-
-	private String id = "root";
-	private String password = "asd123";
 
 	private JPanel loginBackgroundImg;
 
@@ -132,14 +131,23 @@ public class Login extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				String enteredId = idField.getText();
 				String enteredPassword = passwordField.getText();
-
-				if (enteredId.equals(id) && enteredPassword.equals(password)) {
-					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
-					setVisible(false);
-					new BoardFrame();
+				
+				LoginDTO dto = LoginDAO.selectLogin(enteredId);
+				
+				if(dto != null) {
+					
+					if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
+						JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
+						setVisible(false);
+						new BoardFrame();
+					} else {
+						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+					}
+					
 				} else {
-					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				}
+
 
 			}
 		});
@@ -158,32 +166,24 @@ public class Login extends JFrame {
 		passwordField.addActionListener(e -> {
 			String enteredId = idField.getText();
 			String enteredPassword = passwordField.getText();
-
-			if (enteredId.equals(id) && enteredPassword.equals(password)) {
-				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
-				setVisible(false); // 로그인 성공 시 현재 창을 숨김
-				new BoardFrame();
+			
+			LoginDTO dto = LoginDAO.selectLogin(enteredId);
+			
+			if(dto != null) {
+				
+				if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
+					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					new BoardFrame();
+				} else {
+					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			} else {
-				JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public JTextField getIdField() {
