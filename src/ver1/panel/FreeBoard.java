@@ -99,6 +99,7 @@ public class FreeBoard extends JPanel {
 		add(refrashBtn);
 
 		animalScroll.setBounds(20, 5, 1140, 503);
+		animalTable.setBackground(Color.white);
 		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);

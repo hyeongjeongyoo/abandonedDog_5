@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 public class MyPage extends JPanel {
 
 	private JPanel selfImagePanel;
-	private JPanel interestPat;
+	private JPanel interestPet;
 	private JPanel myWriter;
 	
 	public MyPage() {
@@ -25,7 +25,7 @@ public class MyPage extends JPanel {
 	private void initDate() {
 		
 		selfImagePanel = new JPanel();
-		interestPat = new JPanel();
+		interestPet = new JPanel();
 		myWriter = new JPanel();
 		
 	}
@@ -39,10 +39,10 @@ public class MyPage extends JPanel {
 		selfImagePanel.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		add(selfImagePanel);
 		
-		interestPat.setBounds(50, 330, 600, 390);
-		interestPat.setBackground(Color.white);
-		interestPat.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
-		add(interestPat);
+		interestPet.setBounds(50, 330, 600, 390);
+		interestPet.setBackground(Color.white);
+		interestPet.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+		add(interestPet);
 		
 		myWriter.setBounds(730, 330, 600, 390);
 		myWriter.setBackground(Color.white);

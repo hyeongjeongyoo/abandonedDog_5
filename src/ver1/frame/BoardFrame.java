@@ -23,7 +23,7 @@ import ver1.panel.RegisterAnimal;
 import ver1.panel.ReviewAdopt;
 import ver1.panel.ShelterSearch;
 import ver1.panel.VisitAnimal;
-import ver1.panel.abanAnimalList;
+import ver1.panel.AbanAnimalList;
 
 public class BoardFrame extends JFrame {
 
@@ -35,14 +35,18 @@ public class BoardFrame extends JFrame {
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
 
-	private ApplyAdoptBoard applyAdoptBoard;
-	private abanAnimalList abanAnimalListboard;
 	private VisitAnimal visitAnimal;
-	private ReviewAdopt adoptReviewBoard;
+	
 	private FreeBoard freeBoard;
 	private MissingBoard missingBoard;
+	
+	private ApplyAdoptBoard applyAdoptBoard;
+	private ReviewAdopt adoptReviewBoard;
+	
+	private AbanAnimalList abanAnimalListboard;
 	private RegisterAnimal registerAnimal;
 	private ShelterSearch searchShelter;
+	
 	private MyPage myPage;
 
 	public BoardFrame() {
@@ -63,7 +67,7 @@ public class BoardFrame extends JFrame {
 		abandonment = new JTabbedPane(JTabbedPane.LEFT);
 
 		applyAdoptBoard = new ApplyAdoptBoard();
-		abanAnimalListboard = new abanAnimalList();
+		abanAnimalListboard = new AbanAnimalList();
 		visitAnimal = new VisitAnimal();
 
 		// TODO 프레임 작업 중지
