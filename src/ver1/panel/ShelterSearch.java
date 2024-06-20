@@ -14,7 +14,10 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+
+import ver1.component.HeaderRenderer;
 
 public class ShelterSearch extends JPanel {
 
@@ -80,7 +83,7 @@ public class ShelterSearch extends JPanel {
         setLayout(null);
         setBackground(Color.white);
         
-        innerPanel1.setBounds(225, 130, 800, 500);
+        innerPanel1.setBounds(225, 13, 800, 500);
         innerPanel1.setLayout(null);
         innerPanel1.setBackground(new Color(250, 250, 250, 0));
         innerPanel1.setVisible(true);
@@ -95,7 +98,13 @@ public class ShelterSearch extends JPanel {
         innerPanel1.add(magnifierBtn);
         
         careScroll.setBounds(80, 150, 643, 280);
+        careScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+        careScroll.getViewport().setBackground(Color.white);
+        careScroll.getViewport().setOpaque(true);
         innerPanel1.add(careScroll);
+        
+        JTableHeader header = careTable.getTableHeader();
+        header.setDefaultRenderer(new HeaderRenderer());
         
         UIManager.put("ComboBox.background", Color.white);
         

@@ -18,12 +18,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import ver1.DAO.MissingBoardDAO;
 import ver1.DTO.MissingBoardDTO;
+import ver1.component.HeaderRenderer;
 import ver1.jdbc.Define;
 
 public class MissingBoard extends JPanel {
@@ -99,6 +103,9 @@ public class MissingBoard extends JPanel {
 		add(refrashBtn);
 
 		animalScroll.setBounds(20, 5, 1140, 503);
+		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+		animalScroll.getViewport().setBackground(Color.white);
+		animalScroll.getViewport().setOpaque(true);
 		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);
@@ -107,6 +114,8 @@ public class MissingBoard extends JPanel {
 		add(nextPageBtn);
 
 		searchComboBox.setModel(new DefaultComboBoxModel<>(columnNames));
+        JTableHeader header = animalTable.getTableHeader();
+        header.setDefaultRenderer(new HeaderRenderer());
 	}
 
 	public void addEventLayout() {
@@ -138,7 +147,7 @@ public class MissingBoard extends JPanel {
 				}
 			}
 		});
-		
+
 		// TODO 프레임 작업 중지
 //		refrashBtn.addActionListener(new ActionListener() {
 //			

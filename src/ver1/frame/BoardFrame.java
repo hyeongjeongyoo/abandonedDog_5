@@ -26,6 +26,8 @@ import ver1.panel.VisitAnimal;
 import ver1.panel.AbanAnimalList;
 
 public class BoardFrame extends JFrame {
+	
+	public boolean manager;
 
 	private Font font;
 
@@ -49,14 +51,15 @@ public class BoardFrame extends JFrame {
 	
 	private MyPage myPage;
 
-	public BoardFrame() {
+	public BoardFrame(boolean manager) {
+		this.manager = manager;
 		initData();
 		setInitLayout();
 	}
 
 	private void initData() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("img/fav.png")); // 파비콘
-		setTitle("어서오묘 데러가개");
+		setTitle("어서오묘 데려가개");
 
 		font = new Font("Noto Sans KR", Font.BOLD, 15);
 
@@ -79,7 +82,7 @@ public class BoardFrame extends JFrame {
 		missingBoard = new MissingBoard();
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
-		myPage = new MyPage();
+		myPage = new MyPage(this);
 
 	}
 
@@ -177,6 +180,6 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new BoardFrame();
+		new BoardFrame(false);
 	}
 }

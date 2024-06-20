@@ -13,8 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+
+import ver1.component.HeaderRenderer;
 
 public class ReviewAdopt extends JPanel {
 	private JButton registrationBtn;
@@ -79,13 +84,13 @@ public class ReviewAdopt extends JPanel {
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		searchText.setBounds(895, 25, 200, 22);
+		searchText.setBounds(895, 700, 200, 22);
 		add(searchText);
 
-		searchBtn.setBounds(1099, 25, 59, 20);
+		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
 
-		title.setBounds(860, 25, 80, 20);
+		title.setBounds(860, 700, 80, 20);
 		add(title);
 
 		registrationBtn.setBounds(1099, 560, 60, 30);
@@ -98,12 +103,18 @@ public class ReviewAdopt extends JPanel {
 		add(refrashBtn);
 
 		animalScroll.setBounds(20, 50, 1140, 503);
+		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+		animalScroll.getViewport().setBackground(Color.white);
+		animalScroll.getViewport().setOpaque(true);
 		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);
 		nextPageBtn.setBounds(150, 560, 120, 30);
 		add(prevPageBtn);
 		add(nextPageBtn);
+
+		JTableHeader header = animalTable.getTableHeader();
+		header.setDefaultRenderer(new HeaderRenderer());
 	}
 
 	public void addEventLayout() {
