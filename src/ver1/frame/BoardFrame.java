@@ -110,9 +110,8 @@ public class BoardFrame extends JFrame {
 		main.addTab(null, new ImageIcon("img/Home.png"), visitAnimal, null);
 
 		main.addTab(null, new ImageIcon("img/Board.png"), board, null);
-		board.addTab("자유게시판", freeBoard);
-		board.addTab("보호게시판", missingBoard);
-		board.setBackground(Color.white);
+		board.addTab(null, new ImageIcon("img/FreeBoard.png"), freeBoard, null);
+		board.addTab(null, new ImageIcon("img/MissingBoard.png"), missingBoard, null);
 
 		main.addTab(null, new ImageIcon("img/Adopt.png"), missing, null);
 		main.add(emptyPanel, 0);
@@ -143,7 +142,26 @@ public class BoardFrame extends JFrame {
 					boolean isSelected) {
 			}
 		});
+		
+		board.setUI(new BasicTabbedPaneUI() {
+			@Override
+			protected void installDefaults() {
+				super.installDefaults();
+				tabAreaInsets.left = 0;
+			}
 
+			@Override
+			protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
+					boolean isSelected) {
+			}
+
+			@Override
+			protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
+					boolean isSelected) {
+			}
+		});
+		
+		board.setFocusable(false);
 		main.setFocusable(false);
 		add(main);
 	}

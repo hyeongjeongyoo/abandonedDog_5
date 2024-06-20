@@ -71,7 +71,7 @@ public class FreeBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
-		setBackground(Color.white);
+		setBackground(new Color(13, 170, 93));
 
 		//
 		column.setPreferredWidth(500); // 원하는 기본 너비 설정

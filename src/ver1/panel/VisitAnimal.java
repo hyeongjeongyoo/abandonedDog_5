@@ -16,7 +16,6 @@ import ver1.DAO.PhotoDAO;
 public class VisitAnimal extends JPanel implements Runnable {
 
 	SandAnimation animation;
-	JPanel innerP;
 
 	private JPanel imgBox;
 
@@ -33,15 +32,13 @@ public class VisitAnimal extends JPanel implements Runnable {
 
 	private void initData() {
 		animation = new SandAnimation();
-		innerP = new JPanel();
 	}
 
 	private void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);
-		innerP.setBounds(50, 50, 600, 100);
-		innerP.add(animation);
-		add(innerP);
+		animation.setBounds(480, 50, 500, 100);
+		add(animation);
 
 		imgBox = new JPanel() {
 			@Override
@@ -53,7 +50,7 @@ public class VisitAnimal extends JPanel implements Runnable {
 			}
 		};
 
-		imgBox.setBounds(270, 150, 609, 450);
+		imgBox.setBounds(396, 150, 609, 450);
 		imgBox.setBorder(new LineBorder(Color.GRAY, 2));
 		imgBox.setBackground(Color.orange);
 		add(imgBox);

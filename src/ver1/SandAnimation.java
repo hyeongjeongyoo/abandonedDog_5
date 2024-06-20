@@ -18,6 +18,7 @@ public class SandAnimation extends JPanel implements Runnable {
 
     public SandAnimation() {
         setPreferredSize(new Dimension(500, 600));
+        setBackground(Color.white);
         yPositions = new int[text.length() * 100];
 
         Thread thread = new Thread(this);
