@@ -2,13 +2,10 @@ package ver1.frame;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,6 +17,7 @@ import ver1.panel.ApplyAdoptBoard;
 import ver1.panel.FreeBoard;
 import ver1.panel.InterestPat;
 import ver1.panel.MissingBoard;
+import ver1.panel.MyPage;
 import ver1.panel.MyWriter;
 import ver1.panel.RegisterAnimal;
 import ver1.panel.ReviewAdopt;
@@ -36,7 +34,6 @@ public class BoardFrame extends JFrame {
 	private JTabbedPane board;
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
-	private JTabbedPane myPage;
 
 	private ApplyAdoptBoard applyAdoptBoard;
 	private abanAnimalList abanAnimalListboard;
@@ -46,8 +43,7 @@ public class BoardFrame extends JFrame {
 	private MissingBoard missingBoard;
 	private RegisterAnimal registerAnimal;
 	private ShelterSearch searchShelter;
-	private InterestPat interestPat;
-	private MyWriter myWriter;
+	private MyPage myPage;
 
 	private JPanel emptyPanel;
 
@@ -68,7 +64,6 @@ public class BoardFrame extends JFrame {
 		board = new JTabbedPane(JTabbedPane.LEFT);
 		missing = new JTabbedPane(JTabbedPane.LEFT);
 		abandonment = new JTabbedPane(JTabbedPane.LEFT);
-		myPage = new JTabbedPane(JTabbedPane.LEFT);
 
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
@@ -83,8 +78,7 @@ public class BoardFrame extends JFrame {
 		missingBoard = new MissingBoard();
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
-		interestPat = new InterestPat();
-		myWriter = new MyWriter();
+		myPage = new MyPage();
 
 		emptyPanel = new JPanel();
 	}
@@ -135,8 +129,6 @@ public class BoardFrame extends JFrame {
 		abandonment.addTab("보호소 찾기", searchShelter);
 
 		main.addTab(null, new ImageIcon("img/MyPage.png"), myPage, null);
-		myPage.addTab("관심있는 동물", interestPat);
-		myPage.addTab("내가 쓴 게시글", myWriter);
 
 		main.setUI(new BasicTabbedPaneUI() {
 			@Override

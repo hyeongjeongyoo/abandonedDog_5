@@ -83,22 +83,22 @@ public class MissingBoard extends JPanel {
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		searchText.setBounds(895, 25, 200, 22);
+		searchText.setBounds(895, 700, 200, 22);
 		add(searchText);
 
-		searchBtn.setBounds(1099, 25, 59, 20);
+		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
 
-		searchComboBox.setBounds(810, 25, 80, 20);
+		searchComboBox.setBounds(810, 700, 80, 20);
 		add(searchComboBox);
 
-		refrashBtn.setBounds(20, 0, 50, 50);
+		refrashBtn.setBounds(20, 600, 50, 50);
 		refrashBtn.setBorderPainted(false);
 		refrashBtn.setContentAreaFilled(false);
 		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(refrashBtn);
 
-		animalScroll.setBounds(20, 50, 1140, 503);
+		animalScroll.setBounds(20, 5, 1140, 503);
 		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);
