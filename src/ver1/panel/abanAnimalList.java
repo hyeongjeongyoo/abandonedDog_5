@@ -13,13 +13,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class RegisterAdoptBoard extends JPanel {
+public class abanAnimalList extends JPanel {
 
 	private JList<String> infoList;
 
 	private JTable table; // 인스턴스 변수로 선언
 
-	public RegisterAdoptBoard() {
+	public abanAnimalList() {
 		initData();
 		setInitLayout();
 		addEventLayout();
@@ -71,14 +71,14 @@ public class RegisterAdoptBoard extends JPanel {
 	}
 
 	public void setInitLayout() {
-		 // 테이블을 JScrollPane에 추가하여 스크롤 가능하게 함
-        JScrollPane scrollPaneTable = new JScrollPane(table);
-        add(scrollPaneTable, BorderLayout.CENTER);
+		// 테이블을 JScrollPane에 추가하여 스크롤 가능하게 함
+		JScrollPane scrollPaneTable = new JScrollPane(table);
+		add(scrollPaneTable, BorderLayout.CENTER);
 
-        // JList를 JPanel에 넣어서 SOUTH에 추가
-        JPanel listPanel = new JPanel(new BorderLayout());
-        listPanel.add(new JScrollPane(infoList), BorderLayout.CENTER);
-        add(listPanel, BorderLayout.SOUTH);
+		// JList를 JPanel에 넣어서 SOUTH에 추가
+		JPanel listPanel = new JPanel(new BorderLayout());
+		listPanel.add(new JScrollPane(infoList), BorderLayout.CENTER);
+		add(listPanel, BorderLayout.SOUTH);
 	}
 
 	public void addEventLayout() {
