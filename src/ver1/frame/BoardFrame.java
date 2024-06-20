@@ -45,12 +45,9 @@ public class BoardFrame extends JFrame {
 	private ShelterSearch searchShelter;
 	private MyPage myPage;
 
-	private JPanel emptyPanel;
-
 	public BoardFrame() {
 		initData();
 		setInitLayout();
-		addEventListener();
 	}
 
 	private void initData() {
@@ -80,7 +77,6 @@ public class BoardFrame extends JFrame {
 		searchShelter = new ShelterSearch();
 		myPage = new MyPage();
 
-		emptyPanel = new JPanel();
 	}
 
 	private void setInitLayout() {
@@ -119,14 +115,15 @@ public class BoardFrame extends JFrame {
 		board.addTab(null, new ImageIcon("img/MissingBoard.png"), missingBoard, null);
 
 		main.addTab(null, new ImageIcon("img/Adopt.png"), missing, null);
-		main.add(emptyPanel, 0);
-		missing.addTab("입양 신청", applyAdoptBoard);
-		missing.addTab("입양 후기", adoptReviewBoard);
+		missing.addTab("", null, null, null);
+		missing.addTab(null, new ImageIcon("img/AdoptApply.png"), applyAdoptBoard, null);
+		missing.addTab(null, new ImageIcon("img/AdoptReview.png"), adoptReviewBoard, null);
 
 		main.addTab(null, new ImageIcon("img/Shelter.png"), abandonment, null);
-		abandonment.addTab("보호 동물 조회", abanAnimalListboard);
-		abandonment.addTab("보호 동물 등록", registerAnimal);
-		abandonment.addTab("보호소 찾기", searchShelter);
+		abandonment.addTab("", null, null, null);
+		abandonment.addTab(null, new ImageIcon("img/CareAnimal.png"), abanAnimalListboard, null);
+		abandonment.addTab(null, new ImageIcon("img/CareApply.png"), registerAnimal, null);
+		abandonment.addTab(null, new ImageIcon("img/CareSearch.png"), searchShelter, null);
 
 		main.addTab(null, new ImageIcon("img/MyPage.png"), myPage, null);
 
@@ -134,7 +131,7 @@ public class BoardFrame extends JFrame {
 			@Override
 			protected void installDefaults() {
 				super.installDefaults();
-				tabAreaInsets.left = -10;
+				tabAreaInsets.left = -3;
 			}
 
 			@Override
@@ -148,7 +145,20 @@ public class BoardFrame extends JFrame {
 			}
 		});
 
-		board.setUI(new BasicTabbedPaneUI() {
+		board.setUI(addUI());
+		missing.setUI(addUI());
+		abandonment.setUI(addUI());
+
+		board.setFocusable(false);
+		missing.setFocusable(false);
+		abandonment.setFocusable(false);
+		main.setFocusable(false);
+		add(main);
+	}
+
+	private BasicTabbedPaneUI addUI() {
+
+		return new BasicTabbedPaneUI() {
 		    @Override
 		    protected void installDefaults() {
 		        super.installDefaults();
@@ -159,15 +169,7 @@ public class BoardFrame extends JFrame {
 		    protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 		        // 탭의 배경을 그리는 부분
 		    }
-		});
-
-		board.setFocusable(false);
-		main.setFocusable(false);
-		add(main);
-	}
-
-	private void addEventListener() {
-
+		};
 	}
 
 	public static void main(String[] args) {
