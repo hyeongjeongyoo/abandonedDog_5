@@ -176,7 +176,7 @@ public class Login extends JFrame {
 					setVisible(false);
 					new BoardFrame();
 				} else {
-					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			} else {
