@@ -100,7 +100,7 @@ public class MissingBoard extends JPanel {
 		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(refrashBtn);
 
-		animalScroll.setBounds(20, 5, 1140, 507);
+		animalScroll.setBounds(20, 13, 1140, 507);
 		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		animalScroll.getViewport().setBackground(Color.white);
 		animalScroll.getViewport().setOpaque(true);

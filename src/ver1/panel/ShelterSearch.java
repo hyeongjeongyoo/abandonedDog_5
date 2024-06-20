@@ -35,7 +35,7 @@ public class ShelterSearch extends JPanel {
     private JComboBox<String> siDoComboBox;
     private JComboBox<String> siGunGuComboBox;
     
-    String[] columnNames = {"careNm", "careTel", "careAddr"};
+    String[] columnNames = {"보호소명", "전화번호", "주소"};
     
     public ShelterSearch() {
         initData();
@@ -83,7 +83,7 @@ public class ShelterSearch extends JPanel {
         setLayout(null);
         setBackground(Color.white);
         
-        innerPanel1.setBounds(225, 13, 800, 500);
+        innerPanel1.setBounds(200, 13, 800, 500);
         innerPanel1.setLayout(null);
         innerPanel1.setBackground(new Color(250, 250, 250, 0));
         innerPanel1.setVisible(true);

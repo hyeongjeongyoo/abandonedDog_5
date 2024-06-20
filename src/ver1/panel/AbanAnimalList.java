@@ -1,7 +1,9 @@
 package ver1.panel;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;

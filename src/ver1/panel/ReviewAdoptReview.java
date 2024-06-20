@@ -96,13 +96,13 @@ public class ReviewAdoptReview extends JPanel {
 		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);
 
-		refrashBtn.setBounds(20, 0, 50, 50);
+		refrashBtn.setBounds(20, 700, 50, 50);
 		refrashBtn.setBorderPainted(false);
 		refrashBtn.setContentAreaFilled(false);
 		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(refrashBtn);
 
-		animalScroll.setBounds(20, 50, 1140, 503);
+		animalScroll.setBounds(20, 13, 1140, 503);
 		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		animalScroll.getViewport().setBackground(Color.white);
 		animalScroll.getViewport().setOpaque(true);
