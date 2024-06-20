@@ -4,13 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class RegisterAdoptBoard extends JPanel {
+
+	private JList<String> infoList;
 
 	private JTable table; // 인스턴스 변수로 선언
 
@@ -54,12 +59,26 @@ public class RegisterAdoptBoard extends JPanel {
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		listModel.addElement("유기견 1 토랑이");
+		listModel.addElement("유기묘 2 카키");
+
+		infoList = new JList<>(listModel);
+		infoList.setFont(new Font("Noto Sans KR", Font.PLAIN, 12));
+		infoList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 	}
 
 	public void setInitLayout() {
-		setLayout(new BorderLayout());
-		JScrollPane scrollPane = new JScrollPane(table); // 테이블을 스크롤 페인에 추가
-		add(scrollPane, BorderLayout.CENTER);
+		 // 테이블을 JScrollPane에 추가하여 스크롤 가능하게 함
+        JScrollPane scrollPaneTable = new JScrollPane(table);
+        add(scrollPaneTable, BorderLayout.CENTER);
+
+        // JList를 JPanel에 넣어서 SOUTH에 추가
+        JPanel listPanel = new JPanel(new BorderLayout());
+        listPanel.add(new JScrollPane(infoList), BorderLayout.CENTER);
+        add(listPanel, BorderLayout.SOUTH);
 	}
 
 	public void addEventLayout() {
