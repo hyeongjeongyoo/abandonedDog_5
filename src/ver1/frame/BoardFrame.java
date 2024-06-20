@@ -14,7 +14,7 @@ import ver1.panel.VisitAnimal;
 import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
 
-public class Frame extends JFrame {
+public class BoardFrame extends JFrame {
 
 	private Font font;
 
@@ -33,7 +33,7 @@ public class Frame extends JFrame {
 	private JPanel registerAnimal;
 	private JPanel searchShelter;
 
-	public Frame() {
+	public BoardFrame() {
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -118,6 +118,6 @@ public class Frame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Frame();
+		new BoardFrame();
 	}
 }
