@@ -14,6 +14,7 @@ import ver1.panel.FreeBoard;
 import ver1.panel.MissingBoard;
 import ver1.panel.abanAnimalList;
 import ver1.panel.ReviewAdopt;
+import ver1.panel.ShelterSearch;
 import ver1.panel.VisitAnimal;
 
 public class BoardFrame extends JFrame {
@@ -35,7 +36,7 @@ public class BoardFrame extends JFrame {
 	private JPanel registerAdopt;
 	private JPanel abanAnimalList;
 	private JPanel registerAnimal;
-	private JPanel searchShelter;
+	private ShelterSearch searchShelter;
 
 	public BoardFrame() {
 		initData();
@@ -64,7 +65,7 @@ public class BoardFrame extends JFrame {
 		registerAdopt = new JPanel();
 		abanAnimalList = new JPanel();
 		registerAnimal = new JPanel();
-		searchShelter = new JPanel();
+		searchShelter = new ShelterSearch();
 	}
 
 	private void setInitLayout() {
