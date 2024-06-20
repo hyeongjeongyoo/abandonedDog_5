@@ -39,10 +39,10 @@ public class SandAnimation extends JPanel implements Runnable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(new Color(13, 170, 93));
-        g.setFont(new Font("굴림", Font.BOLD, 40));
+        g.setFont(new Font("Noto Sans KR", Font.BOLD, 40));
 
         int x = 50;
-        int baseY = 50;
+        int baseY = 40;
         for (int i = 0; i < charIndex; i++) {
             g.drawString(String.valueOf(text.charAt(i)), x, baseY);
             x += g.getFontMetrics().charWidth(text.charAt(i));
