@@ -2,10 +2,13 @@ package ver1.frame;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -101,7 +104,7 @@ public class BoardFrame extends JFrame {
 		UIManager.put("TabbedPane.contentAreaColor", Color.white);
 		UIManager.put("TabbedPane.selected", Color.white);
 		UIManager.put("TabbedPane.background", Color.white);
-		UIManager.put("TabbedPane.tabInsets", new Insets(50, 10, 0, 10));
+		UIManager.put("TabbedPane.tabInsets", new Insets(50, 5, 0, 0));
 
 		main.setOpaque(true);
 		board.setOpaque(true);
@@ -117,6 +120,7 @@ public class BoardFrame extends JFrame {
 		main.addTab(null, new ImageIcon("img/Home.png"), visitAnimal, null);
 
 		main.addTab(null, new ImageIcon("img/Board.png"), board, null);
+		board.addTab("", null, null, null);
 		board.addTab(null, new ImageIcon("img/FreeBoard.png"), freeBoard, null);
 		board.addTab(null, new ImageIcon("img/MissingBoard.png"), missingBoard, null);
 
@@ -138,7 +142,7 @@ public class BoardFrame extends JFrame {
 			@Override
 			protected void installDefaults() {
 				super.installDefaults();
-				tabAreaInsets.left = 0;
+				tabAreaInsets.left = -10;
 			}
 
 			@Override
@@ -153,21 +157,16 @@ public class BoardFrame extends JFrame {
 		});
 
 		board.setUI(new BasicTabbedPaneUI() {
-			@Override
-			protected void installDefaults() {
-				super.installDefaults();
-				tabAreaInsets.left = 0;
-			}
+		    @Override
+		    protected void installDefaults() {
+		        super.installDefaults();
+		        tabInsets = new Insets(0, 10, 0, 10); // 탭의 내부 여백 설정
+		    }
 
-			@Override
-			protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-					boolean isSelected) {
-			}
-
-			@Override
-			protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-					boolean isSelected) {
-			}
+		    @Override
+		    protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
+		        // 탭의 배경을 그리는 부분
+		    }
 		});
 
 		board.setFocusable(false);

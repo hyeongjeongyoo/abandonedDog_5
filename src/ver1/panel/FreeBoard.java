@@ -71,9 +71,8 @@ public class FreeBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
-		setBackground(new Color(13, 170, 93));
+		setBackground(Color.white);
 
-		//
 		column.setPreferredWidth(500); // 원하는 기본 너비 설정
 		column.setMinWidth(300); // 최소 너비 설정
 		column.setMaxWidth(800); // 최대 너비 설정
@@ -81,25 +80,25 @@ public class FreeBoard extends JPanel {
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		searchText.setBounds(895, 25, 200, 22);
+		searchText.setBounds(895, 700, 200, 22);
 		add(searchText);
 
-		searchBtn.setBounds(1099, 25, 59, 20);
+		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
 
-		title.setBounds(860, 25, 80, 20);
+		title.setBounds(860, 700, 80, 20);
 		add(title);
 
 		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);
 
-		refrashBtn.setBounds(20, 0, 50, 50);
+		refrashBtn.setBounds(20, 600, 50, 50);
 		refrashBtn.setBorderPainted(false);
 		refrashBtn.setContentAreaFilled(false);
 		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(refrashBtn);
 
-		animalScroll.setBounds(20, 50, 1140, 503);
+		animalScroll.setBounds(20, 5, 1140, 503);
 		add(animalScroll);
 
 		prevPageBtn.setBounds(20, 560, 120, 30);

@@ -78,7 +78,7 @@ public class MissingBoard extends JPanel {
 
 	public void setInitLayout() {
 		setLayout(null);
-		setBackground(new Color(13, 170, 93));
+		setBackground(Color.white);
 
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);
