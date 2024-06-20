@@ -19,9 +19,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-import ver1.component.HeaderRenderer;
+import ver1.use.HeaderRenderer;
 
-public class ReviewAdopt extends JPanel {
+public class ReviewAdoptReview extends JPanel {
 	private JButton registrationBtn;
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
@@ -43,7 +43,7 @@ public class ReviewAdopt extends JPanel {
 
 	String[] columnNames = { "id", "title", "contents", "writer", "date" };
 
-	public ReviewAdopt() {
+	public ReviewAdoptReview() {
 		initData();
 		setInitLayout();
 		addEventLayout();

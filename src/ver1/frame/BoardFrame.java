@@ -8,22 +8,19 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
+import ver1.panel.AbanAnimalList;
 import ver1.panel.ApplyAdoptBoard;
 import ver1.panel.FreeBoard;
-import ver1.panel.InterestPat;
 import ver1.panel.MissingBoard;
 import ver1.panel.MyPage;
-import ver1.panel.MyWriter;
 import ver1.panel.RegisterAnimal;
-import ver1.panel.ReviewAdopt;
+import ver1.panel.ReviewAdoptReview;
 import ver1.panel.ShelterSearch;
 import ver1.panel.VisitAnimal;
-import ver1.panel.AbanAnimalList;
 
 public class BoardFrame extends JFrame {
 	
@@ -43,7 +40,7 @@ public class BoardFrame extends JFrame {
 	private MissingBoard missingBoard;
 	
 	private ApplyAdoptBoard applyAdoptBoard;
-	private ReviewAdopt adoptReviewBoard;
+	private ReviewAdoptReview adoptReviewBoard;
 	
 	private AbanAnimalList abanAnimalListboard;
 	private RegisterAnimal registerAnimal;
@@ -73,11 +70,10 @@ public class BoardFrame extends JFrame {
 		abanAnimalListboard = new AbanAnimalList();
 		visitAnimal = new VisitAnimal();
 
-		// TODO 프레임 작업 중지
-//		Thread thread = new Thread(visitAnimal);
-//		thread.start();
+		Thread thread = new Thread(visitAnimal);
+		thread.start();
 
-		adoptReviewBoard = new ReviewAdopt();
+		adoptReviewBoard = new ReviewAdoptReview();
 		freeBoard = new FreeBoard();
 		missingBoard = new MissingBoard();
 		registerAnimal = new RegisterAnimal();

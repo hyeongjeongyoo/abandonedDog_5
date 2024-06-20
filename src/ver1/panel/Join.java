@@ -233,28 +233,27 @@ public class Join extends JFrame {
 				if (!memberNum.getText().equals(null) && !memberNum.getText().equals("소속번호")
 						&& !memberName.getText().equals(null) && !memberName.getText().equals("소속이름")) {
 
-					// TODO 프레임 작업 중지
-//					boolean flag2 = JoinDAO.selectJoinMember(enteredName, enteredPassword, enteredBrith,
-//							enteredPhoneNum, enteredMemberNum, enteredMemberName);
-//
-//					if (flag2) {
-//						JOptionPane.showMessageDialog(null, "[관리자]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
-//								JOptionPane.INFORMATION_MESSAGE);
-//						setVisible(false);
-//						new Login();
-//					} else {
-//						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
-//					}
-//				} else {
-//					boolean flag = JoinDAO.bSelectJoin(enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
-//					if (flag) {
-//						JOptionPane.showMessageDialog(null, "[일반회원]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
-//								JOptionPane.INFORMATION_MESSAGE);
-//						setVisible(false);
-//						new Login();
-//					} else {
-//						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
-//					}
+					boolean flag2 = JoinDAO.selectJoinMember(enteredName, enteredPassword, enteredBrith,
+							enteredPhoneNum, enteredMemberNum, enteredMemberName);
+
+					if (flag2) {
+						JOptionPane.showMessageDialog(null, "[관리자]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
+								JOptionPane.INFORMATION_MESSAGE);
+						setVisible(false);
+						new Login();
+					} else {
+						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					boolean flag = JoinDAO.bSelectJoin(enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
+					if (flag) {
+						JOptionPane.showMessageDialog(null, "[일반회원]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
+								JOptionPane.INFORMATION_MESSAGE);
+						setVisible(false);
+						new Login();
+					} else {
+						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 
 			}

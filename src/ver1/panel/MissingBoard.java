@@ -27,8 +27,8 @@ import javax.swing.table.TableColumn;
 
 import ver1.DAO.MissingBoardDAO;
 import ver1.DTO.MissingBoardDTO;
-import ver1.component.HeaderRenderer;
 import ver1.jdbc.Define;
+import ver1.use.HeaderRenderer;
 
 public class MissingBoard extends JPanel {
 
@@ -56,8 +56,7 @@ public class MissingBoard extends JPanel {
 		initData();
 		setInitLayout();
 		addEventLayout();
-		// TODO 프레임 작업 중지
-//		updateTable();
+		updateTable();
 	}
 
 	public void initData() {
@@ -70,11 +69,10 @@ public class MissingBoard extends JPanel {
 		prevPageBtn = new JButton("이전 페이지");
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
-		// TODO 프레임 작업 중지
 		// 데이터 불러오기
-//		animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
-//
-//		model = new DefaultTableModel(convertToPageData(), columnNames);
+		animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
+
+		model = new DefaultTableModel(convertToPageData(), columnNames);
 		animalTable = new JTable(model);
 		animalScroll = new JScrollPane(animalTable);
 
@@ -102,7 +100,7 @@ public class MissingBoard extends JPanel {
 		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(refrashBtn);
 
-		animalScroll.setBounds(20, 5, 1140, 503);
+		animalScroll.setBounds(20, 5, 1140, 507);
 		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		animalScroll.getViewport().setBackground(Color.white);
 		animalScroll.getViewport().setOpaque(true);
@@ -124,8 +122,7 @@ public class MissingBoard extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					currentPage++;
-					// TODO 프레임 작업 중지
-//					updateTable();
+					updateTable();
 				} catch (Exception e2) {
 					currentPage--;
 					JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
@@ -142,181 +139,177 @@ public class MissingBoard extends JPanel {
 
 				if (currentPage > 0) {
 					currentPage--;
-					// TODO 프레임 작업 중지
-//					updateTable();
+					updateTable();
 				}
 			}
 		});
 
-		// TODO 프레임 작업 중지
-//		refrashBtn.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
-//				currentPage = 0;
-//				updateTable();
-//			}
-//		});
-//		
-//		searchBtn.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(searchComboBox.getSelectedIndex() == 0) {
-//					try {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
-//					} catch (NumberFormatException e2) {
-//						JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-//					}
-//				} else if (searchComboBox.getSelectedIndex() == 1) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
-//				} else if (searchComboBox.getSelectedIndex() == 2) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 3) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 4) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 5) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 6) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 7) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
-//				}  else if (searchComboBox.getSelectedIndex() == 8) {
-//					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
-//				}
-//				currentPage = 0;
-//				updateTable();
-//			}
-//		});
-//		
-//		searchText.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-//					if(searchComboBox.getSelectedIndex() == 0) {
-//						try {
-//							animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
-//						} catch (NumberFormatException e2) {
-//							JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
-//						}
-//					} else if (searchComboBox.getSelectedIndex() == 1) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
-//					} else if (searchComboBox.getSelectedIndex() == 2) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 3) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 4) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 5) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 6) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 7) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
-//					}  else if (searchComboBox.getSelectedIndex() == 8) {
-//						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
-//					}
-//					currentPage = 0;
-//					updateTable();
-//				}
-//			}
-//		});
+		refrashBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
+				currentPage = 0;
+				updateTable();
+			}
+		});
+		
+		searchBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(searchComboBox.getSelectedIndex() == 0) {
+					try {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else if (searchComboBox.getSelectedIndex() == 1) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 2) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 3) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 4) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 5) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 6) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 7) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
+				}  else if (searchComboBox.getSelectedIndex() == 8) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+				}
+				currentPage = 0;
+				updateTable();
+			}
+		});
+		
+		searchText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(searchComboBox.getSelectedIndex() == 0) {
+						try {
+							animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+						} catch (NumberFormatException e2) {
+							JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+						}
+					} else if (searchComboBox.getSelectedIndex() == 1) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 2) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 3) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 4) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 5) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 6) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 7) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
+					}  else if (searchComboBox.getSelectedIndex() == 8) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+					}
+					currentPage = 0;
+					updateTable();
+				}
+			}
+		});
 	}
 
-	// TODO 프레임 작업 중지
-//	private void updateTable() {
-//		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(), columnNames) {
-//			@Override
-//			public boolean isCellEditable(int row, int column) {
-//				return false;
-//			}
-//		};
-//		animalTable.setModel(newModel);
-//
-//		// TableColumn 넓이 고정
-//
-//		// 접수 번호
-//		column = animalTable.getColumnModel().getColumn(0);
-//		column.setMinWidth(65);
-//		column.setMaxWidth(65);
-//		DefaultTableCellRenderer genderRenderer = new DefaultTableCellRenderer();
-//	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-//	    column.setCellRenderer(genderRenderer);
-//		
-//		// 품종
-//		column = animalTable.getColumnModel().getColumn(1);
-//		column.setMinWidth(130);
-//		column.setMaxWidth(130);
-//
-//		// 색깔
-//		column = animalTable.getColumnModel().getColumn(2);
-//		column.setMinWidth(100);
-//		column.setMaxWidth(100);
-//
-//		// 나이
-//		column = animalTable.getColumnModel().getColumn(3);
-//		column.setMinWidth(70);
-//		column.setMaxWidth(70);
-//		
-//		// 무게
-//		column = animalTable.getColumnModel().getColumn(4);
-//		column.setMinWidth(65);
-//		column.setMaxWidth(65);
-//		
-//		// 보호상태
-//		column = animalTable.getColumnModel().getColumn(5);
-//		column.setMinWidth(85);
-//		column.setMaxWidth(85);
-//		
-//		// 성별
-//		column = animalTable.getColumnModel().getColumn(6);
-//		column.setMinWidth(35);
-//		column.setMaxWidth(35);
-//	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-//	    column.setCellRenderer(genderRenderer);
-//		
-//		// 중성화
-//		column = animalTable.getColumnModel().getColumn(7);
-//		column.setMinWidth(45);
-//		column.setMaxWidth(45);
-//	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-//	    column.setCellRenderer(genderRenderer);
-//	}
+	private void updateTable() {
+		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(), columnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		animalTable.setModel(newModel);
 
-	// TODO 프레임 작업 중지
-//	private Object[][] convertToPageData() {
-//		List<MissingBoardDTO> currentPageData = getPageData();
-//		Object[][] pageData = new Object[currentPageData.size()][columnNames.length];
-//
-//		for (int i = 0; i < currentPageData.size(); i++) {
-//			MissingBoardDTO dto = currentPageData.get(i);
-//			pageData[i][0] = dto.getId();
-//			pageData[i][1] = dto.getKindCd();
-//			pageData[i][2] = dto.getColorCd();
-//			pageData[i][3] = dto.getAge();
-//			pageData[i][4] = dto.getWeight();
-//			pageData[i][5] = dto.getProcessState();
-//			pageData[i][6] = dto.getSexCd();
-//			pageData[i][7] = dto.getNeuterYn();
-//			pageData[i][8] = dto.getSpecialMark();
-//		}
-//		return pageData;
-//	}
-//
-//	private List<MissingBoardDTO> getPageData() {
-//		int start = currentPage * rowsPerPage;
-//		int end = Math.min(start + rowsPerPage, animalData.size() * rowsPerPage);
-//		List<MissingBoardDTO> pageData = new ArrayList<>();
-//
-//		for (int i = start; i < end; i++) {
-//			int listIndex = i / rowsPerPage;
-//			int dataIndex = i % rowsPerPage;
-//			if (listIndex < animalData.size() && dataIndex < animalData.get(listIndex).size()) {
-//				pageData.add(animalData.get(listIndex).get(dataIndex));
-//			}
-//		}
-//		return pageData;
-//	}
+		// TableColumn 넓이 고정
+
+		// 접수 번호
+		column = animalTable.getColumnModel().getColumn(0);
+		column.setMinWidth(65);
+		column.setMaxWidth(65);
+		DefaultTableCellRenderer genderRenderer = new DefaultTableCellRenderer();
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
+		
+		// 품종
+		column = animalTable.getColumnModel().getColumn(1);
+		column.setMinWidth(130);
+		column.setMaxWidth(130);
+
+		// 색깔
+		column = animalTable.getColumnModel().getColumn(2);
+		column.setMinWidth(100);
+		column.setMaxWidth(100);
+
+		// 나이
+		column = animalTable.getColumnModel().getColumn(3);
+		column.setMinWidth(70);
+		column.setMaxWidth(70);
+		
+		// 무게
+		column = animalTable.getColumnModel().getColumn(4);
+		column.setMinWidth(65);
+		column.setMaxWidth(65);
+		
+		// 보호상태
+		column = animalTable.getColumnModel().getColumn(5);
+		column.setMinWidth(85);
+		column.setMaxWidth(85);
+		
+		// 성별
+		column = animalTable.getColumnModel().getColumn(6);
+		column.setMinWidth(35);
+		column.setMaxWidth(35);
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
+		
+		// 중성화
+		column = animalTable.getColumnModel().getColumn(7);
+		column.setMinWidth(45);
+		column.setMaxWidth(45);
+	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+	    column.setCellRenderer(genderRenderer);
+	}
+
+	private Object[][] convertToPageData() {
+		List<MissingBoardDTO> currentPageData = getPageData();
+		Object[][] pageData = new Object[currentPageData.size()][columnNames.length];
+
+		for (int i = 0; i < currentPageData.size(); i++) {
+			MissingBoardDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getKindCd();
+			pageData[i][2] = dto.getColorCd();
+			pageData[i][3] = dto.getAge();
+			pageData[i][4] = dto.getWeight();
+			pageData[i][5] = dto.getProcessState();
+			pageData[i][6] = dto.getSexCd();
+			pageData[i][7] = dto.getNeuterYn();
+			pageData[i][8] = dto.getSpecialMark();
+		}
+		return pageData;
+	}
+
+	private List<MissingBoardDTO> getPageData() {
+		int start = currentPage * rowsPerPage;
+		int end = Math.min(start + rowsPerPage, animalData.size() * rowsPerPage);
+		List<MissingBoardDTO> pageData = new ArrayList<>();
+
+		for (int i = start; i < end; i++) {
+			int listIndex = i / rowsPerPage;
+			int dataIndex = i % rowsPerPage;
+			if (listIndex < animalData.size() && dataIndex < animalData.get(listIndex).size()) {
+				pageData.add(animalData.get(listIndex).get(dataIndex));
+			}
+		}
+		return pageData;
+	}
 }

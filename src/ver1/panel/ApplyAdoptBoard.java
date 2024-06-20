@@ -76,8 +76,6 @@ public class ApplyAdoptBoard extends JPanel {
 		labelEmail = new JLabel("이메일:");
 		textFieldEmail = new JTextField(20);
 
-		////////////////
-
 		labelAge = new JLabel("나이:");
 		textFieldAge = new JTextField(20);
 

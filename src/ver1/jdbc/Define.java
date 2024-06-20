@@ -19,7 +19,7 @@ public class Define {
 	
 	public static final String SHELTER = "insert into shelter(orgCd, careRegNo, careNm) values (?, ?, ?)";
 	
-	public static final String ALL_VIEW_ANIMAL_DETAILS = " select * from animal_details order by id desc ";
+	public static final String ALL_VIEW_ANIMAL_DETAILS = " select * from animal_details where processState like '보호%' order by id desc ";
 	
 	public static final String JOIN_VIEW_ANIMAL_DETAILS(String field) {
 		String query = " select * from animal_details where " + field + " like ? ";

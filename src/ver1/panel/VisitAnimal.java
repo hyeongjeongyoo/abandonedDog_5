@@ -62,22 +62,21 @@ public class VisitAnimal extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO 프레임 작업 중지
-//		int temp = 0;
-//		while (true) {
-//			String imagePath = PhotoDAO.randomPhoto();
-//			try {
-//				image = ImageIO.read(new URL(imagePath.trim()));
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			repaint();
-//			temp++;
-//			try {
-//				Thread.sleep(2000); // 이미지 변경 간격을 1초로 설정
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		int temp = 0;
+		while (true) {
+			String imagePath = PhotoDAO.randomPhoto();
+			try {
+				image = ImageIO.read(new URL(imagePath.trim()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			repaint();
+			temp++;
+			try {
+				Thread.sleep(2000); // 이미지 변경 간격을 1초로 설정
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

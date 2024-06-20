@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-import ver1.component.HeaderRenderer;
+import ver1.use.HeaderRenderer;
 
 public class FreeBoard extends JPanel {
 

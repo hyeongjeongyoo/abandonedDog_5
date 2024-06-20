@@ -1,4 +1,4 @@
-package ver1.component;
+package ver1.use;
 
 import java.awt.Color;
 import java.awt.Component;
