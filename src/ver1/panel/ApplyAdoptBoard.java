@@ -1,11 +1,10 @@
 package ver1.panel;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.BorderFactory;
+
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,10 +24,9 @@ public class ApplyAdoptBoard extends JPanel {
 
 	private JTextField textFieldId;
 	private JTextField textFieldAge;
-	private JTextField textFieldSex;
 	private JTextField textFieldJob;
-	private JTextField textfieldMaritalStatus;
-	private JTextField textfieldVisitDate;
+	private JTextField textFieldVisitDate;
+	private JTextField textFieldSizeFamily;
 
 	private JLabel labelId;
 	private JLabel labelAge;
@@ -42,6 +40,16 @@ public class ApplyAdoptBoard extends JPanel {
 	private JLabel labelNumber;
 	private JLabel labelEmail;
 	private JLabel labelAnimalType;
+
+	private JLabel labelRaisedPet;
+	private JLabel labelSizeFamily;
+
+	private JCheckBox checkBoxSexMale;
+	private JCheckBox checkBoxSexFemale;
+	private JCheckBox checkBoxMaritalY;
+	private JCheckBox checkBoxMaritalN;
+	private JCheckBox checkBoxRaisedPetY;
+	private JCheckBox checkBoxRaisedPetN;
 
 	private Font font;
 
@@ -74,24 +82,28 @@ public class ApplyAdoptBoard extends JPanel {
 		textFieldAge = new JTextField(20);
 
 		labelSex = new JLabel("성별:");
-		textFieldSex = new JTextField(20);
+		checkBoxSexMale = new JCheckBox("남성");
+		checkBoxSexFemale = new JCheckBox("여성");
 
 		labelJob = new JLabel("직업:");
 		textFieldJob = new JTextField(20);
 
 		labelMaritalStatus = new JLabel("결혼여부:");
-		textfieldMaritalStatus = new JTextField(20);
+		checkBoxMaritalN = new JCheckBox("미혼");
+		checkBoxMaritalY = new JCheckBox("기혼");
 
 		labelVisitDate = new JLabel("방문예정:");
-		textfieldVisitDate = new JTextField(20);
+		textFieldVisitDate = new JTextField(20);
 
 		labelId = new JLabel("동물ID:");
 		textFieldId = new JTextField(20);
 
-		// 동물 정보 선택 콤보박스 추가
-		labelAnimalType = new JLabel("동물 타입:");
-		String[] animalTypes = { "고양이", "개", "기타" };
-		comboBoxAnimalType = new JComboBox<>(animalTypes);
+		labelRaisedPet = new JLabel("반려동물 키우신 적 있습니까?");
+		checkBoxRaisedPetY = new JCheckBox("Y");
+		checkBoxRaisedPetN = new JCheckBox("N");
+
+		labelSizeFamily = new JLabel("가족 구성인원이 어떻게 됩니까?");
+		textFieldSizeFamily = new JTextField(30);
 
 		btnSubmit = new JButton("신청");
 
@@ -102,24 +114,28 @@ public class ApplyAdoptBoard extends JPanel {
 		labelAddress.setFont(font);
 		labelNumber.setFont(font);
 		labelEmail.setFont(font);
-		labelAnimalType.setFont(font);
 		textFieldAddress.setFont(font);
 		textFieldNumber.setFont(font);
 		textFieldEmail.setFont(font);
-		comboBoxAnimalType.setFont(font);
 		labelAge.setFont(font);
 		textFieldAge.setFont(font);
 		labelSex.setFont(font);
-		textFieldSex.setFont(font);
 		labelJob.setFont(font);
 		textFieldJob.setFont(font);
 		labelMaritalStatus.setFont(font);
-		textfieldMaritalStatus.setFont(font);
 		labelVisitDate.setFont(font);
-		textfieldVisitDate.setFont(font);
+		textFieldVisitDate.setFont(font);
 		labelId.setFont(font);
 		textFieldId.setFont(font);
-
+		checkBoxMaritalY.setFont(font);
+		checkBoxMaritalN.setFont(font);
+		checkBoxSexFemale.setFont(font);
+		checkBoxSexMale.setFont(font);
+		checkBoxRaisedPetN.setFont(font);
+		checkBoxRaisedPetY.setFont(font);
+		textFieldSizeFamily.setFont(font);
+		labelRaisedPet.setFont(font);
+		labelSizeFamily.setFont(font);
 	}
 
 	public void setInitLayout() {
@@ -143,22 +159,28 @@ public class ApplyAdoptBoard extends JPanel {
 		textFieldAge.setBounds(90, 140, 60, 35);
 
 		labelSex.setBounds(310, 110, 120, 100);
-		textFieldSex.setBounds(380, 140, 60, 35);
+		checkBoxSexMale.setBounds(380, 145, 70, 30);
+		checkBoxSexFemale.setBounds(460, 145, 70, 30);
 
 		labelJob.setBounds(50, 160, 120, 100);
 		textFieldJob.setBounds(90, 190, 200, 35);
 
 		labelMaritalStatus.setBounds(310, 160, 120, 100);
-		textfieldMaritalStatus.setBounds(380, 190, 200, 35);
+		checkBoxMaritalN.setBounds(380, 195, 70, 30);
+		checkBoxMaritalY.setBounds(460, 195, 70, 30);
 
 		labelVisitDate.setBounds(50, 210, 120, 100);
-		textfieldVisitDate.setBounds(110, 240, 180, 35);
+		textFieldVisitDate.setBounds(110, 240, 180, 35);
 
 		labelId.setBounds(310, 210, 120, 100);
 		textFieldId.setBounds(380, 240, 200, 35);
 
-		labelAnimalType.setBounds(50, 260, 120, 100);
-		comboBoxAnimalType.setBounds(130, 290, 180, 35);
+		labelRaisedPet.setBounds(50, 260, 200, 100);
+		checkBoxRaisedPetY.setBounds(300, 290, 50, 35);
+		checkBoxRaisedPetN.setBounds(360, 290, 50, 35);
+
+		labelSizeFamily.setBounds(50, 320, 220, 100);
+		textFieldSizeFamily.setBounds(290, 350, 290, 35);
 
 		innerPanel.add(labelName);
 		innerPanel.add(textFieldName);
@@ -168,21 +190,26 @@ public class ApplyAdoptBoard extends JPanel {
 		innerPanel.add(textFieldNumber);
 		innerPanel.add(labelEmail);
 		innerPanel.add(textFieldEmail);
-		innerPanel.add(labelAnimalType);
-		innerPanel.add(comboBoxAnimalType);
+		innerPanel.add(checkBoxSexFemale);
+		innerPanel.add(checkBoxSexMale);
+		innerPanel.add(checkBoxMaritalY);
+		innerPanel.add(checkBoxMaritalN);
+		innerPanel.add(checkBoxRaisedPetN);
+		innerPanel.add(checkBoxRaisedPetY);
 
 		innerPanel.add(labelAge);
 		innerPanel.add(textFieldAge);
 		innerPanel.add(labelSex);
-		innerPanel.add(textFieldSex);
 		innerPanel.add(labelJob);
 		innerPanel.add(textFieldJob);
 		innerPanel.add(labelMaritalStatus);
-		innerPanel.add(textfieldMaritalStatus);
 		innerPanel.add(labelVisitDate);
-		innerPanel.add(textfieldVisitDate);
+		innerPanel.add(textFieldVisitDate);
 		innerPanel.add(labelId);
 		innerPanel.add(textFieldId);
+		innerPanel.add(textFieldSizeFamily);
+		innerPanel.add(labelSizeFamily);
+		innerPanel.add(labelRaisedPet);
 
 		add(innerPanel);
 
