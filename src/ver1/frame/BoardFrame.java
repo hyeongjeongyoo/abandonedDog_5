@@ -60,8 +60,11 @@ public class BoardFrame extends JFrame {
 		applyAdoptBoard = new ApplyAdoptBoard();
 		abanAnimalListboard = new abanAnimalList();
 		visitAnimal = new VisitAnimal();
-		Thread thread = new Thread(visitAnimal);
-		thread.start();
+		
+		// TODO 프레임 작업 중지
+//		Thread thread = new Thread(visitAnimal);
+//		thread.start();
+		
 		adoptReviewBoard = new ReviewAdopt();
 		freeBoard = new FreeBoard();
 		missingBoard = new MissingBoard();

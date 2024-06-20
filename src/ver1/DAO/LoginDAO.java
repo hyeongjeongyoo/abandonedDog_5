@@ -10,23 +10,24 @@ import ver1.jdbc.DBConnectionManager;
 
 public class LoginDAO {
 
-	public static LoginDTO selectLogin(String userName) {
-		LoginDTO dto = null;
-		String query = " select userName, userPassWord from user where userName = ? ";
-		
-		try (Connection conn = DBConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, userName);
-			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				dto = new LoginDTO(rs.getString("userName"), rs.getString("userPassWord"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return dto;
-	}
+	// TODO 프레임 작업 중지
+//	public static LoginDTO selectLogin(String userName) {
+//		LoginDTO dto = null;
+//		String query = " select userName, userPassWord from user where userName = ? ";
+//		
+//		try (Connection conn = DBConnectionManager.getConnection()){
+//			PreparedStatement pstmt = conn.prepareStatement(query);
+//			pstmt.setString(1, userName);
+//			ResultSet rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				dto = new LoginDTO(rs.getString("userName"), rs.getString("userPassWord"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return dto;
+//	}
 	
 }
