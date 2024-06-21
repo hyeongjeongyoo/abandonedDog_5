@@ -68,7 +68,7 @@ public class VisitAnimal extends JPanel implements Runnable {
 			try {
 				image = ImageIO.read(new URL(imagePath.trim()));
 			} catch (IOException e) {
-				e.printStackTrace();
+				continue;
 			}
 			repaint();
 			temp++;
