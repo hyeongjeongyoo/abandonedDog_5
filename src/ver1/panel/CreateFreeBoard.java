@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,13 +22,14 @@ public class CreateFreeBoard extends JFrame {
 	private JLabel contentLabel;
 	private JTextArea contentArea;
 	private JButton submitButton;
+	private JLabel logoLabel;
 
 	private Font font;
 
 	public CreateFreeBoard() {
 		initData();
 		setLayout(null);
-		setBounds(300, 300, 600, 600);
+		setBounds(300, 300, 600, 700);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -39,27 +41,33 @@ public class CreateFreeBoard extends JFrame {
 
 		setTitle("게시글 작성");
 
+		ImageIcon logoIcon = new ImageIcon("img/logo.png"); // 클래스 패스를 기준으로 로드
+
+		logoLabel = new JLabel(logoIcon);
+		logoLabel.setBounds(240, 10, 100, 100);
+		panel.add(logoLabel);
+
 		titleLabel = new JLabel("제목");
-		titleLabel.setBounds(10, 10, 80, 25);
+		titleLabel.setBounds(100, 100, 80, 25);
 		panel.add(titleLabel);
 
 		titleField = new JTextField();
-		titleField.setBounds(100, 10, 400, 25);
-		titleField.setBackground(Color.LIGHT_GRAY); // 텍스트 필드 라이트 그레이색
+		titleField.setBounds(100, 125, 400, 25);
+		titleField.setBackground(new Color(240, 240, 240));
 		panel.add(titleField);
 
 		contentLabel = new JLabel("내용");
-		contentLabel.setBounds(10, 45, 80, 25);
+		contentLabel.setBounds(100, 140, 80, 50);
 		panel.add(contentLabel);
 
 		contentArea = new JTextArea();
-		contentArea.setBackground(Color.LIGHT_GRAY); // 텍스트 에어리어 라이트 그레이색
+		contentArea.setBackground(new Color(240, 240, 240));
 		JScrollPane scrollPane = new JScrollPane(contentArea);
-		scrollPane.setBounds(100, 45, 400, 400);
+		scrollPane.setBounds(100, 180, 400, 400);
 		panel.add(scrollPane);
 
 		submitButton = new JButton("Submit");
-		submitButton.setBounds(250, 500, 100, 30);
+		submitButton.setBounds(250, 600, 100, 30);
 		panel.add(submitButton);
 
 		submitButton.addActionListener(new ActionListener() {
