@@ -3,6 +3,7 @@ package ver1.panel;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -104,7 +105,7 @@ public class ApplyAdoptBoard extends JPanel {
 		labelSizeFamily = new JLabel("가족 구성인원이 어떻게 됩니까?");
 		textFieldSizeFamily = new JTextField(30);
 
-		btnSubmit = new JButton("신청");
+		btnSubmit = new JButton(new ImageIcon("img/goBtn.jpg"));
 
 		// Font 설정
 		font = new Font("Noto Sans KR", Font.PLAIN, 14);

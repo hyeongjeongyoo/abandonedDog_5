@@ -55,9 +55,9 @@ public class ReviewAdoptReview extends JPanel {
 		searchBtn = new JButton("검색");
 		title = new JLabel("Title");
 
-		registrationBtn = new JButton("등록");
-		nextPageBtn = new JButton("다음 페이지");
-		prevPageBtn = new JButton("이전 페이지");
+		registrationBtn = new JButton(new ImageIcon("img/registerBtn.jpg"));
+		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
+		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
 		reviewData = new Object[][] { { 1, "우리 푸푸", "푸푸는 잘먹고 잘싸고 잘지내고있엉요", "푸푸맘", "2024-06-20" },

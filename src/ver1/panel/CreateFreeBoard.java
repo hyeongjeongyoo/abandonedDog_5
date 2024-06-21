@@ -39,7 +39,7 @@ public class CreateFreeBoard extends JFrame {
 		panel.setBackground(Color.WHITE); 
 		panel.setLayout(null); 
 
-		setTitle("게시글 작성");
+		setTitle("자유게시판 글 작성");
 
 		ImageIcon logoIcon = new ImageIcon("img/logo.png"); 
 
@@ -66,7 +66,7 @@ public class CreateFreeBoard extends JFrame {
 		scrollPane.setBounds(100, 180, 400, 400);
 		panel.add(scrollPane);
 
-		submitButton = new JButton("Submit");
+		submitButton = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		submitButton.setBounds(250, 600, 100, 30);
 		panel.add(submitButton);
 

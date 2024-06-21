@@ -2,6 +2,7 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -52,6 +53,8 @@ public class MissingBoard extends JPanel {
 
 	String[] columnNames = { "접수 번호", "품종", "색깔", "나이", "무게", "보호상태", "성별", "중성화", "특이사항" };
 
+	private Font font;
+	
 	public MissingBoard() {
 		initData();
 		setInitLayout();
@@ -62,11 +65,11 @@ public class MissingBoard extends JPanel {
 	public void initData() {
 
 		searchText = new JTextField();
-		searchBtn = new JButton("검색");
+		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
 		searchComboBox = new JComboBox<>();
 
-		nextPageBtn = new JButton("다음 페이지");
-		prevPageBtn = new JButton("이전 페이지");
+		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
+		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
 		// 데이터 불러오기
@@ -114,6 +117,10 @@ public class MissingBoard extends JPanel {
 		searchComboBox.setModel(new DefaultComboBoxModel<>(columnNames));
         JTableHeader header = animalTable.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer());
+        
+		// Font 설정
+		font = new Font("Noto Sans KR", Font.PLAIN, 12);
+		searchComboBox.setFont(font);;
 	}
 
 	public void addEventLayout() {

@@ -58,9 +58,9 @@ public class FreeBoard extends JPanel {
 		searchBtn = new JButton("검색");
 		title = new JLabel("Title");
 
-		registrationBtn = new JButton("등록");
-		nextPageBtn = new JButton("다음 페이지");
-		prevPageBtn = new JButton("이전 페이지");
+		registrationBtn = new JButton(new ImageIcon("img/registerBtn.jpg"));
+		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
+		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
 		freeData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "진짜개멍정", "2023-06-30" }, { 2, "인사 오지게 박습니다", "등업 신청이요~" },

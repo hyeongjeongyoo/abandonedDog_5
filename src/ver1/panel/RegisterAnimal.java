@@ -38,7 +38,6 @@ public class RegisterAnimal extends JPanel {
 		initData();
 		addEventListener();
 		updateTable();
-		
 	}
 
 	private void initData() {
@@ -126,7 +125,7 @@ public class RegisterAnimal extends JPanel {
 		add(innerPanel);
 		add(innerPanel, BorderLayout.CENTER);
 
-		btn = new JButton("등록");
+		btn = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		mainPanel.add(btn);
 		btn.setBounds(1099, 550, 60, 30);
 		add(btn);
