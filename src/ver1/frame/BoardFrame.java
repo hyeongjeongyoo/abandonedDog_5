@@ -25,7 +25,10 @@ import ver1.panel.VisitAnimal;
 public class BoardFrame extends JFrame {
 	
 	public boolean manager;
-	public String name;
+	private String name;
+	private String id;
+	private String password;
+	private String birthDay;
 
 	private Font font;
 
@@ -49,8 +52,12 @@ public class BoardFrame extends JFrame {
 	
 	private MyPage myPage;
 
-	public BoardFrame(boolean manager) {
+	public BoardFrame(boolean manager, String name, String id, String password, String birthDay) {
 		this.manager = manager;
+		this.name = name;
+		this.id = id;
+		this.password = password;
+		this.birthDay = birthDay;
 		initData();
 		setInitLayout();
 	}
@@ -94,6 +101,10 @@ public class BoardFrame extends JFrame {
 		missing.setFont(font);
 		abandonment.setFont(font);
 		myPage.setFont(font);
+		myPage.nameField.setText(name);
+		myPage.idField.setText(id);
+		myPage.passwordField.setText(password);
+		myPage.birthField.setText(birthDay);
 
 		UIManager.put("TabbedPane.contentAreaColor", Color.white);
 		UIManager.put("TabbedPane.selected", Color.white);
@@ -181,6 +192,6 @@ public class BoardFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new BoardFrame(false);
+		new BoardFrame(false, null, null, null, null);
 	}
 }
