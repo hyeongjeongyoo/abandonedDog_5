@@ -44,7 +44,7 @@ public class FreeBoard extends JPanel {
     private JButton searchBtn;
     private JLabel title;
 
-    String[] columnNames = { "id", "title", "contents" };
+    String[] columnNames = { "id", "제목", "작성자", "작성일" };
 
     public FreeBoard() {
         initData();
@@ -64,10 +64,15 @@ public class FreeBoard extends JPanel {
         refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
         freeData = new Object[][] {
-                { 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" },
+                { 1, "안녕하세요 인사드리러왔습니다", "진짜개멍정", "2023-06-30" },
                 { 2, "인사 오지게 박습니다", "등업 신청이요~" },
                 { 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
         };
+//        freeData = new Object[][] {
+//        	{ 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" },
+//        	{ 2, "인사 오지게 박습니다", "등업 신청이요~" },
+//        	{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
+//        };
 
         model = new DefaultTableModel(freeData, columnNames);
         animalTable = new JTable(model);

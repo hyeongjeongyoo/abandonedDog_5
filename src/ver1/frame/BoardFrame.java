@@ -25,6 +25,8 @@ import ver1.panel.VisitAnimal;
 public class BoardFrame extends JFrame {
 	
 	public boolean manager;
+	
+	
 
 	private Font font;
 
@@ -152,6 +154,10 @@ public class BoardFrame extends JFrame {
 		missing.setUI(addUI());
 		abandonment.setUI(addUI());
 
+		board.setSelectedIndex(1);
+		missing.setSelectedIndex(1);
+		abandonment.setSelectedIndex(1);
+		
 		board.setFocusable(false);
 		missing.setFocusable(false);
 		abandonment.setFocusable(false);
