@@ -19,9 +19,6 @@ public class VisitAnimal extends JPanel implements Runnable {
 
 	private JPanel imgBox;
 
-	String imagePath1 = "https://www.animal.go.kr/files/shelter/2024/06/202406181506269.jpg";
-	String imagePath2 = "https://www.animal.go.kr/files/shelter/2024/06/202406181006750.jpg";
-	String imagePath3 = "https://www.animal.go.kr/files/shelter/2024/06/202406181006546.jpg";
 	Image image;
 
 	public VisitAnimal() {
