@@ -2,8 +2,6 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -11,16 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import lombok.Data;
-import ver1.DTO.MissingBoardDTO;
 import ver1.frame.BoardFrame;
 import ver1.use.HeaderRenderer;
 
@@ -56,7 +51,7 @@ public class MyPage extends JPanel {
 	
 	String[] columnNames = {"id", "title", "contents"};
 	
-	private Image info;
+	private ImageIcon info;
 
 	private JLabel managerLabel;
 	private JLabel commonLabel;
@@ -72,9 +67,9 @@ public class MyPage extends JPanel {
 	private void initDate() {
 		
 		if(mContext.manager) {
-			info = new ImageIcon("img/managerBtn.png").getImage();
+			info = new ImageIcon("img/managerBtn.png");
 		} else {
-			info = new ImageIcon("img/common.png").getImage();
+			info = new ImageIcon("img/common.png");
 		}
 
 		nameField = new JLabel();
@@ -86,8 +81,8 @@ public class MyPage extends JPanel {
 		memberName = new JLabel();
 		
 		selfImage = new JLabel(new ImageIcon("img/Self.jpg"));
-		managerLabel = new JLabel(new ImageIcon("img/managerBtn.png"));
-		commonLabel = new JLabel(new ImageIcon("img/common.png"));
+		managerLabel = new JLabel(info);
+		commonLabel = new JLabel(info);
 		
 		showInfo = new JPanel();
 		commonInfo = new JLabel(new ImageIcon("img/CommonData.png"));
@@ -185,11 +180,15 @@ public class MyPage extends JPanel {
 		
 		managerLabel.setSize(103, 24);
 		managerLabel.setLocation(50, 30);
-		add(managerLabel);
 		
 		commonLabel.setSize(103, 24);
 		commonLabel.setLocation(50, 30);
-		add(commonLabel);
+		
+		if(mContext.manager) {
+			add(managerLabel);
+		} else {
+			add(commonLabel);
+		}
 		
 		commonInfo.setSize(104, 255);
 		commonInfo.setLocation(245, 68);

@@ -178,7 +178,7 @@ public class Join extends JFrame {
 				String enteredPassword = passwordField.getText();
 				String enteredBrith = birthField.getText();
 				String enteredPhoneNum = phoneNumField.getText();
-				int enteredMemberNum = 0;
+				int enteredMemberNum = Integer.parseInt(memberNumField.getText());
 				
 				if(memberNumField.equals("소속번호")) {
 					enteredMemberNum = Integer.parseInt(memberNumField.getText());

@@ -13,5 +13,6 @@ public class LoginDTO {
 	String userName;
 	String userPassWord;
 	String userBirth;
+	String authority;
 	
 }

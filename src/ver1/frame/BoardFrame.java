@@ -32,6 +32,7 @@ public class BoardFrame extends JFrame {
 	private String id;
 	private String password;
 	private String birthDay;
+	private String authority;
 
 	private Font font;
 
@@ -57,12 +58,13 @@ public class BoardFrame extends JFrame {
 	
 	private MyPage myPage;
 	
-	public BoardFrame(boolean manager, String name, String id, String password, String birthDay) {
+	public BoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority) {
 		this.manager = manager;
 		this.name = name;
 		this.id = id;
 		this.password = password;
 		this.birthDay = birthDay;
+		this.authority = authority;
 		initData();
 		setInitLayout();
 	}
@@ -220,6 +222,6 @@ public class BoardFrame extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new BoardFrame(false, null, null, null, null);
+		new BoardFrame(false, null, null, null, null, null);
 	}
 }
