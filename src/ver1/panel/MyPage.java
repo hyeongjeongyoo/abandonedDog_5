@@ -13,10 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import lombok.Data;
 import ver1.frame.BoardFrame;
+import ver1.use.HeaderRenderer;
 
 @Data
 public class MyPage extends JPanel {
@@ -97,6 +99,16 @@ public class MyPage extends JPanel {
 	private void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);
+		
+		myWriter.getTableHeader().setReorderingAllowed(false);
+		
+		JTableHeader header = myWriter.getTableHeader();
+        header.setDefaultRenderer(new HeaderRenderer());
+		
+        column.setPreferredWidth(600); // 원하는 기본 너비 설정
+        myWriter.getColumn("title").setPreferredWidth(800);
+        column.setMinWidth(200); // 최소 너비 설정
+        column.setMaxWidth(900); // 최대 너비 설정
 
 		selfImage.setBounds(50, 70, 200, 250);
 		selfImage.setBackground(Color.white);
@@ -126,7 +138,7 @@ public class MyPage extends JPanel {
 		commonInfo.setLocation(245, 68);
 		add(commonInfo);
 		
-		//managerInfo.setSize();
+		// managerInfo.setSize();
 		
 		// showInfo.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		showInfo.setBackground(Color.white);
@@ -136,14 +148,9 @@ public class MyPage extends JPanel {
 		interestPet.setBackground(Color.white);
 		interestPet.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		add(interestPet);
-
-		myWriter.setBounds(730, 410, 600, 330);
-		myWriter.setBackground(Color.white);
-		myWriter.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
-		add(myWriter);
-		
-		myWriterScroll.setBounds(20, 20, 1140, 503);
-		//myWriterScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+        
+		myWriterScroll.setBounds(730, 410, 600, 330);
+		myWriterScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		myWriterScroll.getViewport().setBackground(Color.white);
 		myWriterScroll.getViewport().setOpaque(true);
         add(myWriterScroll);
