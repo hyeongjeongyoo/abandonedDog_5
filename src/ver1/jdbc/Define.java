@@ -50,5 +50,18 @@ public class Define {
 													+ " join care as c"
 													+ " on s.careNm = c.careNm"
 													+ " group by c.careNm ";
+	
+	public static final String SEARCH_ABANDON = " select c.careNm, "
+													+ "ad.id, ad.kindCd, "
+													+ "ad.colorCd, ad.age, "
+													+ "ad.weight, ad.sexCd, "
+													+ "ad.neuterYn, ad.specialMark, "
+													+ " p.popfile"
+													+ " from animal_details as ad"
+													+ " join care as c"
+													+ " on ad.careId = c.careId"
+													+ " join photo as p"
+													+ " on ad.id = p.id "
+													+ " where ad.id = ?";
 
 }

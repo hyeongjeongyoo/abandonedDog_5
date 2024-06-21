@@ -2,14 +2,28 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URL;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
+import ver1.DAO.PhotoDAO;
+import ver1.DTO.PhotoDTO;
 
 public class AbanAnimalList extends JPanel {
 
@@ -26,8 +40,10 @@ public class AbanAnimalList extends JPanel {
 	private JTextField textFieldWeight;
 	private JTextField textFieldSex;
 	private JTextField textFieldNeuter;
-	private JTextField textFieldSpecialMark;
+	private JTextArea textFieldSpecialMark;
 	private JTextField textFieldShelter;
+
+	private JScrollPane scrollPane;
 
 	private JLabel labelID;
 	private JLabel labelKind;
@@ -38,9 +54,9 @@ public class AbanAnimalList extends JPanel {
 	private JLabel labelNeuter;
 	private JLabel labelSpecialMark;
 	private JLabel labelShelter;
-	private JLabel picture;
 
 	private Font font;
+	private Image image;
 
 	public AbanAnimalList() {
 		initData();
@@ -78,14 +94,27 @@ public class AbanAnimalList extends JPanel {
 		textFieldNeuter = new JTextField(20);
 
 		labelSpecialMark = new JLabel("상세정보");
-		textFieldSpecialMark = new JTextField(20);
+		textFieldSpecialMark = new JTextArea(5, 20);
 
 		labelShelter = new JLabel("소속 보호소");
 		textFieldShelter = new JTextField(20);
 
+		scrollPane = new JScrollPane(textFieldSpecialMark); // Add JScrollPane
+
 	}
 
 	public void setInitLayout() {
+
+		petImage = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				if (image != null) {
+					g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+				}
+			}
+		};
+
 		setLayout(null);
 		setBackground(Color.white);
 
@@ -129,10 +158,12 @@ public class AbanAnimalList extends JPanel {
 		textFieldNeuter.setBounds(80, 440, 180, 35);
 
 		labelShelter.setBounds(300, 50, 120, 100);
-		textFieldShelter.setBounds(410, 80, 180, 35);
+		textFieldShelter.setBounds(410, 80, 230, 35);
 
 		labelSpecialMark.setBounds(300, 110, 120, 100);
-		textFieldSpecialMark.setBounds(410, 140, 180, 150);
+		scrollPane.setBounds(410, 140, 230, 150);
+		textFieldSpecialMark.setLineWrap(true); // Enable line wrap
+		textFieldSpecialMark.setWrapStyleWord(true);
 
 		myWriter.add(labelID);
 		myWriter.add(labelKind);
@@ -152,7 +183,7 @@ public class AbanAnimalList extends JPanel {
 		myWriter.add(textFieldSex);
 		myWriter.add(textFieldNeuter);
 		myWriter.add(textFieldShelter);
-		myWriter.add(textFieldSpecialMark);
+		myWriter.add(scrollPane);
 
 		// Font 설정
 		font = new Font("Noto Sans KR", Font.PLAIN, 17);
@@ -177,6 +208,76 @@ public class AbanAnimalList extends JPanel {
 	}
 
 	public void addEventLayout() {
+		searchBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String keyword = searchText.getText();
+				if (!keyword.isEmpty()) {
+					try {
+						PhotoDTO dao = PhotoDAO.searchPhoto(Integer.parseInt(keyword));
+						String imagePath = dao.getPopfile().replaceFirst("http", "https");
 
+						if (imagePath != null) {
+							try {
+								image = ImageIO.read(new URL(imagePath.trim()));
+								textFieldShelter.setText(dao.getCareNm());
+								textFieldID.setText(String.valueOf(dao.getId()));
+								textFieldKind.setText(dao.getKindCd());
+								textFieldColor.setText(dao.getColorCd());
+								textFieldAge.setText(dao.getAge());
+								textFieldWeight.setText(dao.getWeight());
+								textFieldSex.setText(dao.getSexCd());
+								textFieldNeuter.setText(dao.getNeuterYn());
+								textFieldSpecialMark.setText(dao.getSpecialMark());
+								petImage.repaint();
+								searchText.setText(null);
+							} catch (IOException ex) {
+								ex.printStackTrace();
+							}
+						}
+
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "숫자만 입력해주세요.", "조회 실패", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
+
+		searchText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String keyword = searchText.getText();
+					if (!keyword.isEmpty()) {
+						try {
+							PhotoDTO dao = PhotoDAO.searchPhoto(Integer.parseInt(keyword));
+							String imagePath = dao.getPopfile().replaceFirst("http", "https");
+
+							if (imagePath != null) {
+								try {
+									image = ImageIO.read(new URL(imagePath.trim()));
+									textFieldShelter.setText(dao.getCareNm());
+									textFieldID.setText(String.valueOf(dao.getId()));
+									textFieldKind.setText(dao.getKindCd());
+									textFieldColor.setText(dao.getColorCd());
+									textFieldAge.setText(dao.getAge());
+									textFieldWeight.setText(dao.getWeight());
+									textFieldSex.setText(dao.getSexCd());
+									textFieldNeuter.setText(dao.getNeuterYn());
+									textFieldSpecialMark.setText(dao.getSpecialMark());
+									petImage.repaint();
+									searchText.setText(null);
+								} catch (IOException ex) {
+									ex.printStackTrace();
+								}
+							}
+						} catch (NumberFormatException e2) {
+							JOptionPane.showMessageDialog(null, "숫자만 입력해주세요.", "조회 실패", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			}
+		});
 	}
+
 }

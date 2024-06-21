@@ -8,7 +8,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhotoDTO {
-
+	
+	String careNm;
+	int id;
+	String kindCd;
+	String colorCd;
+	String age;
+	String weight;
+	String sexCd;
+	String neuterYn;
+	String specialMark;
 	String popfile;
+	
+	public PhotoDTO(String popfile) {
+		this.popfile = popfile;
+	}
 	
 }
