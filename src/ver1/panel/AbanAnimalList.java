@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -67,7 +68,7 @@ public class AbanAnimalList extends JPanel {
 	public void initData() {
 
 		searchText = new JTextField();
-		searchBtn = new JButton("검색");
+		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
 
 		petImage = new JPanel();
 		myWriter = new JPanel();
