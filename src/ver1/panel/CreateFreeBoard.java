@@ -36,12 +36,12 @@ public class CreateFreeBoard extends JFrame {
 
 	private void initData() {
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE); // 배경 흰색
-		panel.setLayout(null); // 레이아웃 설정을 null로 변경
+		panel.setBackground(Color.WHITE); 
+		panel.setLayout(null); 
 
 		setTitle("게시글 작성");
 
-		ImageIcon logoIcon = new ImageIcon("img/logo.png"); // 클래스 패스를 기준으로 로드
+		ImageIcon logoIcon = new ImageIcon("img/logo.png"); 
 
 		logoLabel = new JLabel(logoIcon);
 		logoLabel.setBounds(240, 10, 100, 100);
