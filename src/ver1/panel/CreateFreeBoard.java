@@ -1,5 +1,7 @@
 package ver1.panel;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -19,34 +22,45 @@ public class CreateFreeBoard extends JFrame {
 	private JTextArea contentArea;
 	private JButton submitButton;
 
+	private Font font;
+
 	public CreateFreeBoard() {
 		initData();
 		setLayout(null);
-		setBounds(300, 300, 400, 300);
+		setBounds(300, 300, 600, 600);
 		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 
 	private void initData() {
-		titleLabel = new JLabel("Title:");
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE); // 배경 흰색
+		panel.setLayout(null); // 레이아웃 설정을 null로 변경
+
+		setTitle("게시글 작성");
+
+		titleLabel = new JLabel("제목");
 		titleLabel.setBounds(10, 10, 80, 25);
-		add(titleLabel);
+		panel.add(titleLabel);
 
 		titleField = new JTextField();
-		titleField.setBounds(100, 10, 260, 25);
-		add(titleField);
+		titleField.setBounds(100, 10, 400, 25);
+		titleField.setBackground(Color.LIGHT_GRAY); // 텍스트 필드 라이트 그레이색
+		panel.add(titleField);
 
-		contentLabel = new JLabel("Content:");
+		contentLabel = new JLabel("내용");
 		contentLabel.setBounds(10, 45, 80, 25);
-		add(contentLabel);
+		panel.add(contentLabel);
 
 		contentArea = new JTextArea();
+		contentArea.setBackground(Color.LIGHT_GRAY); // 텍스트 에어리어 라이트 그레이색
 		JScrollPane scrollPane = new JScrollPane(contentArea);
-		scrollPane.setBounds(100, 45, 260, 150);
-		add(scrollPane);
+		scrollPane.setBounds(100, 45, 400, 400);
+		panel.add(scrollPane);
 
 		submitButton = new JButton("Submit");
-		submitButton.setBounds(150, 210, 100, 30);
-		add(submitButton);
+		submitButton.setBounds(250, 500, 100, 30);
+		panel.add(submitButton);
 
 		submitButton.addActionListener(new ActionListener() {
 			@Override
@@ -63,6 +77,14 @@ public class CreateFreeBoard extends JFrame {
 				dispose(); // 폼 닫기
 			}
 		});
-	}
 
+		font = new Font("Noto Sans KR", Font.BOLD, 14);
+		titleLabel.setFont(font);
+		titleField.setFont(font);
+		contentLabel.setFont(font);
+		contentArea.setFont(font);
+
+		// 패널을 프레임의 콘텐츠 패널로 설정
+		setContentPane(panel);
+	}
 }
