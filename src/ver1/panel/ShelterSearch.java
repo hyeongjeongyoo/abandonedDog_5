@@ -48,6 +48,7 @@ public class ShelterSearch extends JPanel {
     String[] columnNames = {"보호소명", "전화번호", "주소"};
     
     private Font font;
+    private Font font2;
     
     public ShelterSearch() {
         initData();
@@ -66,12 +67,16 @@ public class ShelterSearch extends JPanel {
         careScroll = new JScrollPane(careTable);
         
         font = new Font("Noto Sans KR", Font.BOLD, 15);
+        font2 = new Font("Noto Sans KR", Font.PLAIN, 13);
         
         siDoComboBox = new JComboBox<>();
         siGunGuComboBox = new JComboBox<>();
         
         siDo = new JLabel("시, 도 ");
         siGunGu = new JLabel("시, 군, 구 ");
+        
+        siDoComboBox.setFont(font2);
+        siGunGuComboBox.setFont(font2);
     }
     
     public void setInitLayout() {
