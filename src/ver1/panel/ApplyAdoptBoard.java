@@ -2,6 +2,8 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -136,12 +138,20 @@ public class ApplyAdoptBoard extends JPanel {
 		textFieldSizeFamily.setFont(font);
 		labelRaisedPet.setFont(font);
 		labelSizeFamily.setFont(font);
+
+		checkBoxSexMale.setBackground(Color.white);
+		checkBoxSexFemale.setBackground(Color.white);
+		checkBoxMaritalY.setBackground(Color.white);
+		checkBoxMaritalN.setBackground(Color.white);
+		checkBoxRaisedPetY.setBackground(Color.white);
+		checkBoxRaisedPetN.setBackground(Color.white);
+
 	}
 
 	public void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);
-		
+
 		innerPanel.setLayout(null);
 		innerPanel.setBounds(110, 13, 980, 450);
 		innerPanel.setBackground(Color.white);
@@ -222,7 +232,67 @@ public class ApplyAdoptBoard extends JPanel {
 	}
 
 	public void addEventLayout() {
-		// 이벤트 처리기를 추가합니다.
-	}
 
+		checkBoxMaritalN.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxMaritalN.isSelected()) {
+					checkBoxMaritalY.setSelected(false);
+				}
+			}
+		});
+
+		checkBoxMaritalY.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxMaritalY.isSelected()) {
+					checkBoxMaritalN.setSelected(false);
+				}
+			}
+		});
+
+		checkBoxRaisedPetN.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxRaisedPetN.isSelected()) {
+					checkBoxRaisedPetY.setSelected(false);
+				}
+
+			}
+		});
+
+		checkBoxRaisedPetY.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxRaisedPetY.isSelected()) {
+					checkBoxRaisedPetN.setSelected(false);
+				}
+
+			}
+		});
+
+		checkBoxSexFemale.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxSexFemale.isSelected()) {
+					checkBoxSexMale.setSelected(false);
+				}
+
+			}
+		});
+
+		checkBoxSexMale.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (checkBoxSexMale.isSelected()) {
+					checkBoxSexFemale.setSelected(false);
+				}
+
+			}
+		});
+	}
 }
