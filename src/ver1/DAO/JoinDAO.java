@@ -13,10 +13,10 @@ import ver1.jdbc.DBConnectionManager;
 @Data
 public class JoinDAO {
 
-	public static boolean booleanSelectJoin(String userName, String userPassWord, String userBrith, String userTel) {
+	public static boolean booleanSelectJoin(String userName, String name, String userPassWord, String userBrith, String userTel) {
 		boolean flag = false;
 		String selectJoin = " SELECT userName, userPassWord FROM user WHERE userName = ? ";
-		String insertJoin = " INSERT INTO user(userName, userPassword, userBirth, userTel) VALUES( ?, ?, ?, ?) ";
+		String insertJoin = " INSERT INTO user(userName, name, userPassword, userBirth, userTel) VALUES( ?, ?, ?, ?, ?) ";
 
 		try (Connection conn1 = DBConnectionManager.getConnection()) {
 
@@ -31,9 +31,10 @@ public class JoinDAO {
 				try (Connection conn2 = DBConnectionManager.getConnection()) {
 					PreparedStatement pstmt2 = conn2.prepareStatement(insertJoin);
 					pstmt2.setString(1, userName);
-					pstmt2.setString(2, userPassWord);
-					pstmt2.setString(3, userBrith);
-					pstmt2.setString(4, userTel);
+					pstmt2.setString(2, name);
+					pstmt2.setString(3, userPassWord);
+					pstmt2.setString(4, userBrith);
+					pstmt2.setString(5, userTel);
 					pstmt2.executeUpdate();
 					flag = true;
 				} catch (Exception e) {
@@ -49,7 +50,7 @@ public class JoinDAO {
 		return flag;
 	}
 
-	public static boolean selectJoinMember(String userName, String userPassWord, String userBrith, String userTel,
+	public static boolean selectJoinMember(String userName, String name, String userPassWord, String userBrith, String userTel,
 			int userDepartmentNo, String userDepartmentName) {
 		boolean flag2 = false;
 		String selectJoinMem = " SELECT userName, userPassWord FROM user WHERE userName = ? ";
@@ -76,11 +77,12 @@ public class JoinDAO {
 							PreparedStatement pstmt = conn5.prepareStatement(insertJoinMem);
 
 							pstmt.setString(1, userName);
-							pstmt.setString(2, userPassWord);
-							pstmt.setString(3, userBrith);
-							pstmt.setString(4, userTel);
-							pstmt.setInt(5, userDepartmentNo);
-							pstmt.setString(6, userDepartmentName);
+							pstmt.setString(2, name);
+							pstmt.setString(3, userPassWord);
+							pstmt.setString(4, userBrith);
+							pstmt.setString(5, userTel);
+							pstmt.setInt(6, userDepartmentNo);
+							pstmt.setString(7, userDepartmentName);
 							pstmt.executeUpdate();
 							flag2 = true;
 

@@ -25,8 +25,7 @@ import ver1.panel.VisitAnimal;
 public class BoardFrame extends JFrame {
 	
 	public boolean manager;
-	
-	
+	public String name;
 
 	private Font font;
 

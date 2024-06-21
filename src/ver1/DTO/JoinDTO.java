@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class JoinDTO {
 
 	String userName;
+	String name;
 	String userPassWord;
 	String userBirth;
 	String userTel;

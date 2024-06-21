@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -21,7 +19,6 @@ import javax.swing.JTextField;
 
 import lombok.Data;
 import ver1.DAO.JoinDAO;
-import ver1.use.RoundJTextField;
 
 @Data
 public class Join extends JFrame {
@@ -176,8 +173,8 @@ public class Join extends JFrame {
 		joinBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				String enteredName = nameField.getText();
 				String enteredId = idField.getText();
+				String enteredName = nameField.getText();
 				String enteredPassword = passwordField.getText();
 				String enteredBrith = birthField.getText();
 				String enteredPhoneNum = phoneNumField.getText();
@@ -189,9 +186,9 @@ public class Join extends JFrame {
 				
 				String enteredMemberName = memberNameField.getText();
 
-				if (!memberNameField.isEnabled()) {
+				if (memberNameField.isEnabled()) {
 
-					boolean flag2 = JoinDAO.selectJoinMember(enteredId, enteredPassword, enteredBrith,
+					boolean flag2 = JoinDAO.selectJoinMember(enteredId, enteredName, enteredPassword, enteredBrith,
 							enteredPhoneNum, enteredMemberNum, enteredMemberName);
 
 					if (flag2) {
@@ -203,7 +200,7 @@ public class Join extends JFrame {
 						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					boolean flag = JoinDAO.booleanSelectJoin(enteredId, enteredPassword, enteredBrith, enteredPhoneNum);
+					boolean flag = JoinDAO.booleanSelectJoin(enteredId, enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
 					if (flag) {
 						JOptionPane.showMessageDialog(null, "[일반회원]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
 								JOptionPane.INFORMATION_MESSAGE);

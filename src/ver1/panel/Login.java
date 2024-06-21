@@ -25,15 +25,16 @@ import ver1.frame.BoardFrame;
 @Data
 public class Login extends JFrame {
 
-	Login login;
-	Join join2;
-
+	public String name;
+	
 	private JPanel loginBackgroundImg;
-
 	private JLabel logo;
 
 	private JTextField idField;
 	private JTextField passwordField;
+	
+	private JLabel idLabel;
+	private JLabel passwordLabel;
 
 	private JLabel loginBtn;
 	private final int BTN_WIDTH = 240;
@@ -55,8 +56,12 @@ public class Login extends JFrame {
 		loginBtn = new JLabel(new ImageIcon("img/loginBtn.jpg"));
 		logo = new JLabel(new ImageIcon("img/logo.png"));
 
-		idField = new JTextField("ID", 10);
-		passwordField = new JTextField("PASSWORD", 50);
+		idField = new JTextField(10);
+		passwordField = new JTextField(50);
+		
+		idLabel = new JLabel("아이디");
+		passwordLabel = new JLabel("비밀번호");
+		
 		join = new JButton("회원가입");
 
 		idField.setFont(font);
@@ -79,8 +84,18 @@ public class Login extends JFrame {
 		setLocationRelativeTo(null); // 가운데 배치
 		setVisible(true);
 
-		idField.setBounds(95, 126, 240, 40);
-		passwordField.setBounds(95, 170, 240, 40);
+		Font font = new Font("Noto Sans KR", Font.BOLD, 15);
+		
+		idLabel.setBounds(95, 126, 100, 40);
+		idLabel.setFont(font);
+		passwordLabel.setBounds(95, 170, 100, 40);
+		passwordLabel.setFont(font);
+		
+		add(idLabel);
+		add(passwordLabel);
+		
+		idField.setBounds(165, 126, 171, 40);
+		passwordField.setBounds(165, 170, 171, 40);
 		
 		loginBackgroundImg.setBackground(Color.white);
 

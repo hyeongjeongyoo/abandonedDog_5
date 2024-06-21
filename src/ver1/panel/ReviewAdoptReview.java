@@ -67,6 +67,7 @@ public class ReviewAdoptReview extends JPanel {
 		};
 
 		model = new DefaultTableModel(reviewData, columnNames);
+
 		animalTable = new JTable(model);
 		animalScroll = new JScrollPane(animalTable);
 		column = animalTable.getColumnModel().getColumn(2); // "contents" 컬럼
@@ -148,7 +149,12 @@ public class ReviewAdoptReview extends JPanel {
 	}
 
 	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "title", "contents" });
+		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "title", "contents" }) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // 모든 셀을 편집 불가능하게 설정
+			}
+		};
 		animalTable.setModel(newModel);
 
 		column = animalTable.getColumnModel().getColumn(2); // "specialMark" 컬럼

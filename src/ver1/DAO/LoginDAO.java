@@ -29,4 +29,12 @@ public class LoginDAO {
 		return dto;
 	}
 	
+	public static String selectName() {
+		String str = null;
+		
+		
+		
+		return str;
+	}
+	
 }
