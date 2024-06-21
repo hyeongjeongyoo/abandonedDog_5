@@ -104,10 +104,10 @@ public class MyPage extends JPanel {
         }
     };
     myWriterScroll = new JScrollPane(myWriter);
-    column = myWriter.getColumnModel().getColumn(2); // "contents" 컬럼
+    column = myWriter.getColumnModel().getColumn(2);
 
 	}
-
+	
 	private void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);

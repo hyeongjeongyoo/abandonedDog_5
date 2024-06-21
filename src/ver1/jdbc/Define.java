@@ -64,4 +64,17 @@ public class Define {
 													+ " on ad.id = p.id "
 													+ " where ad.id = ?";
 
+	public static final String SELECT_INTEREST = " select d.orgdownNm as sido,"
+													+ " g.orgdownNm as sigungu,"
+													+ " s.careNm as careNm,"
+													+ " c.careTel as careTel,"
+													+ " c.careAddr as careAddr"
+													+ " from sido as d"
+													+ " join sigungu as g"
+													+ " on d.orgCd = g.uprCd"
+													+ " join shelter as s"
+													+ " on s.orgCd = g.orgCd"
+													+ " join care as c"
+													+ " on s.careNm = c.careNm"
+													+ " group by c.careNm ";
 }

@@ -30,6 +30,7 @@ public class AbanAnimalList extends JPanel {
 
 	private JTextField searchText;
 	private JButton searchBtn;
+	private JButton interestBtn;
 
 	private JPanel petImage;
 	private JPanel myWriter;
@@ -57,6 +58,7 @@ public class AbanAnimalList extends JPanel {
 	private JLabel labelShelter;
 
 	private Font font;
+	private Font font2;
 	private Image image;
 
 	public AbanAnimalList() {
@@ -69,6 +71,8 @@ public class AbanAnimalList extends JPanel {
 
 		searchText = new JTextField();
 		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
+		
+		interestBtn = new JButton("관심등록");
 
 		petImage = new JPanel();
 		myWriter = new JPanel();
@@ -126,6 +130,10 @@ public class AbanAnimalList extends JPanel {
 
 		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
+		
+		interestBtn.setBounds(20, 15, 100, 25);
+		interestBtn.setBackground(Color.GRAY);
+		add(interestBtn);
 
 		petImage.setBounds(30, 13, 400, 600);
 		petImage.setBackground(Color.white);
@@ -175,6 +183,7 @@ public class AbanAnimalList extends JPanel {
 		textFieldSpecialMark.setLineWrap(true); // Enable line wrap
 		textFieldSpecialMark.setWrapStyleWord(true);
 
+		myWriter.add(interestBtn);
 		myWriter.add(labelID);
 		myWriter.add(labelKind);
 		myWriter.add(labelColor);
@@ -197,6 +206,8 @@ public class AbanAnimalList extends JPanel {
 
 		// Font 설정
 		font = new Font("Noto Sans KR", Font.PLAIN, 17);
+		font2 = new Font("Noto Sans KR", Font.PLAIN, 14);
+		interestBtn.setFont(font2);
 		labelID.setFont(font);
 		textFieldID.setFont(font);
 		labelKind.setFont(font);
@@ -237,6 +248,18 @@ public class AbanAnimalList extends JPanel {
 						searchCareAnimal(Integer.parseInt(keyword));
 					}
 				}
+			}
+		});
+		
+		interestBtn.addKeyListener (new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO 버튼 클릭시 마이페이지에 테이블 추가
+				if() {
+					
+				}
+				
+				JOptionPane.showMessageDialog(null, "관심등록되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 	}
