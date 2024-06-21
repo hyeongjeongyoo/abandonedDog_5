@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -19,14 +20,25 @@ public class VisitAnimal extends JPanel implements Runnable {
 
 	private JPanel imgBox;
 
+	private Image backgroundImage;
 	Image image;
 
 	public VisitAnimal() {
 		initData();
 		setInitLayout();
 		addEventListener();
+//		initBackgroundImage();
 	}
+	
+	private void initBackgroundImage() {
+        backgroundImage = new ImageIcon("img/backgroundBg.png").getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
 
+    }
+
+//	public void paintComponent(Graphics g) {
+//        g.drawImage(backgroundImage, 0, 0, this); // 배경 이미지 그리기
+//    }
+	
 	private void initData() {
 		animation = new SandAnimation();
 	}

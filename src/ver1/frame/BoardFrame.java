@@ -9,10 +9,12 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
+import lombok.Data;
 import ver1.panel.AbanAnimalList;
 import ver1.panel.ApplyAdoptBoard;
 import ver1.panel.FreeBoard;
@@ -54,10 +56,9 @@ public class BoardFrame extends JFrame {
 	private ShelterSearch searchShelter;
 	
 	private MyPage myPage;
-
+	
 	public BoardFrame(boolean manager, String name, String id, String password, String birthDay) {
 		this.manager = manager;
-		initBackgroundImage(); // 배경 이미지 초기화
 		this.name = name;
 		this.id = id;
 		this.password = password;
@@ -77,8 +78,6 @@ public class BoardFrame extends JFrame {
     }
     
 	private void initData() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("img/fav.png")); // 파비콘
-		setTitle("어서오묘 데려가개");
 
 		font = new Font("Noto Sans KR", Font.BOLD, 15);
 
@@ -97,7 +96,7 @@ public class BoardFrame extends JFrame {
 
 		adoptReviewBoard = new ReviewAdoptReview();
 		freeBoard = new FreeBoard();
-		missingBoard = new MissingBoard();
+		missingBoard = new MissingBoard(this);
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
 		myPage = new MyPage(this);
@@ -105,6 +104,8 @@ public class BoardFrame extends JFrame {
 	}
 
 	private void setInitLayout() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("img/fav.png")); // 파비콘
+		setTitle("어서오묘 데려가개");
 		setSize(1400, 900);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -205,7 +206,19 @@ public class BoardFrame extends JFrame {
 		    }
 		};
 	}
+	
+	public JTabbedPane getMain() {
+		return main;
+	}
+	
+	public JTabbedPane getAbandonment() {
+		return abandonment;
+	}
 
+	public AbanAnimalList getAbanAnimalListboard() {
+		return abanAnimalListboard;
+	}
+	
 	public static void main(String[] args) {
 		new BoardFrame(false, null, null, null, null);
 	}

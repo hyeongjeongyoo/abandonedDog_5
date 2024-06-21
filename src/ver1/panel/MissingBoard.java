@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +30,13 @@ import javax.swing.table.TableColumn;
 
 import ver1.DAO.MissingBoardDAO;
 import ver1.DTO.MissingBoardDTO;
+import ver1.frame.BoardFrame;
 import ver1.jdbc.Define;
 import ver1.use.HeaderRenderer;
 
 public class MissingBoard extends JPanel {
+	
+	private BoardFrame mContext;
 
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
@@ -55,10 +60,12 @@ public class MissingBoard extends JPanel {
 
 	private Font font;
 	
-	public MissingBoard() {
+	public MissingBoard(BoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		addEventLayout();
+		addTableClickListener();
 		updateTable();
 	}
 
@@ -319,4 +326,25 @@ public class MissingBoard extends JPanel {
 		}
 		return pageData;
 	}
+	
+	private void addTableClickListener() {
+        animalTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 마우스가 두 번 클릭되었는지 확인
+                if (e.getClickCount() == 2) {
+                    // 클릭된 셀의 행과 열 가져오기
+                    int row = animalTable.rowAtPoint(e.getPoint());
+                    int column = animalTable.columnAtPoint(e.getPoint());
+
+                    // "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+                    if (column == 0) {
+                        mContext.getMain().setSelectedIndex(3);
+                        mContext.getAbandonment().setSelectedIndex(1);
+                        mContext.getAbanAnimalListboard().searchCareAnimal((Integer) animalTable.getValueAt(row, column));
+                    }
+                }
+            }
+        });
+    }
 }
