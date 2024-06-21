@@ -2,6 +2,7 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -12,11 +13,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import lombok.Data;
+import ver1.DTO.MissingBoardDTO;
 import ver1.frame.BoardFrame;
 import ver1.use.HeaderRenderer;
 
@@ -106,6 +109,7 @@ public class MyPage extends JPanel {
 		setBackground(Color.white);
 		
 		myWriter.getTableHeader().setReorderingAllowed(false);
+		myWriter.getTableHeader().setResizingAllowed(false);
 		
 		JTableHeader header = myWriter.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer());
@@ -143,9 +147,6 @@ public class MyPage extends JPanel {
 		commonInfo.setLocation(245, 68);
 		add(commonInfo);
 		
-		// managerInfo.setSize();
-		
-		// showInfo.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		showInfo.setBackground(Color.white);
 		add(showInfo);
 
@@ -159,6 +160,14 @@ public class MyPage extends JPanel {
 		myWriterScroll.getViewport().setBackground(Color.white);
 		myWriterScroll.getViewport().setOpaque(true);
         add(myWriterScroll);
+        
+    	DefaultTableModel newModel = new DefaultTableModel(getMyPageData(), columnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		myWriter.setModel(newModel);
 	}
 
 	private void addEventListener() {

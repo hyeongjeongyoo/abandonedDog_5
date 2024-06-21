@@ -25,7 +25,6 @@ import javax.swing.table.TableColumn;
 import ver1.DAO.ShelterDAO;
 import ver1.DAO.SidoDAO;
 import ver1.DAO.SigunguDAO;
-import ver1.DTO.MissingBoardDTO;
 import ver1.DTO.ShelterDTO;
 import ver1.use.HeaderRenderer;
 

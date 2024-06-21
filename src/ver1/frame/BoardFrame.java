@@ -3,6 +3,7 @@ package ver1.frame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
@@ -34,6 +35,8 @@ public class BoardFrame extends JFrame {
 	private JTabbedPane board;
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
+	
+	private Image backgroundImage;
 
 	private VisitAnimal visitAnimal;
 	
@@ -51,10 +54,21 @@ public class BoardFrame extends JFrame {
 
 	public BoardFrame(boolean manager) {
 		this.manager = manager;
+		initBackgroundImage(); // 배경 이미지 초기화
 		initData();
 		setInitLayout();
 	}
 
+    private void initBackgroundImage() {
+        backgroundImage = new ImageIcon("img/backgroundBg.png").getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
+
+    }
+    
+	
+    public void paintComponent(Graphics g) {
+        g.drawImage(backgroundImage, 0, 0, this); // 배경 이미지 그리기
+    }
+    
 	private void initData() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("img/fav.png")); // 파비콘
 		setTitle("어서오묘 데려가개");
@@ -163,6 +177,7 @@ public class BoardFrame extends JFrame {
 		main.setFocusable(false);
 		add(main);
 	}
+
 
 	private BasicTabbedPaneUI addUI() {
 

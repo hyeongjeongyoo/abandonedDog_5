@@ -142,28 +142,28 @@ public class Login extends JFrame {
 			}
 		});
 		loginBtn.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				String enteredId = idField.getText();
 				String enteredPassword = passwordField.getText();
-				
+
 				LoginDTO dto = LoginDAO.selectLogin(enteredId);
-				
-				if(dto != null) {
-					
+
+				if (dto != null) {
+
 					if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
 						JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
 						new BoardFrame(false);
 					} else {
-						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패",
+								JOptionPane.ERROR_MESSAGE);
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				}
-
 
 			}
 		});
@@ -182,11 +182,11 @@ public class Login extends JFrame {
 		passwordField.addActionListener(e -> {
 			String enteredId = idField.getText();
 			String enteredPassword = passwordField.getText();
-			
+
 			LoginDTO dto = LoginDAO.selectLogin(enteredId);
-			
-			if(dto != null) {
-				
+
+			if (dto != null) {
+
 				if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
 					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
@@ -194,7 +194,7 @@ public class Login extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 			} else {
 				JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 			}
