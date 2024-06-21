@@ -12,7 +12,7 @@ public class LoginDAO {
 
 	public static LoginDTO selectLogin(String userName) {
 		LoginDTO dto = null;
-		String query = " select userName, userPassWord from user where userName = ? ";
+		String query = " select userName, name, userPassWord, userBirth from user where userName = ? ";
 		
 		try (Connection conn = DBConnectionManager.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(query);
@@ -20,7 +20,7 @@ public class LoginDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				dto = new LoginDTO(rs.getString("userName"), rs.getString("userPassWord"));
+				dto = new LoginDTO(rs.getString("name"), rs.getString("userName"), rs.getString("userPassWord"), rs.getString("userBirth"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

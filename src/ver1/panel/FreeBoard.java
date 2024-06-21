@@ -41,10 +41,6 @@ public class FreeBoard extends JPanel {
 	private DefaultTableModel model;
 	private Object[][] freeData;
 
-	private JTextField searchText;
-	private JButton searchBtn;
-	private JLabel title;
-
 	String[] columnNames = { "id", "제목", "작성자", "작성일" };
 
 	public FreeBoard() {
@@ -55,9 +51,6 @@ public class FreeBoard extends JPanel {
 	}
 
 	public void initData() {
-		searchText = new JTextField();
-		searchBtn = new JButton("검색");
-		title = new JLabel("Title");
 
 		registrationBtn = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
@@ -89,15 +82,6 @@ public class FreeBoard extends JPanel {
 		// 컬럼 헤더 이동 불가
 		freeTable.getTableHeader().setReorderingAllowed(false);
 		freeTable.getTableHeader().setResizingAllowed(false);
-
-		searchText.setBounds(895, 700, 200, 22);
-		add(searchText);
-
-		searchBtn.setBounds(1099, 700, 59, 20);
-		add(searchBtn);
-
-		title.setBounds(860, 700, 80, 20);
-		add(title);
 
 		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);

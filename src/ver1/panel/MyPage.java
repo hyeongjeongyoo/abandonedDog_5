@@ -1,6 +1,7 @@
 package ver1.panel;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +29,13 @@ public class MyPage extends JPanel {
 	
 	private BoardFrame mContext;
 	
-	private JLabel nameField;
-	private JLabel idField;
-	private JTextField passwordField;
-	private JTextField birthField;
-	private JTextField phoneNum;
-	private JTextField memberNum;
-	private JTextField memberName;
+	public JLabel nameField;
+	public JLabel idField;
+	public JLabel passwordField;
+	public JLabel birthField;
+	public JLabel phoneNum;
+	public JLabel memberNum;
+	public JLabel memberName;
 	
 	private JLabel selfImage;
 	private JPanel showInfo;
@@ -76,10 +77,18 @@ public class MyPage extends JPanel {
 			info = new ImageIcon("img/common.png").getImage();
 		}
 
-		nameField = new JLabel(mContext.getName());
+		nameField = new JLabel();
+		idField = new JLabel();
+		passwordField = new JLabel();
+		birthField = new JLabel();
+		phoneNum = new JLabel();
+		memberNum = new JLabel();
+		memberName = new JLabel();
+		
 		selfImage = new JLabel(new ImageIcon("img/Self.jpg"));
 		managerLabel = new JLabel(new ImageIcon("img/managerBtn.png"));
 		commonLabel = new JLabel(new ImageIcon("img/common.png"));
+		
 		showInfo = new JPanel();
 		commonInfo = new JLabel(new ImageIcon("img/CommonData.png"));
 		managerInfo = new JLabel(new ImageIcon("img/Self.jpg"));
@@ -111,6 +120,8 @@ public class MyPage extends JPanel {
 		myWriter.getTableHeader().setReorderingAllowed(false);
 		myWriter.getTableHeader().setResizingAllowed(false);
 		
+		Font font = new Font("Noto Sans KR", Font.BOLD, 15);
+		
 		JTableHeader header = myWriter.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer());
 		
@@ -130,10 +141,47 @@ public class MyPage extends JPanel {
 			showInfo.setBounds(110, 10, 600, 300);
 		}
 		
-		nameField.setSize(100, 50);
-		nameField.setLocation(150, 100);
+		nameField.setSize(100, 30);
+		nameField.setLocation(400, 80);
 		nameField.setBorder(new LineBorder(new Color(13, 170, 93),1));
+		nameField.setFont(font);
 		add(nameField);
+		
+		idField.setSize(100, 30);
+		idField.setLocation(400, 148);
+		idField.setBorder(new LineBorder(new Color(13, 170, 93),1));
+		idField.setFont(font);
+		add(idField);
+		
+		passwordField.setSize(100, 30);
+		passwordField.setLocation(400, 213);
+		passwordField.setBorder(new LineBorder(new Color(13, 170, 93),1));
+		passwordField.setFont(font);
+		add(passwordField);
+		
+		birthField.setSize(100, 30);
+		birthField.setLocation(400, 275);
+		birthField.setBorder(new LineBorder(new Color(13, 170, 93),1));
+		birthField.setFont(font);
+		add(birthField);
+		
+//		phoneNum.setSize(100, 30);
+//		phoneNum.setLocation(400, 80);
+//		phoneNum.setBorder(new LineBorder(new Color(13, 170, 93),1));
+//		phoneNum.setFont(font);
+//		add(phoneNum);
+		
+//		memberNum.setSize(100, 30);
+//		memberNum.setLocation(400, 80);
+//		memberNum.setBorder(new LineBorder(new Color(13, 170, 93),1));
+//		memberNum.setFont(font);
+//		add(memberNum);
+//		
+//		memberName.setSize(100, 30);
+//		memberName.setLocation(400, 80);
+//		memberName.setBorder(new LineBorder(new Color(13, 170, 93),1));
+//		memberName.setFont(font);
+//		add(memberName);
 		
 		managerLabel.setSize(103, 24);
 		managerLabel.setLocation(50, 30);
