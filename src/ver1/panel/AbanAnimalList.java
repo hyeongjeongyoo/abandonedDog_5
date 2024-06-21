@@ -255,9 +255,6 @@ public class AbanAnimalList extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO 버튼 클릭시 마이페이지에 테이블 추가
-				if() {
-					
-				}
 				
 				JOptionPane.showMessageDialog(null, "관심등록되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 			}

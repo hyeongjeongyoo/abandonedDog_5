@@ -4,27 +4,34 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
 import lombok.Data;
+import ver1.DAO.FreeBoardDAO;
+import ver1.DTO.FreeBoardDTO;
+import ver1.DTO.ShelterDTO;
+import ver1.frame.BoardFrame;
 import ver1.use.HeaderRenderer;
 
 @Data
 public class FreeBoard extends JPanel {
+
+	private BoardFrame mContext;
 
 	private JButton registrationBtn;
 	private JButton nextPageBtn;
@@ -43,11 +50,13 @@ public class FreeBoard extends JPanel {
 
 	String[] columnNames = { "id", "제목", "작성자", "작성일" };
 
-	public FreeBoard() {
+	public FreeBoard(BoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		addEventLayout();
 		updateTable();
+		addTableClickListener();
 	}
 
 	public void initData() {
@@ -65,7 +74,7 @@ public class FreeBoard extends JPanel {
 //        	{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
 //        };
 
-		model = new DefaultTableModel(freeData, columnNames);
+		model = new DefaultTableModel(convertToPageData(), columnNames);
 		freeTable = new JTable(model);
 		freeScroll = new JScrollPane(freeTable);
 		column = freeTable.getColumnModel().getColumn(2); // "contents" 컬럼
@@ -139,37 +148,74 @@ public class FreeBoard extends JPanel {
 		registrationBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new CreateFreeBoard();
+				new CreateFreeBoard(mContext);
 			}
 		});
 	}
 
-	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "제목", "작성자", "작성일" }) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // 모든 셀을 편집 불가능하게 설정
-            }
-        };
+	public void updateTable() {
+		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(),
+				new String[] { "id", "제목", "작성자", "작성일" }) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // 모든 셀을 편집 불가능하게 설정
+			}
+		};
 		freeTable.setModel(newModel);
 
 		// Set column widths and other configurations
+		DefaultTableCellRenderer genderRenderer = new DefaultTableCellRenderer();
 		column = freeTable.getColumnModel().getColumn(0);
-		column.setPreferredWidth(50);
+		column.setPreferredWidth(20);
+		genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		column.setCellRenderer(genderRenderer);
+
 		column = freeTable.getColumnModel().getColumn(1);
-		column.setPreferredWidth(300);
+		column.setPreferredWidth(700);
+		genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		column.setCellRenderer(genderRenderer);
+
 		column = freeTable.getColumnModel().getColumn(2);
-		column.setPreferredWidth(500);
+		column.setPreferredWidth(100);
+
+		column = freeTable.getColumnModel().getColumn(3);
+		column.setPreferredWidth(100);
 	}
 
-	private Object[][] getPageData() {
-		int start = currentPage * rowsPerPage;
-		int end = Math.min(start + rowsPerPage, freeData.length);
-		Object[][] pageData = new Object[end - start][];
-		for (int i = start; i < end; i++) {
-			pageData[i - start] = freeData[i];
+	private Object[][] convertToPageData() {
+		List<FreeBoardDTO> currentPageData = FreeBoardDAO.getFreeBoard();
+		Object[][] pageData = new Object[currentPageData.size()][columnNames.length];
+
+		for (int i = 0; i < currentPageData.size(); i++) {
+			FreeBoardDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getTitle();
+			pageData[i][2] = dto.getUsername();
+			pageData[i][3] = dto.getCreate_date();
 		}
 		return pageData;
+	}
+
+	private void addTableClickListener() {
+		freeTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 마우스가 두 번 클릭되었는지 확인
+				if (e.getClickCount() == 2) {
+					// 클릭된 셀의 행과 열 가져오기
+					int row = freeTable.rowAtPoint(e.getPoint());
+					int column = freeTable.columnAtPoint(e.getPoint());
+
+					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+					if (column == 1) {
+						CreateFreeBoard cfb = new CreateFreeBoard(mContext);
+						FreeBoardDTO dto = FreeBoardDAO.getBoardDto(mContext.getName());
+						cfb.titleField.setText(dto.getTitle());
+						cfb.contentArea.setText(dto.getContent());
+					}
+				}
+			}
+		});
 	}
 
 }

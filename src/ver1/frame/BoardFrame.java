@@ -97,7 +97,7 @@ public class BoardFrame extends JFrame {
 		thread.start();
 
 		adoptReviewBoard = new ReviewAdoptReview();
-		freeBoard = new FreeBoard();
+		freeBoard = new FreeBoard(this);
 		missingBoard = new MissingBoard(this);
 		registerAnimal = new RegisterAnimal();
 		searchShelter = new ShelterSearch();
@@ -213,6 +213,10 @@ public class BoardFrame extends JFrame {
 		return main;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
 	public JTabbedPane getAbandonment() {
 		return abandonment;
 	}
@@ -221,6 +225,10 @@ public class BoardFrame extends JFrame {
 		return abanAnimalListboard;
 	}
 	
+	public FreeBoard getFreeBoard() {
+		return freeBoard;
+	}
+
 	public static void main(String[] args) {
 		new BoardFrame(false, null, null, null, null, null);
 	}

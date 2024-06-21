@@ -15,18 +15,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import ver1.DAO.FreeBoardDAO;
+import ver1.frame.BoardFrame;
+
 public class CreateFreeBoard extends JFrame {
+	
+	private BoardFrame mContext;
 
 	private JLabel titleLabel;
-	private JTextField titleField;
+	public JTextField titleField;
 	private JLabel contentLabel;
-	private JTextArea contentArea;
+	public JTextArea contentArea;
 	private JButton submitButton;
 	private JLabel logoLabel;
 
 	private Font font;
 
-	public CreateFreeBoard() {
+	public CreateFreeBoard(BoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setLayout(null);
 		setBounds(300, 300, 600, 700);
@@ -79,10 +85,13 @@ public class CreateFreeBoard extends JFrame {
 				if (title.isEmpty() || content.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "제목과 내용 모두 작성해주세요", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
+				} else {
+					FreeBoardDAO.addFreeBoardDAO(titleField.getText(), mContext.getName(), contentArea.getText());
+					JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					mContext.getFreeBoard().updateTable();
+					dispose(); // 폼 닫기
 				}
 
-				JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
-				dispose(); // 폼 닫기
 			}
 		});
 
