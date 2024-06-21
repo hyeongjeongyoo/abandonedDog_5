@@ -90,7 +90,12 @@ public class MyPage extends JPanel {
     };
     
     model = new DefaultTableModel(myPageData, columnNames);
-    myWriter = new JTable(model);
+    myWriter = new JTable(model){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // 모든 셀을 편집 불가능하게 설정
+        }
+    };
     myWriterScroll = new JScrollPane(myWriter);
     column = myWriter.getColumnModel().getColumn(2); // "contents" 컬럼
 
