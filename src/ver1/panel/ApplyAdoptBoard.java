@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class ApplyAdoptBoard extends JPanel {
 
@@ -62,7 +63,7 @@ public class ApplyAdoptBoard extends JPanel {
 	public void initData() {
 
 		innerPanel = new JPanel();
-		innerPanel.setBorder(new LineBorder(Color.black));
+		innerPanel.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 
 		labelName = new JLabel("이름:");
 		textFieldName = new JTextField(20);
@@ -141,7 +142,8 @@ public class ApplyAdoptBoard extends JPanel {
 		setBackground(Color.white);
 		
 		innerPanel.setLayout(null);
-		innerPanel.setBounds(100, 50, 980, 450);
+		innerPanel.setBounds(110, 13, 980, 450);
+		innerPanel.setBackground(Color.white);
 
 		labelName.setBounds(50, 10, 120, 100);
 		textFieldName.setBounds(90, 40, 180, 35);

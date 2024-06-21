@@ -54,7 +54,7 @@ public class SandAnimation extends JPanel implements Runnable {
             for (int i = 0; i < 100; i++) {
                 int particleX = x + random.nextInt(g.getFontMetrics().charWidth(text.charAt(charIndex)));
                 int particleY = baseY + yPositions[charIndex * 100 + i];
-                g.drawString(".", particleX, particleY);
+                g.drawString("`", particleX, particleY);
             }
         }
     }

@@ -2,6 +2,7 @@ package ver1.panel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 
@@ -48,9 +49,9 @@ public class RegisterAnimal extends JPanel {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
 		innerPanel = new JPanel();
-		innerPanel.setBounds(100, 50, 900, 500);
-		innerPanel.setBorder(new LineBorder(Color.BLACK));
-		
+		innerPanel.setBounds(110, 13, 900, 500);
+		innerPanel.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+		innerPanel.setBackground(Color.white);
 		innerPanel.setLayout(null);
 
 		

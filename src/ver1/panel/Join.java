@@ -245,7 +245,7 @@ public class Join extends JFrame {
 						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					boolean flag = JoinDAO.bSelectJoin(enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
+					boolean flag = JoinDAO.booleanSelectJoin(enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
 					if (flag) {
 						JOptionPane.showMessageDialog(null, "[일반회원]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
 								JOptionPane.INFORMATION_MESSAGE);

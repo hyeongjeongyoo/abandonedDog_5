@@ -28,4 +28,27 @@ public class Define {
 	}
 	
 	public static final String MAIN_PHOTO = " select popfile from photo order by rand() limit 1 ";
+	
+	public static final String SELECT_SIDO = " select * from sido ";
+	
+	public static final String SELECT_SIGUNGU = " select sido.orgdownNm as sido,"
+													+ " sigungu.orgdownNm as sigungu"
+													+ " from sido"
+													+ " join sigungu"
+													+ " on sido.orgCd = sigungu.uprCd ";
+	
+	public static final String SELECT_SHELTER = " select d.orgdownNm as sido,"
+													+ " g.orgdownNm as sigungu,"
+													+ " s.careNm as careNm,"
+													+ " c.careTel as careTel,"
+													+ " c.careAddr as careAddr"
+													+ " from sido as d"
+													+ " join sigungu as g"
+													+ " on d.orgCd = g.uprCd"
+													+ " join shelter as s"
+													+ " on s.orgCd = g.orgCd"
+													+ " join care as c"
+													+ " on s.careNm = c.careNm"
+													+ " group by c.careNm ";
+
 }

@@ -14,7 +14,7 @@ public class HeaderRenderer extends JLabel implements TableCellRenderer {
         setOpaque(true);
         setBackground(new Color(13, 170, 93));
         setForeground(Color.white);
-        setFont(new Font("Noto Sans KR", Font.BOLD, 16)); // 폰트 설정
+        setFont(new Font("Noto Sans KR", Font.BOLD, 14)); // 폰트 설정
     }
 
     @Override

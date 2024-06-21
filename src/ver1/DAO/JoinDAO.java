@@ -13,7 +13,7 @@ import ver1.jdbc.DBConnectionManager;
 @Data
 public class JoinDAO {
 
-	public static boolean bSelectJoin(String userName, String userPassWord, String userBrith, String userTel) {
+	public static boolean booleanSelectJoin(String userName, String userPassWord, String userBrith, String userTel) {
 		boolean flag = false;
 		String selectJoin = " SELECT userName, userPassWord FROM user WHERE userName = ? ";
 		String insertJoin = " INSERT INTO user(userName, userPassword, userBirth, userTel) VALUES( ?, ?, ?, ?) ";
