@@ -18,6 +18,7 @@ public class MyPageDAO {
 		MyPageDTO dto = null;
 
 		try (Connection conn = DBConnectionManager.getConnection()) {
+			// todo define 재정의
 			PreparedStatement pstmt = conn.prepareStatement(Define.ALL_VIEW_ANIMAL_DETAILS);
 			pstmt.setInt(1, value);
 			ResultSet rs = pstmt.executeQuery();
