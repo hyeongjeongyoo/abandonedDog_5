@@ -168,8 +168,20 @@ public class MyPageDAO {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, value);
 			pstmt.setString(2, userName);
-			int temp = pstmt.executeUpdate();
-			System.out.println(temp);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void deleteInterest(int id, String userName) {
+		
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(Define.DELETE_INTEREST);
+			pstmt.setInt(1, id);
+			pstmt.setString(2, userName);
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

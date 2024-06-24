@@ -233,19 +233,19 @@ public class MyPage extends JPanel {
 		changePhoneNumBtn.setLocation(940, 80);
 		changePhoneNumBtn.setFont(font);
 		add(changePhoneNumBtn);
-		
+
 		deleteInterestBtn.setBounds(50, 370, 150, 30);
 		deleteInterestBtn.setFont(font);
 		add(deleteInterestBtn);
-		
+
 		deleteMyWriteBtn.setBounds(730, 370, 80, 30);
 		deleteMyWriteBtn.setFont(font);
 		add(deleteMyWriteBtn);
-		
+
 		updateMyWriteBtn.setBounds(820, 370, 80, 30);
 		updateMyWriteBtn.setFont(font);
 		add(updateMyWriteBtn);
-		
+
 		permissionBtn.setBounds(1245, 290, 80, 30);
 		permissionBtn.setFont(font);
 		add(permissionBtn);
@@ -370,7 +370,7 @@ public class MyPage extends JPanel {
 				}
 			}
 		});
-		
+
 		changeNameBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -379,7 +379,7 @@ public class MyPage extends JPanel {
 				nameField.setText(changeName);
 			}
 		});
-		
+
 		changePasswordBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -388,7 +388,7 @@ public class MyPage extends JPanel {
 				passwordField.setText(changeName);
 			}
 		});
-		
+
 		changePhoneNumBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -397,25 +397,35 @@ public class MyPage extends JPanel {
 				phoneNum.setText(changeName);
 			}
 		});
-		
+
 		deleteInterestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				List<InterestDTO> dtos = MyPageDAO.addInterestAnimal(mContext.name);
+				try {
+					int row = interestAnimal.rowAtPoint(e.getPoint());
+					int value = (Integer) interestAnimal.getValueAt(row, 0);
+					MyPageDAO.deleteInterest(value, mContext.name);
+					updateInterestAnimal(interestConvertToPageData(mContext.name));
+				} catch (ArrayIndexOutOfBoundsException e2) {
+					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		
+
 		deleteMyWriteBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
+
 		updateMyWriteBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
+
 		permissionBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

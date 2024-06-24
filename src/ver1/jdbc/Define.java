@@ -93,4 +93,6 @@ public class Define {
 	public static final String CHANGE_PASSWORD = " update user set userPassWord = ? where userName = ? ";
 	
 	public static final String CHANGE_PHONE_NUMBER = " update user set userTel = ? where userName = ? ";
+	
+	public static final String DELETE_INTEREST = " delete from interestdb where id = ? and userName = ? ";
 }
