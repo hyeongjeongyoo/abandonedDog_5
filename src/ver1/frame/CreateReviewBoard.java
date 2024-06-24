@@ -88,7 +88,7 @@ public class CreateReviewBoard extends JFrame {
 				} else {
 					ReviewBoardDAO.addReviewBoardDAO(titleField.getText(), mContext.getName(), contentArea.getText());
 					JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
-					mContext.getReviewBoard().updateTable();
+//					mContext.getReviewBoard().updateTable();
 					mContext.getMyPage().updateMyWrite();
 					dispose(); // 폼 닫기
 				}
