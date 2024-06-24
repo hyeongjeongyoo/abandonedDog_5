@@ -4,21 +4,29 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import ver1.DAO.AdoptDAO;
 import ver1.DAO.MyPageDAO;
+import ver1.DAO.ShelterDAO;
 import ver1.DTO.AdoptDTO;
+import ver1.frame.BoardFrame;
 
 public class ApplyAdoptBoard extends JPanel {
+	
+	private BoardFrame mContext;
 
 	private JComboBox<String> comboBoxAnimalType;
 	private JButton btnSubmit;
@@ -60,7 +68,8 @@ public class ApplyAdoptBoard extends JPanel {
 
 	private Font font;
 
-	public ApplyAdoptBoard() {
+	public ApplyAdoptBoard(BoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		addEventLayout();
@@ -71,36 +80,40 @@ public class ApplyAdoptBoard extends JPanel {
 		innerPanel = new JPanel();
 		innerPanel.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 
-		labelName = new JLabel("이름:");
+		labelName = new JLabel("이름");
 		textFieldName = new JTextField(20);
+		textFieldName.setText(mContext.name);
+		textFieldName.setEditable(false);
 
-		labelAddress = new JLabel("주소:");
+		labelAddress = new JLabel("주소");
 		textFieldAddress = new JTextField(20);
 
-		labelNumber = new JLabel("번호:");
+		labelNumber = new JLabel("폰 번호");
 		textFieldNumber = new JTextField(20);
+		textFieldNumber.setText(mContext.phoneNum);
+		textFieldNumber.setEditable(false);
 
-		labelEmail = new JLabel("이메일:");
+		labelEmail = new JLabel("이메일");
 		textFieldEmail = new JTextField(20);
 
-		labelAge = new JLabel("나이:");
+		labelAge = new JLabel("나이");
 		textFieldAge = new JTextField(20);
 
-		labelSex = new JLabel("성별:");
+		labelSex = new JLabel("성별");
 		checkBoxSexMale = new JCheckBox("남성");
 		checkBoxSexFemale = new JCheckBox("여성");
 
-		labelJob = new JLabel("직업:");
+		labelJob = new JLabel("직업");
 		textFieldJob = new JTextField(20);
 
-		labelMaritalStatus = new JLabel("결혼여부:");
+		labelMaritalStatus = new JLabel("결혼여부");
 		checkBoxMaritalN = new JCheckBox("미혼");
 		checkBoxMaritalY = new JCheckBox("기혼");
 
-		labelVisitDate = new JLabel("방문예정:");
+		labelVisitDate = new JLabel("방문예정");
 		textFieldVisitDate = new JTextField(20);
 
-		labelId = new JLabel("동물ID:");
+		labelId = new JLabel("동물ID");
 		textFieldId = new JTextField(20);
 
 		labelRaisedPet = new JLabel("반려동물 키우신 적 있습니까?");
@@ -296,9 +309,22 @@ public class ApplyAdoptBoard extends JPanel {
 
 			}
 		});
+		
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					AdoptDAO.insertApplyAdopt(sendAdopt(Integer.parseInt(textFieldId.getText())));
+					JOptionPane.showMessageDialog(null, "신청이 완료되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				} catch (NumberFormatException e2) {
+					JOptionPane.showMessageDialog(null, "나이와, 동물 ID는 숫자만 입력이 가능합니다.", "Fail", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
 	}
 
-	public void sendMyPage(int careId, String shelterName) {
+	public AdoptDTO sendAdopt(int careId) {
 		AdoptDTO dto = new AdoptDTO();
 		dto.setName(textFieldName.getText());
 		dto.setAddress(textFieldAddress.getText());
@@ -331,10 +357,11 @@ public class ApplyAdoptBoard extends JPanel {
 
 		dto.setSizeFamily(textFieldSizeFamily.getText());
 		dto.setPermission("승인대기");
-		dto.setCareId(MyPageDAO.searchShelter(shelterName));
+		dto.setCareId(careId);
 
 		// DTO 객체를 다음 단계로 넘기는 로직 추가 (예: DAO 호출 등)
 		// 예시: myPageDAO.saveMyPage(dto);
+		return dto;
 	}
 
 }

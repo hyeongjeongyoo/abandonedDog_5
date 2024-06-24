@@ -64,25 +64,6 @@ public class MyPageDAO {
 		}
 	}
 	
-	public static int searchShelter(String careNm) {
-		String query = " select careId from shelter where careNm = ? ";
-		int shelterName = 0;
-		try (Connection conn = DBConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, careNm);
-			
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				shelterName = rs.getInt("careId");
-			}
-			
-		} catch (SQLException e) {
-		}
-		
-		
-		return shelterName;
-	}
-	
 	public static MissingBoardDTO interestAnimal(int animalId) {
 		MissingBoardDTO boardDTO = null;
 		String query = " select * from animal_details where id = ? ";

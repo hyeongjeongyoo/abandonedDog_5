@@ -105,8 +105,25 @@ public class MyPage extends JPanel {
 			info = new ImageIcon("img/managerBtn.png");
 			memberNum = new JLabel();
 			memberName = new JLabel();
+			permissionBtn = new JButton(new ImageIcon("img/okBtn.jpg"));
+			managerModel = new DefaultTableModel(permissionData, permissionManager);
+			permissionManagerTable = new JTable(managerModel) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false; // 모든 셀을 편집 불가능하게 설정
+				}
+			};
+			permissionManagerPane = new JScrollPane(permissionManagerTable);
 		} else {
 			info = new ImageIcon("img/common.png");
+			commonModel = new DefaultTableModel(applyData, permissionCommon);
+			permissionCommonTable = new JTable(commonModel) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false; // 모든 셀을 편집 불가능하게 설정
+				}
+			};
+			permissionCommonPane = new JScrollPane(permissionCommonTable);
 		}
 
 		changeNameBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
@@ -115,7 +132,6 @@ public class MyPage extends JPanel {
 		deleteInterestBtn = new JButton(new ImageIcon("img/reinterBtn.jpg"));
 		deleteMyWriteBtn = new JButton(new ImageIcon("img/deleBtn.jpg"));
 		updateMyWriteBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
-		permissionBtn = new JButton(new ImageIcon("img/okBtn.jpg"));
 
 		nameField = new JLabel();
 		idField = new JLabel();
@@ -150,24 +166,6 @@ public class MyPage extends JPanel {
 			}
 		};
 		animalScroll = new JScrollPane(interestAnimal);
-
-		commonModel = new DefaultTableModel(applyData, permissionCommon);
-		permissionCommonTable = new JTable(commonModel) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false; // 모든 셀을 편집 불가능하게 설정
-			}
-		};
-		permissionCommonPane = new JScrollPane(permissionCommonTable);
-
-		managerModel = new DefaultTableModel(permissionData, permissionManager);
-		permissionManagerTable = new JTable(managerModel) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false; // 모든 셀을 편집 불가능하게 설정
-			}
-		};
-		permissionManagerPane = new JScrollPane(permissionManagerTable);
 
 		// TODO 컬럼쓰는 법 다시 확인 - 형정
 		column = myWriter.getColumnModel().getColumn(0);
@@ -247,16 +245,6 @@ public class MyPage extends JPanel {
 		deleteMyWriteBtn.setFont(font);
 		add(deleteMyWriteBtn);
 
-		permissionBtn.setBounds(1245, 290, 80, 30);
-		permissionBtn.setFont(font);
-		add(permissionBtn);
-
-		managerLabel.setSize(103, 24);
-		managerLabel.setLocation(50, 30);
-
-		commonLabel.setSize(103, 24);
-		commonLabel.setLocation(50, 30);
-
 		if (mContext.manager) {
 			add(managerLabel);
 			memberNum.setSize(130, 30);
@@ -282,8 +270,16 @@ public class MyPage extends JPanel {
 			header = permissionManagerTable.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer());
 			add(permissionManagerPane);
+			
+			permissionBtn.setBounds(1245, 290, 80, 30);
+			permissionBtn.setFont(font);
+			add(permissionBtn);
+			
+			managerLabel.setSize(103, 24);
+			managerLabel.setLocation(50, 30);
 		} else {
 			add(commonLabel);
+			
 			permissionCommonPane.setBounds(1125, 80, 200, 200);
 			permissionCommonPane.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 			permissionCommonPane.getViewport().setBackground(Color.white);
@@ -293,6 +289,9 @@ public class MyPage extends JPanel {
 			header = permissionCommonTable.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer());
 			add(permissionCommonPane);
+			
+			commonLabel.setSize(103, 24);
+			commonLabel.setLocation(50, 30);
 		}
 
 		animalScroll.setBounds(50, 410, 600, 330);
@@ -462,11 +461,13 @@ public class MyPage extends JPanel {
 			}
 		});
 
-		permissionBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
+		if(permissionBtn != null) {
+			permissionBtn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
+		}
 
 	}
 

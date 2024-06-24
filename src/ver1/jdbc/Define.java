@@ -21,7 +21,8 @@ public class Define {
 	
 	public static final String ALL_VIEW_ANIMAL_DETAILS = " select * from animal_details where processState like '보호%' order by id desc ";
 	
-	public static final String INSERT_APPLY_ADOPT = " insert into adopt_apply(name, address, number, email, age, sex, job, maritalStatus, visitDate, animalId, raisedPet, sizeFamily, permission, careID)\r\n"
+	public static final String INSERT_APPLY_ADOPT = " insert into adopt_apply(name, address, number, email, age, sex, job, "
+														+ "maritalStatus, visitDate, animalId, raisedPet, sizeFamily, permission, careID)\r\n"
 														+ "values\r\n"
 														+ "	(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '승인대기', ?) ";
 	
@@ -101,4 +102,6 @@ public class Define {
 	public static final String UPDATE_MY_WRITE_TITLE = " update freeboarddb set title = ? where userName = ? and id = ? ";
 	
 	public static final String UPDATE_MY_WRITE_CONTENT = " update freeboarddb set content = ? where userName = ? and id = ? ";
+	
+	public static final String SEARCH_SHELTER = " select s.careId from animal_details as a join shelter as s on a.careId = s.careId where a.id = ? ";
 }

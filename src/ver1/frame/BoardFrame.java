@@ -34,7 +34,7 @@ public class BoardFrame extends JFrame {
 	public String birthDay;
 	public String phoneNum;
 	public String authority;
-	public  String userDepartmentNo;
+	public String userDepartmentNo;
 	public String userDepartmentName;
 
 	private Font font;
@@ -89,7 +89,6 @@ public class BoardFrame extends JFrame {
 
     private void initBackgroundImage() {
         backgroundImage = new ImageIcon("img/backgroundBg.png").getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
-
     }
     
 	
@@ -107,7 +106,7 @@ public class BoardFrame extends JFrame {
 		missing = new JTabbedPane(JTabbedPane.LEFT);
 		abandonment = new JTabbedPane(JTabbedPane.LEFT);
 
-		applyAdoptBoard = new ApplyAdoptBoard();
+		applyAdoptBoard = new ApplyAdoptBoard(this);
 		abanAnimalListboard = new AbanAnimalList(this);
 		visitAnimal = new VisitAnimal();
 

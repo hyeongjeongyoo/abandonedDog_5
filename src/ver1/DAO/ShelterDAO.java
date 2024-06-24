@@ -53,4 +53,16 @@ public class ShelterDAO {
 
 		return dto;
 	}
+	
+	public static int searchCareId(int id) {
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(Define.SEARCH_SHELTER);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.getInt("s.careId");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
