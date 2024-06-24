@@ -1,4 +1,4 @@
-package ver1.panel;
+package ver1.frame;
 
 import java.awt.Color;
 import java.awt.Font;
