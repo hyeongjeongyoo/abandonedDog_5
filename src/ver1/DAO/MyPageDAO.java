@@ -187,4 +187,29 @@ public class MyPageDAO {
 		}
 		
 	}
+	
+	public static void deleteMyWrite(int id, String userName) {
+		
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(Define.DELETE_MY_WRITE);
+			pstmt.setInt(1, id);
+			pstmt.setString(2, userName);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void updateMyWrite(String query, String changeValue, String userName, int id) {
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, changeValue);
+			pstmt.setString(2, userName);
+			pstmt.setInt(3, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

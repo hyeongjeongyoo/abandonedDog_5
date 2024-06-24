@@ -26,6 +26,7 @@ import ver1.DAO.MyPageDAO;
 import ver1.DTO.FreeBoardDTO;
 import ver1.DTO.InterestDTO;
 import ver1.frame.BoardFrame;
+import ver1.frame.UpdateAdoptBoard;
 import ver1.frame.ViewFreeBoard;
 import ver1.jdbc.Define;
 import ver1.use.HeaderRenderer;
@@ -112,8 +113,8 @@ public class MyPage extends JPanel {
 		changePasswordBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		changePhoneNumBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		deleteInterestBtn = new JButton(new ImageIcon("img/reinterBtn.jpg"));
-		deleteMyWriteBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
-		updateMyWriteBtn = new JButton(new ImageIcon("img/deleBtn.jpg"));
+		deleteMyWriteBtn = new JButton(new ImageIcon("img/deleBtn.jpg"));
+		updateMyWriteBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		permissionBtn = new JButton(new ImageIcon("img/okBtn.jpg"));
 
 		nameField = new JLabel();
@@ -238,13 +239,13 @@ public class MyPage extends JPanel {
 		deleteInterestBtn.setFont(font);
 		add(deleteInterestBtn);
 
-		deleteMyWriteBtn.setBounds(730, 370, 80, 30);
-		deleteMyWriteBtn.setFont(font);
-		add(deleteMyWriteBtn);
-
-		updateMyWriteBtn.setBounds(820, 370, 80, 30);
+		updateMyWriteBtn.setBounds(730, 370, 80, 30);
 		updateMyWriteBtn.setFont(font);
 		add(updateMyWriteBtn);
+		
+		deleteMyWriteBtn.setBounds(820, 370, 80, 30);
+		deleteMyWriteBtn.setFont(font);
+		add(deleteMyWriteBtn);
 
 		permissionBtn.setBounds(1245, 290, 80, 30);
 		permissionBtn.setFont(font);
@@ -417,12 +418,47 @@ public class MyPage extends JPanel {
 		deleteMyWriteBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int choice = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "게시글 삭제", JOptionPane.YES_NO_OPTION);
+				if(choice == 0) {
+					List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos(mContext.name);
+					try {
+						int row = myWriter.rowAtPoint(e.getPoint());
+						int value = (Integer) myWriter.getValueAt(row, 0);
+						for (FreeBoardDTO dto : dtos) {
+							if(dto.getId() == value) {
+								MyPageDAO.deleteMyWrite(dto.getId(), mContext.name);
+								updateMyWrite();
+								mContext.getFreeBoard().updateTable();
+							}
+							
+						}
+					} catch (ArrayIndexOutOfBoundsException e2) {
+						JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			}
 		});
 
 		updateMyWriteBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos(mContext.name);
+				try {
+					int row = myWriter.rowAtPoint(e.getPoint());
+					int value = (Integer) myWriter.getValueAt(row, 0);
+					for (FreeBoardDTO dto : dtos) {
+						if(dto.getId() == value) {
+							UpdateAdoptBoard uab = new UpdateAdoptBoard(mContext, dto.getTitle(), dto.getContent(), value);
+							uab.titleField.setText(dto.getTitle());
+							uab.contentArea.setText(dto.getContent());
+						}
+						
+					}
+				} catch (ArrayIndexOutOfBoundsException e2) {
+					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 

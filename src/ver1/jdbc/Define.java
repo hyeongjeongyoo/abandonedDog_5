@@ -95,4 +95,10 @@ public class Define {
 	public static final String CHANGE_PHONE_NUMBER = " update user set userTel = ? where userName = ? ";
 	
 	public static final String DELETE_INTEREST = " delete from interestdb where id = ? and userName = ? ";
+	
+	public static final String DELETE_MY_WRITE = " delete from freeboarddb where id = ? and userName = ? ";
+	
+	public static final String UPDATE_MY_WRITE_TITLE = " update freeboarddb set title = ? where userName = ? and id = ? ";
+	
+	public static final String UPDATE_MY_WRITE_CONTENT = " update freeboarddb set content = ? where userName = ? and id = ? ";
 }
