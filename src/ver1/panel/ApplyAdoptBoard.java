@@ -234,48 +234,6 @@ public class ApplyAdoptBoard extends JPanel {
 	}
 
 	public void addEventLayout() {
-
-	public void sendMyPage() {
-			MyPageDTO dto = new MyPageDTO();
-			dto.setName(textFieldName.getText());
-			dto.setAddress(textFieldAddress.getText());
-			dto.setNumber(textFieldNumber.getText());
-			dto.setEmail(textFieldEmail.getText());
-			dto.setAge(textFieldAge.getText());
-
-			if (checkBoxSexMale.isSelected()) {
-				dto.setSex("남성");
-			} else if (checkBoxSexFemale.isSelected()) {
-				dto.setSex("여성");
-			}
-
-			dto.setJob(textFieldJob.getText());
-
-			if (checkBoxMaritalY.isSelected()) {
-				dto.setMaritalStatus("기혼");
-			} else if (checkBoxMaritalN.isSelected()) {
-				dto.setMaritalStatus("미혼");
-			}
-
-			dto.setVisitDate(textFieldVisitDate.getText());
-			dto.setAnimalId(textFieldId.getText());
-
-			if (checkBoxRaisedPetY.isSelected()) {
-				dto.setRaisedPet("Y");
-			} else if (checkBoxRaisedPetN.isSelected()) {
-				dto.setRaisedPet("N");
-			}
-
-			dto.setSizeFamily(textFieldSizeFamily.getText());
-
-			// DTO 객체를 다음 단계로 넘기는 로직 추가 (예: DAO 호출 등)
-			// 예시: myPageDAO.saveMyPage(dto);
-
-			System.out.println("MyPageDTO: " + dto);
-		}
-	}
-		
-
 		checkBoxMaritalN.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -337,6 +295,43 @@ public class ApplyAdoptBoard extends JPanel {
 
 			}
 		});
+	}
+
+	public void sendMyPage() {
+		MyPageDTO dto = new MyPageDTO();
+		dto.setName(textFieldName.getText());
+		dto.setAddress(textFieldAddress.getText());
+		dto.setNumber(textFieldNumber.getText());
+		dto.setEmail(textFieldEmail.getText());
+		dto.setAge(textFieldAge.getText());
+
+		if (checkBoxSexMale.isSelected()) {
+			dto.setSex("남성");
+		} else if (checkBoxSexFemale.isSelected()) {
+			dto.setSex("여성");
+		}
+
+		dto.setJob(textFieldJob.getText());
+
+		if (checkBoxMaritalY.isSelected()) {
+			dto.setMaritalStatus("기혼");
+		} else if (checkBoxMaritalN.isSelected()) {
+			dto.setMaritalStatus("미혼");
+		}
+
+		dto.setVisitDate(textFieldVisitDate.getText());
+		dto.setAnimalId(textFieldId.getText());
+
+		if (checkBoxRaisedPetY.isSelected()) {
+			dto.setRaisedPet("Y");
+		} else if (checkBoxRaisedPetN.isSelected()) {
+			dto.setRaisedPet("N");
+		}
+
+		dto.setSizeFamily(textFieldSizeFamily.getText());
+
+		// DTO 객체를 다음 단계로 넘기는 로직 추가 (예: DAO 호출 등)
+		// 예시: myPageDAO.saveMyPage(dto);
 	}
 
 }

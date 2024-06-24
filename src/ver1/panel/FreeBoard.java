@@ -209,7 +209,7 @@ public class FreeBoard extends JPanel {
 					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
 					if (column == 1) {
 						CreateFreeBoard cfb = new CreateFreeBoard(mContext);
-						FreeBoardDTO dto = FreeBoardDAO.getBoardDto(mContext.getName());
+						FreeBoardDTO dto = FreeBoardDAO.getBoardDto((String)freeTable.getValueAt(row, column+1));
 						cfb.titleField.setText(dto.getTitle());
 						cfb.contentArea.setText(dto.getContent());
 					}

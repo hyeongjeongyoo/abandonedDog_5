@@ -25,7 +25,7 @@ public class MyPageDAO {
 			if (rs.next()) {
 				
 				dto = new MyPageDTO(rs.getString("name"),
-						rs.getString("address")),
+						rs.getString("address"),
 						rs.getString("number"),
 						rs.getString("email"),
 						rs.getString("age"),
