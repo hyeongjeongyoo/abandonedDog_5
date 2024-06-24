@@ -89,6 +89,7 @@ public class CreateFreeBoard extends JFrame {
 					FreeBoardDAO.addFreeBoardDAO(titleField.getText(), mContext.getName(), contentArea.getText());
 					JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
 					mContext.getFreeBoard().updateTable();
+					mContext.getMyPage().updateMyWrite();
 					dispose(); // 폼 닫기
 				}
 

@@ -2,7 +2,8 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -19,8 +20,12 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import lombok.Data;
-import ver1.SandAnimation;
+import ver1.DAO.FreeBoardDAO;
+import ver1.DAO.MyPageDAO;
+import ver1.DTO.FreeBoardDTO;
+import ver1.DTO.InterestDTO;
 import ver1.frame.BoardFrame;
+import ver1.frame.ViewFreeBoard;
 import ver1.use.HeaderRenderer;
 
 @Data
@@ -46,25 +51,40 @@ public class MyPage extends JPanel {
 	private JButton changeBirth;
 	private JButton changePhoneNum;
 
-	private DefaultTableModel writeModel;
-	private DefaultTableModel petModel;
 	private List<List<FreeBoard>> myPageNum;
-	private Object[][] myPageData;
 
 	private TableColumn column;
 
+	private DefaultTableModel petModel;
 	String[] petColumnNames = { "동물 번호", "품종", "추가 날짜" };
+	private Object[][] myPageData;
 	private JTable interestAnimal;
 	private JScrollPane animalScroll;
 
+	private DefaultTableModel writeModel;
 	String[] columnNames = { "id", "제목", "작성일" };
+	private Object[][] myWriteData;
 	private JTable myWriter;
 	private JScrollPane myWriterScroll;
+
+	private DefaultTableModel commonModel;
+	String[] permissionCommon = { "id", "승인상태" };
+	private Object[][] applyData;
+	private JTable permissionCommonTable;
+	private JScrollPane permissionCommonPane;
+
+	private DefaultTableModel managerModel;
+	String[] permissionManager = { "Id", "신청자명" };
+	private Object[][] permissionData;
+	private JTable permissionManagerTable;
+	private JScrollPane permissionManagerPane;
 
 	private ImageIcon info;
 
 	private JLabel managerLabel;
 	private JLabel commonLabel;
+	
+	private JTableHeader header;
 
 	public MyPage(BoardFrame mContext) {
 		this.mContext = mContext;
@@ -75,14 +95,13 @@ public class MyPage extends JPanel {
 
 	private void initDate() {
 
-		// TODO DB 연결 필
-//		if(mContext.manager) {
-		info = new ImageIcon("img/managerBtn.png");
-		memberNum = new JLabel();
-		memberName = new JLabel();
-//		} else {
-		info = new ImageIcon("img/common.png");
-//		}
+		if (mContext.manager) {
+			info = new ImageIcon("img/managerBtn.png");
+			memberNum = new JLabel();
+			memberName = new JLabel();
+		} else {
+			info = new ImageIcon("img/common.png");
+		}
 
 		changeName = new JButton("수정");
 		changePassword = new JButton("수정");
@@ -103,10 +122,8 @@ public class MyPage extends JPanel {
 		managerInfo = new JLabel(new ImageIcon("img/Self.jpg"));
 		interestPet = new JPanel();
 
-		myPageData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "2024-10-21" }, { 2, "인사 오지게 박습니다", "2024-10-21" },
-				{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "2024-10-21" }, };
-
-		writeModel = new DefaultTableModel(myPageData, columnNames);
+		myWriteData = myWriteConvertToPageData(mContext.name);
+		writeModel = new DefaultTableModel(myWriteData, columnNames);
 		myWriter = new JTable(writeModel) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -114,7 +131,9 @@ public class MyPage extends JPanel {
 			}
 		};
 		myWriterScroll = new JScrollPane(myWriter);
-
+		
+		
+		myPageData = interestConvertToPageData(mContext.name);
 		petModel = new DefaultTableModel(myPageData, petColumnNames);
 		interestAnimal = new JTable(petModel) {
 			@Override
@@ -124,11 +143,29 @@ public class MyPage extends JPanel {
 		};
 		animalScroll = new JScrollPane(interestAnimal);
 
+		commonModel = new DefaultTableModel(applyData, permissionCommon);
+		permissionCommonTable = new JTable(commonModel) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // 모든 셀을 편집 불가능하게 설정
+			}
+		};
+		permissionCommonPane = new JScrollPane(permissionCommonTable);
+
+		managerModel = new DefaultTableModel(permissionData, permissionManager);
+		permissionManagerTable = new JTable(managerModel) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false; // 모든 셀을 편집 불가능하게 설정
+			}
+		};
+		permissionManagerPane = new JScrollPane(permissionManagerTable);
+
 		// TODO 컬럼쓰는 법 다시 확인 - 형정
 		column = myWriter.getColumnModel().getColumn(0);
 		column.setMaxWidth(50);
 		column.setMinWidth(50);
-		
+
 		column = interestAnimal.getColumnModel().getColumn(0);
 		column.setMaxWidth(80);
 		column.setMinWidth(80);
@@ -138,18 +175,7 @@ public class MyPage extends JPanel {
 		setLayout(null);
 		setBackground(Color.white);
 
-		myWriter.getTableHeader().setReorderingAllowed(false);
-		myWriter.getTableHeader().setResizingAllowed(false);
-
-		interestAnimal.getTableHeader().setReorderingAllowed(false);
-		interestAnimal.getTableHeader().setResizingAllowed(false);
-
 		Font font = new Font("Noto Sans KR", Font.BOLD, 15);
-
-		JTableHeader header = myWriter.getTableHeader();
-		header.setDefaultRenderer(new HeaderRenderer());
-		header = interestAnimal.getTableHeader();
-		header.setDefaultRenderer(new HeaderRenderer());
 
 		selfImage.setBounds(50, 70, 200, 250);
 		selfImage.setBackground(Color.white);
@@ -212,56 +238,188 @@ public class MyPage extends JPanel {
 		commonLabel.setSize(103, 24);
 		commonLabel.setLocation(50, 30);
 
-		// TODO DB 연결 필
-//		if(mContext.manager) {
-		add(managerLabel);
-		memberNum.setSize(130, 30);
-		memberNum.setLocation(800, 148);
-		memberNum.setBorder(new LineBorder(new Color(13, 170, 93), 1));
-		memberNum.setFont(font);
-		add(memberNum);
+		if (mContext.manager) {
+			add(managerLabel);
+			memberNum.setSize(130, 30);
+			memberNum.setLocation(800, 148);
+			memberNum.setBorder(new LineBorder(new Color(13, 170, 93), 1));
+			memberNum.setFont(font);
+			add(memberNum);
 
-		memberName.setSize(130, 30);
-		memberName.setLocation(800, 213);
-		memberName.setBorder(new LineBorder(new Color(13, 170, 93), 1));
-		memberName.setFont(font);
-		add(memberName);
-//		} else {
-		add(commonLabel);
-//		}
+			memberName.setSize(130, 30);
+			memberName.setLocation(800, 213);
+			memberName.setBorder(new LineBorder(new Color(13, 170, 93), 1));
+			memberName.setFont(font);
+			add(memberName);
+			memberNum.setText(mContext.userDepartmentNo);
+			memberName.setText(mContext.userDepartmentName);
+
+			permissionManagerPane.setBounds(1125, 80, 200, 200);
+			permissionManagerPane.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+			permissionManagerPane.getViewport().setBackground(Color.white);
+			permissionManagerPane.getViewport().setOpaque(true);
+			permissionManagerTable.getTableHeader().setReorderingAllowed(false);
+			permissionManagerTable.getTableHeader().setResizingAllowed(false);
+			header = permissionManagerTable.getTableHeader();
+			header.setDefaultRenderer(new HeaderRenderer());
+			add(permissionManagerPane);
+		} else {
+			add(commonLabel);
+			permissionCommonPane.setBounds(1125, 80, 200, 200);
+			permissionCommonPane.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
+			permissionCommonPane.getViewport().setBackground(Color.white);
+			permissionCommonPane.getViewport().setOpaque(true);
+			permissionCommonTable.getTableHeader().setReorderingAllowed(false);
+			permissionCommonTable.getTableHeader().setResizingAllowed(false);
+			header = permissionCommonTable.getTableHeader();
+			header.setDefaultRenderer(new HeaderRenderer());
+			add(permissionCommonPane);
+		}
 
 		animalScroll.setBounds(50, 410, 600, 330);
 		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		animalScroll.getViewport().setBackground(Color.white);
 		animalScroll.getViewport().setOpaque(true);
+		interestAnimal.getTableHeader().setReorderingAllowed(false);
+		interestAnimal.getTableHeader().setResizingAllowed(false);
+		header = interestAnimal.getTableHeader();
+		header.setDefaultRenderer(new HeaderRenderer());
 		add(animalScroll);
 
 		myWriterScroll.setBounds(730, 410, 600, 330);
 		myWriterScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 		myWriterScroll.getViewport().setBackground(Color.white);
 		myWriterScroll.getViewport().setOpaque(true);
+		myWriter.getTableHeader().setReorderingAllowed(false);
+		myWriter.getTableHeader().setResizingAllowed(false);
+		header = myWriter.getTableHeader();
+		header.setDefaultRenderer(new HeaderRenderer());
 		add(myWriterScroll);
 
-//		DefaultTableModel newModel = new DefaultTableModel(getMyPageData(), columnNames) {
-//			@Override
-//			public boolean isCellEditable(int row, int column) {
-//				return false;
-//			}
-//		};
-//		
-//		myWriter.setModel(newModel);
+		nameField.setText(mContext.name);
+		idField.setText(mContext.id);
+		passwordField.setText(mContext.password);
+		birthField.setText(mContext.birthDay);
+		phoneNum.setText(mContext.phoneNum);
 
 	}
 
 	private void addEventListener() {
+		
+		interestAnimal.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 마우스가 두 번 클릭되었는지 확인
+                if (e.getClickCount() == 2) {
+                    // 클릭된 셀의 행과 열 가져오기
+                    int row = interestAnimal.rowAtPoint(e.getPoint());
+                    int column = interestAnimal.columnAtPoint(e.getPoint());
 
+                    // "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+                    if (column == 0) {
+                        mContext.getMain().setSelectedIndex(3);
+                        mContext.getAbandonment().setSelectedIndex(1);
+                        mContext.getAbanAnimalListboard().searchCareAnimal((Integer) interestAnimal.getValueAt(row, column));
+                    }
+                }
+            }
+        });
+		
+		myWriter.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 마우스가 두 번 클릭되었는지 확인
+				if (e.getClickCount() == 2) {
+					// 클릭된 셀의 행과 열 가져오기
+					int row = myWriter.rowAtPoint(e.getPoint());
+					int column = myWriter.columnAtPoint(e.getPoint());
+
+					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+					if (column == 1) {
+						ViewFreeBoard viewBoard = new ViewFreeBoard(mContext);
+						List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos(mContext.name);
+						String title = (String)myWriter.getValueAt(row, column);
+						for (FreeBoardDTO dto : dtos) {
+							if(title.equals(dto.getTitle())) {
+								viewBoard.setTitle(dto.getUsername() + "님의 게시물");
+								viewBoard.titleField.setText(dto.getTitle());
+								viewBoard.nameField.setText(dto.getUsername());
+								viewBoard.contentArea.setText(dto.getContent());
+							}
+						}
+					}
+				}
+			}
+		});
+
+	}
+	
+	public void updateMyWrite() {
+		DefaultTableModel newModel = new DefaultTableModel(myWriteConvertToPageData(mContext.name), petColumnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		myWriter.setModel(newModel);
+		column = myWriter.getColumnModel().getColumn(0);
+		column.setMaxWidth(50);
+		column.setMinWidth(50);
+	}
+	
+	public void updateMyAdopt() {
+		
+	}
+	
+	public void updateManagerAdopt() {
+		
+	}
+	
+	public void updateInterestAnimal(Object[][] data) {
+		DefaultTableModel newModel = new DefaultTableModel(data, petColumnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		interestAnimal.setModel(newModel);
+		column = interestAnimal.getColumnModel().getColumn(0);
+		column.setMaxWidth(80);
+		column.setMinWidth(80);
+	}
+	
+	public Object[][] interestConvertToPageData(String userName) {
+		List<InterestDTO> currentPageData = MyPageDAO.addInterestAnimal(userName);
+		Object[][] pageData = new Object[currentPageData.size()][petColumnNames.length];
+
+		for (int i = 0; i < currentPageData.size(); i++) {
+			InterestDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getKindCd();
+			pageData[i][2] = dto.getAddDate();
+		}
+		return pageData;
+	}
+	
+	public Object[][] myWriteConvertToPageData(String userName) {
+		List<FreeBoardDTO> currentPageData = MyPageDAO.addMyWrite(mContext.name);
+		Object[][] pageData = new Object[currentPageData.size()][petColumnNames.length];
+		
+		for (int i = 0; i < currentPageData.size(); i++) {
+			FreeBoardDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getTitle();
+			pageData[i][2] = dto.getCreate_date();
+		}
+		return pageData;
 	}
 
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame("Sand Animation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new MyPage(null));
+		frame.add(new MyPage(new BoardFrame(false, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY,
+				TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY)));
 		frame.setSize(1400, 900);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

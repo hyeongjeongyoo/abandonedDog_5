@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.xdevapi.DbDoc;
-
 import ver1.DTO.FreeBoardDTO;
-import ver1.DTO.MissingBoardDTO;
 import ver1.jdbc.DBConnectionManager;
 
 public class FreeBoardDAO {
@@ -34,7 +31,7 @@ public class FreeBoardDAO {
 	
 	public static List<FreeBoardDTO> getFreeBoard() {
 		List<FreeBoardDTO> list = new ArrayList<>();
-		String query = " select * from freeboarddb ";
+		String query = " select * from freeboarddb order by id desc ";
 		try (Connection conn = DBConnectionManager.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
@@ -81,5 +78,34 @@ public class FreeBoardDAO {
 		
 		return dto;
 	}
+	
+	public static List<FreeBoardDTO> getBoardDtos(String username) {
+		List<FreeBoardDTO> dtos = new ArrayList<>();
+		FreeBoardDTO dto = null;
+		String query = " select * from freeboarddb where username = ? ";
+		
+		try(Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, username);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				dto = new FreeBoardDTO(
+						rs.getInt("id"),
+						rs.getString("title"),
+						rs.getString("username"),
+						rs.getString("content"),
+						rs.getString("create_date"));
+				dtos.add(dto);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return dtos;
+	}
+	
 	
 }

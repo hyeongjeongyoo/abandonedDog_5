@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,8 +25,8 @@ import javax.swing.table.TableColumn;
 import lombok.Data;
 import ver1.DAO.FreeBoardDAO;
 import ver1.DTO.FreeBoardDTO;
-import ver1.DTO.ShelterDTO;
 import ver1.frame.BoardFrame;
+import ver1.frame.ViewFreeBoard;
 import ver1.use.HeaderRenderer;
 
 @Data
@@ -56,7 +57,6 @@ public class FreeBoard extends JPanel {
 		setInitLayout();
 		addEventLayout();
 		updateTable();
-		addTableClickListener();
 	}
 
 	public void initData() {
@@ -65,15 +65,6 @@ public class FreeBoard extends JPanel {
 		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
 		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
-
-		freeData = new Object[][] { { 1, "안녕하세요 인사드리러왔습니다", "진짜개멍정", "2023-06-30" }, { 2, "인사 오지게 박습니다", "등업 신청이요~" },
-				{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " }, };
-//        freeData = new Object[][] {
-//        	{ 1, "안녕하세요 인사드리러왔습니다", "정말 좋은 취지의 사이트네요" },
-//        	{ 2, "인사 오지게 박습니다", "등업 신청이요~" },
-//        	{ 3, "미안하다 이거 보여주려고 어그로끌었다 ", "우리조 코딩 싸움수준 ㄹㅇ실화냐? " },
-//        };
-
 		model = new DefaultTableModel(convertToPageData(), columnNames);
 		freeTable = new JTable(model);
 		freeScroll = new JScrollPane(freeTable);
@@ -124,7 +115,7 @@ public class FreeBoard extends JPanel {
 				try {
 					currentPage++;
 					updateTable();
-				} catch (NegativeArraySizeException e2) {
+				} catch (Exception e2) {
 					currentPage--;
 					JOptionPane.showMessageDialog(null, "마지막 페이지 입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -149,6 +140,33 @@ public class FreeBoard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new CreateFreeBoard(mContext);
+			}
+		});
+		
+		freeTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 마우스가 두 번 클릭되었는지 확인
+				if (e.getClickCount() == 2) {
+					// 클릭된 셀의 행과 열 가져오기
+					int row = freeTable.rowAtPoint(e.getPoint());
+					int column = freeTable.columnAtPoint(e.getPoint());
+
+					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+					if (column == 1) {
+						ViewFreeBoard viewBoard = new ViewFreeBoard(mContext);
+						List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos((String)freeTable.getValueAt(row, column+1));
+						String title = (String)freeTable.getValueAt(row, column);
+						for (FreeBoardDTO dto : dtos) {
+							if(title.equals(dto.getTitle())) {
+								viewBoard.setTitle(dto.getUsername() + "님의 게시물");
+								viewBoard.titleField.setText(dto.getTitle());
+								viewBoard.nameField.setText(dto.getUsername());
+								viewBoard.contentArea.setText(dto.getContent());
+							}
+						}
+					}
+				}
 			}
 		});
 	}
@@ -194,28 +212,6 @@ public class FreeBoard extends JPanel {
 			pageData[i][3] = dto.getCreate_date();
 		}
 		return pageData;
-	}
-
-	private void addTableClickListener() {
-		freeTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// 마우스가 두 번 클릭되었는지 확인
-				if (e.getClickCount() == 2) {
-					// 클릭된 셀의 행과 열 가져오기
-					int row = freeTable.rowAtPoint(e.getPoint());
-					int column = freeTable.columnAtPoint(e.getPoint());
-
-					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
-					if (column == 1) {
-						CreateFreeBoard cfb = new CreateFreeBoard(mContext);
-						FreeBoardDTO dto = FreeBoardDAO.getBoardDto((String)freeTable.getValueAt(row, column+1));
-						cfb.titleField.setText(dto.getTitle());
-						cfb.contentArea.setText(dto.getContent());
-					}
-				}
-			}
-		});
 	}
 
 }

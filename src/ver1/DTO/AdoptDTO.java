@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyPageDTO {
+public class AdoptDTO {
 
 	String name;
 	String address;
@@ -21,5 +21,7 @@ public class MyPageDTO {
 	String animalId;
 	String raisedPet;
 	String sizeFamily;
+	String permission;
+	int careId;
 
 }

@@ -28,11 +28,14 @@ import ver1.panel.VisitAnimal;
 public class BoardFrame extends JFrame {
 	
 	public boolean manager;
-	private String name;
-	private String id;
-	private String password;
-	private String birthDay;
-	private String authority;
+	public String name;
+	public String id;
+	public String password;
+	public String birthDay;
+	public String phoneNum;
+	public String authority;
+	public  String userDepartmentNo;
+	public String userDepartmentName;
 
 	private Font font;
 
@@ -58,13 +61,28 @@ public class BoardFrame extends JFrame {
 	
 	private MyPage myPage;
 	
-	public BoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority) {
+	public BoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority, String phoneNum) {
 		this.manager = manager;
 		this.name = name;
 		this.id = id;
 		this.password = password;
 		this.birthDay = birthDay;
 		this.authority = authority;
+		this.phoneNum = phoneNum;
+		initData();
+		setInitLayout();
+	}
+	
+	public BoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority, String phoneNum, String userDepartmentNo, String userDepartmentName) {
+		this.manager = manager;
+		this.name = name;
+		this.id = id;
+		this.password = password;
+		this.birthDay = birthDay;
+		this.authority = authority;
+		this.phoneNum = phoneNum;
+		this.userDepartmentNo = userDepartmentNo;
+		this.userDepartmentName = userDepartmentName;
 		initData();
 		setInitLayout();
 	}
@@ -90,7 +108,7 @@ public class BoardFrame extends JFrame {
 		abandonment = new JTabbedPane(JTabbedPane.LEFT);
 
 		applyAdoptBoard = new ApplyAdoptBoard();
-		abanAnimalListboard = new AbanAnimalList();
+		abanAnimalListboard = new AbanAnimalList(this);
 		visitAnimal = new VisitAnimal();
 
 		Thread thread = new Thread(visitAnimal);
@@ -118,10 +136,6 @@ public class BoardFrame extends JFrame {
 		missing.setFont(font);
 		abandonment.setFont(font);
 		myPage.setFont(font);
-		myPage.nameField.setText(name);
-		myPage.idField.setText(id);
-		myPage.passwordField.setText(password);
-		myPage.birthField.setText(birthDay);
 
 		UIManager.put("TabbedPane.contentAreaColor", Color.white);
 		UIManager.put("TabbedPane.selected", Color.white);
@@ -228,8 +242,12 @@ public class BoardFrame extends JFrame {
 	public FreeBoard getFreeBoard() {
 		return freeBoard;
 	}
+	
+	public MyPage getMyPage() {
+		return myPage;
+	}
 
 	public static void main(String[] args) {
-		new BoardFrame(false, null, null, null, null, null);
+		new BoardFrame(false, null, null, null, null, null, null);
 	}
 }

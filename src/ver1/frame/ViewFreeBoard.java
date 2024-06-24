@@ -24,9 +24,10 @@ public class ViewFreeBoard extends JFrame {
 
 	private JLabel titleLabel;
 	public JTextField titleField;
+	private JLabel nameLabel;
+	public JTextField nameField;
 	private JLabel contentLabel;
 	public JTextArea contentArea;
-	private JButton submitButton;
 	private JLabel logoLabel;
 	private JPanel panel;
 
@@ -55,45 +56,36 @@ public class ViewFreeBoard extends JFrame {
 		titleField.setBounds(100, 125, 400, 25);
 		titleField.setBackground(new Color(240, 240, 240));
 		panel.add(titleField);
-
+		
+		nameLabel = new JLabel("작성자");
+		nameLabel.setBounds(100, 150, 80, 25);
+		panel.add(nameLabel);
+		
+		nameField = new JTextField();
+		nameField.setBounds(100, 175, 400, 25);
+		nameField.setBackground(new Color(240, 240, 240));
+		panel.add(nameField);
+		
 		contentLabel = new JLabel("내용");
-		contentLabel.setBounds(100, 140, 80, 50);
+		contentLabel.setBounds(100, 190, 80, 50);
 		panel.add(contentLabel);
 
 		contentArea = new JTextArea();
 		contentArea.setBackground(new Color(240, 240, 240));
 		JScrollPane scrollPane = new JScrollPane(contentArea);
-		scrollPane.setBounds(100, 180, 400, 400);
+		scrollPane.setBounds(100, 230, 400, 400);
 		panel.add(scrollPane);
-
-		submitButton = new JButton(new ImageIcon("img/registerBtn.jpg"));
-		submitButton.setBounds(250, 600, 100, 30);
-		panel.add(submitButton);
-
-		submitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String title = titleField.getText();
-				String content = contentArea.getText();
-
-				if (title.isEmpty() || content.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "제목과 내용 모두 작성해주세요", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				} else {
-					FreeBoardDAO.addFreeBoardDAO(titleField.getText(), mContext.getName(), contentArea.getText());
-					JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
-					mContext.getFreeBoard().updateTable();
-					dispose(); // 폼 닫기
-				}
-
-			}
-		});
 
 		font = new Font("Noto Sans KR", Font.BOLD, 14);
 		titleLabel.setFont(font);
 		titleField.setFont(font);
+		titleField.setEditable(false);
+		nameLabel.setFont(font);
+		nameField.setFont(font);
+		nameField.setEditable(false);
 		contentLabel.setFont(font);
 		contentArea.setFont(font);
+		contentArea.setEditable(false);
 
 		// 패널을 프레임의 콘텐츠 패널로 설정
 		setContentPane(panel);

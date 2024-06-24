@@ -156,9 +156,9 @@ public class Login extends JFrame {
 						JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
 						if (dto.getAuthority().equals("common")) {
-							new BoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority());
+							new BoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority(), dto.getUserTel());
 						} else {
-							new BoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority());
+							new BoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority(), dto.getUserTel(), dto.getUserDepartmentNo(), dto.getUserDepartmentName());
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패",
@@ -171,18 +171,7 @@ public class Login extends JFrame {
 
 			}
 		});
-		idField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				idField.setText("");
-			}
-		});
-		passwordField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				passwordField.setText("");
-			}
-		});
+		
 		passwordField.addActionListener(e -> {
 			String enteredId = idField.getText();
 			String enteredPassword = passwordField.getText();
@@ -195,9 +184,9 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
 					if (dto.getAuthority().equals("common")) {
-						new BoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority());
+						new BoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority(), dto.getUserTel());
 					} else {
-						new BoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority());
+						new BoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(), dto.getUserBirth(), dto.getAuthority(), dto.getUserTel(), dto.getUserDepartmentNo(), dto.getUserDepartmentName());
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);

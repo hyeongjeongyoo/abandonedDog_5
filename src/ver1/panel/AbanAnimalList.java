@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
@@ -23,10 +25,14 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import ver1.DAO.MyPageDAO;
 import ver1.DAO.PhotoDAO;
 import ver1.DTO.PhotoDTO;
+import ver1.frame.BoardFrame;
 
 public class AbanAnimalList extends JPanel {
+	
+	private BoardFrame mContext;
 
 	private JTextField searchText;
 	private JButton searchBtn;
@@ -61,7 +67,8 @@ public class AbanAnimalList extends JPanel {
 	private Font font2;
 	private Image image;
 
-	public AbanAnimalList() {
+	public AbanAnimalList(BoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		addEventLayout();
@@ -251,11 +258,11 @@ public class AbanAnimalList extends JPanel {
 			}
 		});
 		
-		interestBtn.addKeyListener (new KeyAdapter() {
+		interestBtn.addMouseListener(new MouseAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO 버튼 클릭시 마이페이지에 테이블 추가
-				
+			public void mouseClicked(MouseEvent e) {
+				MyPageDAO.insertInterestAnimal(Integer.parseInt(textFieldID.getText()), mContext.name);
+				mContext.getMyPage().updateInterestAnimal(mContext.getMyPage().interestConvertToPageData(mContext.name));
 				JOptionPane.showMessageDialog(null, "관심등록되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});

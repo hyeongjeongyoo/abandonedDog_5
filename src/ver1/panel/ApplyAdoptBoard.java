@@ -15,7 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import ver1.DTO.MyPageDTO;
+import ver1.DAO.MyPageDAO;
+import ver1.DTO.AdoptDTO;
 
 public class ApplyAdoptBoard extends JPanel {
 
@@ -159,36 +160,36 @@ public class ApplyAdoptBoard extends JPanel {
 		innerPanel.setBackground(Color.white);
 
 		labelName.setBounds(50, 10, 120, 100);
-		textFieldName.setBounds(90, 40, 180, 35);
+		textFieldName.setBounds(120, 40, 200, 35);
 
-		labelAddress.setBounds(310, 10, 120, 100);
-		textFieldAddress.setBounds(380, 40, 200, 35);
+		labelAddress.setBounds(410, 10, 120, 100);
+		textFieldAddress.setBounds(480, 40, 200, 35);
 
 		labelNumber.setBounds(50, 60, 120, 100);
-		textFieldNumber.setBounds(90, 90, 180, 35);
+		textFieldNumber.setBounds(120, 90, 200, 35);
 
-		labelEmail.setBounds(310, 60, 120, 100);
-		textFieldEmail.setBounds(380, 90, 200, 35);
+		labelEmail.setBounds(410, 60, 120, 100);
+		textFieldEmail.setBounds(480, 90, 200, 35);
 
 		labelAge.setBounds(50, 110, 120, 100);
-		textFieldAge.setBounds(90, 140, 60, 35);
+		textFieldAge.setBounds(120, 140, 200, 35);
 
-		labelSex.setBounds(310, 110, 120, 100);
-		checkBoxSexMale.setBounds(380, 145, 70, 30);
-		checkBoxSexFemale.setBounds(460, 145, 70, 30);
+		labelSex.setBounds(410, 110, 120, 100);
+		checkBoxSexMale.setBounds(480, 145, 70, 30);
+		checkBoxSexFemale.setBounds(560, 145, 70, 30);
 
 		labelJob.setBounds(50, 160, 120, 100);
-		textFieldJob.setBounds(90, 190, 200, 35);
+		textFieldJob.setBounds(120, 190, 200, 35);
 
-		labelMaritalStatus.setBounds(310, 160, 120, 100);
-		checkBoxMaritalN.setBounds(380, 195, 70, 30);
-		checkBoxMaritalY.setBounds(460, 195, 70, 30);
+		labelMaritalStatus.setBounds(410, 160, 120, 100);
+		checkBoxMaritalN.setBounds(480, 195, 70, 30);
+		checkBoxMaritalY.setBounds(560, 195, 70, 30);
 
 		labelVisitDate.setBounds(50, 210, 120, 100);
-		textFieldVisitDate.setBounds(110, 240, 180, 35);
+		textFieldVisitDate.setBounds(120, 240, 200, 35);
 
-		labelId.setBounds(310, 210, 120, 100);
-		textFieldId.setBounds(380, 240, 200, 35);
+		labelId.setBounds(410, 210, 120, 100);
+		textFieldId.setBounds(480, 240, 200, 35);
 
 		labelRaisedPet.setBounds(50, 260, 200, 100);
 		checkBoxRaisedPetY.setBounds(300, 290, 50, 35);
@@ -297,8 +298,8 @@ public class ApplyAdoptBoard extends JPanel {
 		});
 	}
 
-	public void sendMyPage() {
-		MyPageDTO dto = new MyPageDTO();
+	public void sendMyPage(int careId, String shelterName) {
+		AdoptDTO dto = new AdoptDTO();
 		dto.setName(textFieldName.getText());
 		dto.setAddress(textFieldAddress.getText());
 		dto.setNumber(textFieldNumber.getText());
@@ -329,6 +330,8 @@ public class ApplyAdoptBoard extends JPanel {
 		}
 
 		dto.setSizeFamily(textFieldSizeFamily.getText());
+		dto.setPermission("승인대기");
+		dto.setCareId(MyPageDAO.searchShelter(shelterName));
 
 		// DTO 객체를 다음 단계로 넘기는 로직 추가 (예: DAO 호출 등)
 		// 예시: myPageDAO.saveMyPage(dto);

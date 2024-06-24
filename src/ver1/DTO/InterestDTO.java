@@ -7,15 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDTO {
+public class InterestDTO {
 
-	String name;
+	int id;
+	String kindCd;
+	String addDate;
 	String userName;
-	String userPassWord;
-	String userBirth;
-	String authority;
-	String userTel;
-	String userDepartmentNo;
-	String userDepartmentName;
 	
 }
