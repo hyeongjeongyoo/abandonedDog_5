@@ -178,12 +178,11 @@ public class Join extends JFrame {
 				String enteredPassword = passwordField.getText();
 				String enteredBrith = birthField.getText();
 				String enteredPhoneNum = phoneNumField.getText();
-				int enteredMemberNum = Integer.parseInt(memberNumField.getText());
-				
-				if(memberNumField.equals("소속번호")) {
+				int enteredMemberNum = 0;
+				try {
 					enteredMemberNum = Integer.parseInt(memberNumField.getText());
+				} catch (NumberFormatException e2) {
 				}
-				
 				String enteredMemberName = memberNameField.getText();
 
 				if (memberNameField.isEnabled()) {
