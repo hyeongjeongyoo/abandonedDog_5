@@ -46,10 +46,14 @@ public class MyPage extends JPanel {
 	private JLabel managerInfo;
 	private JPanel interestPet;
 
-	private JButton changeName;
-	private JButton changePassword;
-	private JButton changeBirth;
-	private JButton changePhoneNum;
+	private JButton changeNameBtn;
+	private JButton changePasswordBtn;
+	private JButton changeBirthBtn;
+	private JButton changePhoneNumBtn;
+	private JButton deleteInterestBtn;
+	private JButton deleteMyWriteBtn;
+	private JButton updateMyWriteBtn;
+	private JButton permissionBtn;
 
 	private List<List<FreeBoard>> myPageNum;
 
@@ -103,10 +107,14 @@ public class MyPage extends JPanel {
 			info = new ImageIcon("img/common.png");
 		}
 
-		changeName = new JButton(new ImageIcon("img/editBtn.jpg"));
-		changePassword = new JButton(new ImageIcon("img/editBtn.jpg"));
-		changeBirth = new JButton(new ImageIcon("img/editBtn.jpg"));
-		changePhoneNum = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changeNameBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changePasswordBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changeBirthBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changePhoneNumBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
+		deleteInterestBtn = new JButton("관심 등록 해제");
+		deleteMyWriteBtn = new JButton("수정");
+		updateMyWriteBtn = new JButton("삭제");
+		permissionBtn = new JButton("승인");
 
 		nameField = new JLabel();
 		idField = new JLabel();
@@ -211,25 +219,41 @@ public class MyPage extends JPanel {
 		phoneNum.setFont(font);
 		add(phoneNum);
 
-		changeName.setSize(80, 30);
-		changeName.setLocation(540, 80);
-		changeName.setFont(font);
-		add(changeName);
+		changeNameBtn.setSize(80, 30);
+		changeNameBtn.setLocation(540, 80);
+		changeNameBtn.setFont(font);
+		add(changeNameBtn);
 
-		changePassword.setSize(80, 30);
-		changePassword.setLocation(540, 213);
-		changePassword.setFont(font);
-		add(changePassword);
+		changePasswordBtn.setSize(80, 30);
+		changePasswordBtn.setLocation(540, 213);
+		changePasswordBtn.setFont(font);
+		add(changePasswordBtn);
 
-		changeBirth.setSize(80, 30);
-		changeBirth.setLocation(540, 275);
-		changeBirth.setFont(font);
-		add(changeBirth);
+		changeBirthBtn.setSize(80, 30);
+		changeBirthBtn.setLocation(540, 275);
+		changeBirthBtn.setFont(font);
+		add(changeBirthBtn);
 
-		changePhoneNum.setSize(80, 30);
-		changePhoneNum.setLocation(940, 80);
-		changePhoneNum.setFont(font);
-		add(changePhoneNum);
+		changePhoneNumBtn.setSize(80, 30);
+		changePhoneNumBtn.setLocation(940, 80);
+		changePhoneNumBtn.setFont(font);
+		add(changePhoneNumBtn);
+		
+		deleteInterestBtn.setBounds(50, 370, 150, 30);
+		deleteInterestBtn.setFont(font);
+		add(deleteInterestBtn);
+		
+		deleteMyWriteBtn.setBounds(730, 370, 80, 30);
+		deleteMyWriteBtn.setFont(font);
+		add(deleteMyWriteBtn);
+		
+		updateMyWriteBtn.setBounds(820, 370, 80, 30);
+		updateMyWriteBtn.setFont(font);
+		add(updateMyWriteBtn);
+		
+		permissionBtn.setBounds(1245, 290, 80, 30);
+		permissionBtn.setFont(font);
+		add(permissionBtn);
 
 		managerLabel.setSize(103, 24);
 		managerLabel.setLocation(50, 30);
@@ -349,6 +373,54 @@ public class MyPage extends JPanel {
 						}
 					}
 				}
+			}
+		});
+		
+		changeNameBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		changePasswordBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		changeBirthBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		changePhoneNumBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		deleteInterestBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		deleteMyWriteBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		updateMyWriteBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		
+		permissionBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 			}
 		});
 

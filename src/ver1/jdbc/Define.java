@@ -87,5 +87,12 @@ public class Define {
 	public static final String MY_INTEREST_BOARD = " select * from interestdb where userName = ? ";
 	
 	public static final String INSERT_MY_INTEREST = " insert into interestdb(id, kindCd, addDate, userName) values (?, ?, curdate(), ?) ";
+
+	public static final String CHANGE_NAME = " update user set name = ? where userName = ? ";
 	
+	public static final String CHANGE_PASSWORD = " update user set userPassWord = ? where userName = ? ";
+	
+	public static final String CHANGE_BIRTH = " update user set userBirth = ? where userName = ? ";
+	
+	public static final String CHANGE_PHONE_NUMBER = " update user set userTel = ? where userName = ? ";
 }
