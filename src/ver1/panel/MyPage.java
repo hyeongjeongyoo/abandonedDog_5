@@ -111,10 +111,10 @@ public class MyPage extends JPanel {
 		changeNameBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		changePasswordBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		changePhoneNumBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
-		deleteInterestBtn = new JButton("관심 등록 해제");
-		deleteMyWriteBtn = new JButton("수정");
-		updateMyWriteBtn = new JButton("삭제");
-		permissionBtn = new JButton("승인");
+		deleteInterestBtn = new JButton(new ImageIcon("img/reinterBtn.jpg"));
+		deleteMyWriteBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
+		updateMyWriteBtn = new JButton(new ImageIcon("img/deleBtn.jpg"));
+		permissionBtn = new JButton(new ImageIcon("img/okBtn.jpg"));
 
 		nameField = new JLabel();
 		idField = new JLabel();
