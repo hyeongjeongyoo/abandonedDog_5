@@ -100,6 +100,34 @@ public class MissingBoardDAO {
 		
 		return dto;
 	}
+	public static List<MissingBoardDTO> getJoinMissingDTO(String query, int value) {
+		List<MissingBoardDTO> dto = new ArrayList<>();
+		
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, value);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dto.add(new MissingBoardDTO(
+						rs.getInt("id"), 
+						rs.getString("kindCd"), 
+						rs.getString("colorCd"), 
+						rs.getString("age"), 
+						rs.getString("weight"), 
+						rs.getString("processState"), 
+						rs.getString("sexCd"), 
+						rs.getString("neuterYn"), 
+						rs.getString("specialMark"), 
+						rs.getInt("emp_no"), 
+						rs.getInt("careId")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 	
 	public static List<List<MissingBoardDTO>> getJoinMissingDTOList(String query, int value) {
 	    List<List<MissingBoardDTO>> dtos = new ArrayList<>();
@@ -117,32 +145,4 @@ public class MissingBoardDAO {
 	    return dtos;
 	}
 	
-	public static List<MissingBoardDTO> getJoinMissingDTO(String query, int value) {
-		List<MissingBoardDTO> dto = new ArrayList<>();
-		
-		try (Connection conn = DBConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, value);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				dto.add(new MissingBoardDTO(
-										rs.getInt("id"), 
-										rs.getString("kindCd"), 
-										rs.getString("colorCd"), 
-										rs.getString("age"), 
-										rs.getString("weight"), 
-										rs.getString("processState"), 
-										rs.getString("sexCd"), 
-										rs.getString("neuterYn"), 
-										rs.getString("specialMark"), 
-										rs.getInt("emp_no"), 
-										rs.getInt("careId")));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return dto;
-	}
 }
