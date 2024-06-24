@@ -79,7 +79,7 @@ public class AbanAnimalList extends JPanel {
 		searchText = new JTextField();
 		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
 		
-		interestBtn = new JButton("관심등록");
+		interestBtn = new JButton(new ImageIcon("img/interBtn.jpg"));
 
 		petImage = new JPanel();
 		myWriter = new JPanel();
@@ -138,7 +138,7 @@ public class AbanAnimalList extends JPanel {
 		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
 		
-		interestBtn.setBounds(20, 15, 100, 25);
+		interestBtn.setBounds(20, 15, 118, 25);
 		interestBtn.setBackground(Color.GRAY);
 		add(interestBtn);
 

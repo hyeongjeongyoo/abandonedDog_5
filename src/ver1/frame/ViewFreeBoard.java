@@ -2,6 +2,7 @@ package ver1.frame;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ver1.DAO.FreeBoardDAO;
-import ver1.frame.BoardFrame;
 
 public class ViewFreeBoard extends JFrame {
 
@@ -42,6 +42,7 @@ public class ViewFreeBoard extends JFrame {
 	private void initData() {
 
 		ImageIcon logoIcon = new ImageIcon("img/logo.png");
+		
 		panel = new JPanel();
 
 		logoLabel = new JLabel(logoIcon);
@@ -99,6 +100,7 @@ public class ViewFreeBoard extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 		setTitle("님의 게시글");
+
 	}
 
 	public static void main(String[] args) {

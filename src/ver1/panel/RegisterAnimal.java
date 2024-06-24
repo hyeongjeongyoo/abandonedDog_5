@@ -32,7 +32,8 @@ public class RegisterAnimal extends JPanel {
 	private JLabel labelEmp;
 
 	private JButton btn;
-
+	private Font font;
+	private Font font2;
 	
 	public RegisterAnimal() {
 		initData();
@@ -69,50 +70,50 @@ public class RegisterAnimal extends JPanel {
 		innerPanel.add(labelId);
 		innerPanel.add(textId);
 		labelId.setBounds(50, 10, 50, 40);
-		textId.setBounds(100, 10, 100, 30);
+		textId.setBounds(100, 15, 100, 30);
 
 		labelKind = new JLabel("품종");
 		innerPanel.add(labelKind);
 		innerPanel.add(boxKind);
 		labelKind.setBounds(50, 60, 500, 40);
-		boxKind.setBounds(100, 60, 500, 30);
+		boxKind.setBounds(100, 65, 500, 30);
 		
 
 		labelColor = new JLabel("색깔");
 		innerPanel.add(labelColor);
 		innerPanel.add(textColor);
 		labelColor.setBounds(50, 110, 500, 40);
-		textColor.setBounds(100, 110, 500, 30);
+		textColor.setBounds(100, 115, 500, 30);
 
 		labelAge = new JLabel("나이");
 		innerPanel.add(labelAge);
 		innerPanel.add(textAge);
 		labelAge.setBounds(50, 160, 500, 40);
-		textAge.setBounds(100, 160, 500, 30);
+		textAge.setBounds(100, 165, 500, 30);
 
 		labelWeight = new JLabel("무게");
 		innerPanel.add(labelWeight);
 		innerPanel.add(textWeight);
 		labelWeight.setBounds(50, 210, 500, 40);
-		textWeight.setBounds(100, 210, 500, 30);
+		textWeight.setBounds(100, 215, 500, 30);
 
 		labelSex = new JLabel("성별");
 		innerPanel.add(labelSex);
 		innerPanel.add(boxSex);
 		labelSex.setBounds(50, 260, 500, 40);
-		boxSex.setBounds(100, 260, 500, 30);
+		boxSex.setBounds(100, 265, 500, 30);
 
 		labelNeuter = new JLabel("중성화");
 		innerPanel.add(labelNeuter);
 		innerPanel.add(boxNeuter);
 		labelNeuter.setBounds(50, 310, 500, 40);
-		boxNeuter.setBounds(100, 310, 500, 30);
+		boxNeuter.setBounds(100, 315, 500, 30);
 
 		labelSpecialMark = new JLabel("첨가말");
 		innerPanel.add(labelSpecialMark);
 		innerPanel.add(textSpecialMark);
 		labelSpecialMark.setBounds(50, 360, 500, 40);
-		textSpecialMark.setBounds(100, 360, 500, 30);
+		textSpecialMark.setBounds(100, 365, 500, 30);
 
 		labelEmp = new JLabel("소속보호소");
 		innerPanel.add(labelEmp);
@@ -127,10 +128,27 @@ public class RegisterAnimal extends JPanel {
 
 		btn = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		mainPanel.add(btn);
-		btn.setBounds(1099, 550, 60, 30);
+		btn.setBounds(950, 560, 60, 30);
 		add(btn);
-	
+		
+		font = new Font("Noto Sans KR", Font.BOLD, 14);
+		font2 = new Font("Noto Sans KR", Font.PLAIN, 14);
+		labelId.setFont(font);
+		labelKind.setFont(font);
+		labelColor.setFont(font);
+		labelAge.setFont(font);
+		labelWeight.setFont(font);
+		labelSex.setFont(font);
+		labelNeuter.setFont(font);
+		labelSpecialMark.setFont(font);
+		labelEmp.setFont(font);
+		boxSex.setFont(font2);
+		boxKind.setFont(font2);
+		boxNeuter.setFont(font2);
+		boxEmp1.setFont(font2);
+		boxEmp2.setFont(font2);
 	}
+	
 
 	private void addEventListener() {
 		btn.addActionListener(e -> {

@@ -48,6 +48,7 @@ public class CreateFreeBoard extends JFrame {
 		setTitle("자유게시판 글 작성");
 
 		ImageIcon logoIcon = new ImageIcon("img/logo.png"); 
+		
 
 		logoLabel = new JLabel(logoIcon);
 		logoLabel.setBounds(240, 10, 100, 100);

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import lombok.Data;
 import ver1.DAO.LoginDAO;
@@ -85,6 +86,7 @@ public class Login extends JFrame {
 		setVisible(true);
 
 		Font font = new Font("Noto Sans KR", Font.BOLD, 15);
+		UIManager.put("OptionPane.messageFont", new Font("Noto Sans KR", Font.PLAIN, 12));
 		
 		idLabel.setBounds(95, 126, 100, 40);
 		idLabel.setFont(font);

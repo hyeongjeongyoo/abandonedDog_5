@@ -83,7 +83,7 @@ public class MyPage extends JPanel {
 
 	private JLabel managerLabel;
 	private JLabel commonLabel;
-	
+
 	private JTableHeader header;
 
 	public MyPage(BoardFrame mContext) {
@@ -103,10 +103,10 @@ public class MyPage extends JPanel {
 			info = new ImageIcon("img/common.png");
 		}
 
-		changeName = new JButton("수정");
-		changePassword = new JButton("수정");
-		changeBirth = new JButton("수정");
-		changePhoneNum = new JButton("수정");
+		changeName = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changePassword = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changeBirth = new JButton(new ImageIcon("img/editBtn.jpg"));
+		changePhoneNum = new JButton(new ImageIcon("img/editBtn.jpg"));
 
 		nameField = new JLabel();
 		idField = new JLabel();
@@ -131,8 +131,7 @@ public class MyPage extends JPanel {
 			}
 		};
 		myWriterScroll = new JScrollPane(myWriter);
-		
-		
+
 		myPageData = interestConvertToPageData(mContext.name);
 		petModel = new DefaultTableModel(myPageData, petColumnNames);
 		interestAnimal = new JTable(petModel) {
@@ -305,26 +304,27 @@ public class MyPage extends JPanel {
 	}
 
 	private void addEventListener() {
-		
-		interestAnimal.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // 마우스가 두 번 클릭되었는지 확인
-                if (e.getClickCount() == 2) {
-                    // 클릭된 셀의 행과 열 가져오기
-                    int row = interestAnimal.rowAtPoint(e.getPoint());
-                    int column = interestAnimal.columnAtPoint(e.getPoint());
 
-                    // "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
-                    if (column == 0) {
-                        mContext.getMain().setSelectedIndex(3);
-                        mContext.getAbandonment().setSelectedIndex(1);
-                        mContext.getAbanAnimalListboard().searchCareAnimal((Integer) interestAnimal.getValueAt(row, column));
-                    }
-                }
-            }
-        });
-		
+		interestAnimal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 마우스가 두 번 클릭되었는지 확인
+				if (e.getClickCount() == 2) {
+					// 클릭된 셀의 행과 열 가져오기
+					int row = interestAnimal.rowAtPoint(e.getPoint());
+					int column = interestAnimal.columnAtPoint(e.getPoint());
+
+					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+					if (column == 0) {
+						mContext.getMain().setSelectedIndex(3);
+						mContext.getAbandonment().setSelectedIndex(1);
+						mContext.getAbanAnimalListboard()
+								.searchCareAnimal((Integer) interestAnimal.getValueAt(row, column));
+					}
+				}
+			}
+		});
+
 		myWriter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -338,9 +338,9 @@ public class MyPage extends JPanel {
 					if (column == 1) {
 						ViewFreeBoard viewBoard = new ViewFreeBoard(mContext);
 						List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos(mContext.name);
-						String title = (String)myWriter.getValueAt(row, column);
+						String title = (String) myWriter.getValueAt(row, column);
 						for (FreeBoardDTO dto : dtos) {
-							if(title.equals(dto.getTitle())) {
+							if (title.equals(dto.getTitle())) {
 								viewBoard.setTitle(dto.getUsername() + "님의 게시물");
 								viewBoard.titleField.setText(dto.getTitle());
 								viewBoard.nameField.setText(dto.getUsername());
@@ -353,7 +353,7 @@ public class MyPage extends JPanel {
 		});
 
 	}
-	
+
 	public void updateMyWrite() {
 		DefaultTableModel newModel = new DefaultTableModel(myWriteConvertToPageData(mContext.name), petColumnNames) {
 			@Override
@@ -366,15 +366,15 @@ public class MyPage extends JPanel {
 		column.setMaxWidth(50);
 		column.setMinWidth(50);
 	}
-	
+
 	public void updateMyAdopt() {
-		
+
 	}
-	
+
 	public void updateManagerAdopt() {
-		
+
 	}
-	
+
 	public void updateInterestAnimal(Object[][] data) {
 		DefaultTableModel newModel = new DefaultTableModel(data, petColumnNames) {
 			@Override
@@ -387,7 +387,7 @@ public class MyPage extends JPanel {
 		column.setMaxWidth(80);
 		column.setMinWidth(80);
 	}
-	
+
 	public Object[][] interestConvertToPageData(String userName) {
 		List<InterestDTO> currentPageData = MyPageDAO.addInterestAnimal(userName);
 		Object[][] pageData = new Object[currentPageData.size()][petColumnNames.length];
@@ -400,11 +400,11 @@ public class MyPage extends JPanel {
 		}
 		return pageData;
 	}
-	
+
 	public Object[][] myWriteConvertToPageData(String userName) {
 		List<FreeBoardDTO> currentPageData = MyPageDAO.addMyWrite(mContext.name);
 		Object[][] pageData = new Object[currentPageData.size()][petColumnNames.length];
-		
+
 		for (int i = 0; i < currentPageData.size(); i++) {
 			FreeBoardDTO dto = currentPageData.get(i);
 			pageData[i][0] = dto.getId();

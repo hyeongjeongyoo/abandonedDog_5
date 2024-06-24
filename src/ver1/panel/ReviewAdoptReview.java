@@ -52,7 +52,7 @@ public class ReviewAdoptReview extends JPanel {
 
 	public void initData() {
 		searchText = new JTextField();
-		searchBtn = new JButton("검색");
+		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
 		title = new JLabel("Title");
 
 		registrationBtn = new JButton(new ImageIcon("img/registerBtn.jpg"));
