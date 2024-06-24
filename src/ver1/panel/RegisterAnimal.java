@@ -1,10 +1,23 @@
 package ver1.panel;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import java.awt.*;
+import ver1.frame.BoardFrame;
 
 public class RegisterAnimal extends JPanel {
 	private JPanel mainPanel;
@@ -34,7 +47,7 @@ public class RegisterAnimal extends JPanel {
 	private JButton btn;
 	private Font font;
 	private Font font2;
-	
+
 	public RegisterAnimal() {
 		initData();
 		addEventListener();
@@ -44,7 +57,7 @@ public class RegisterAnimal extends JPanel {
 	private void initData() {
 		setLayout(null);
 		setBackground(Color.white);
-	    
+
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
@@ -54,14 +67,13 @@ public class RegisterAnimal extends JPanel {
 		innerPanel.setBackground(Color.white);
 		innerPanel.setLayout(null);
 
-		
 		textId = new JTextField(20);
-		boxKind = new JComboBox<>(new String[]{"강아지", "고양이"});
+		boxKind = new JComboBox<>(new String[] { "강아지", "고양이" });
 		textColor = new JTextField(20);
 		textAge = new JTextField(20);
 		textWeight = new JTextField(20);
-		boxSex = new JComboBox<>(new String[]{"수컷", "암컷"});
-		boxNeuter = new JComboBox<>(new String[] {"Y", "N", "U"});
+		boxSex = new JComboBox<>(new String[] { "수컷", "암컷" });
+		boxNeuter = new JComboBox<>(new String[] { "Y", "N", "U" });
 		textSpecialMark = new JTextField(20);
 		boxEmp1 = new JRadioButton("선택1");
 		boxEmp2 = new JRadioButton("선택2");
@@ -77,7 +89,6 @@ public class RegisterAnimal extends JPanel {
 		innerPanel.add(boxKind);
 		labelKind.setBounds(50, 60, 500, 40);
 		boxKind.setBounds(100, 65, 500, 30);
-		
 
 		labelColor = new JLabel("색깔");
 		innerPanel.add(labelColor);
@@ -130,7 +141,7 @@ public class RegisterAnimal extends JPanel {
 		mainPanel.add(btn);
 		btn.setBounds(950, 560, 60, 30);
 		add(btn);
-		
+
 		font = new Font("Noto Sans KR", Font.BOLD, 14);
 		font2 = new Font("Noto Sans KR", Font.PLAIN, 14);
 		labelId.setFont(font);
@@ -148,7 +159,6 @@ public class RegisterAnimal extends JPanel {
 		boxEmp1.setFont(font2);
 		boxEmp2.setFont(font2);
 	}
-	
 
 	private void addEventListener() {
 		btn.addActionListener(e -> {
@@ -163,10 +173,14 @@ public class RegisterAnimal extends JPanel {
 	            String emp1 = boxEmp1.isSelected() ? "사용함" : "사용안함";
 	            String emp2 = boxEmp2.isSelected() ? "사용함" : "사용안함";
 		});
+		boxEmp1.addActionListener(e -> {
+			String input = JOptionPane.showInputDialog("보호소 이름을 입력하세요");
+		});
 	}
 
 	private void updateTable() {
 		// 테이블 업데이트 관련 로직 추가
 	}
 
+	
 }
