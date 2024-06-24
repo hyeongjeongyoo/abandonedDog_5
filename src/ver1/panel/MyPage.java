@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,6 +27,7 @@ import ver1.DTO.FreeBoardDTO;
 import ver1.DTO.InterestDTO;
 import ver1.frame.BoardFrame;
 import ver1.frame.ViewFreeBoard;
+import ver1.jdbc.Define;
 import ver1.use.HeaderRenderer;
 
 @Data
@@ -48,7 +50,6 @@ public class MyPage extends JPanel {
 
 	private JButton changeNameBtn;
 	private JButton changePasswordBtn;
-	private JButton changeBirthBtn;
 	private JButton changePhoneNumBtn;
 	private JButton deleteInterestBtn;
 	private JButton deleteMyWriteBtn;
@@ -109,7 +110,6 @@ public class MyPage extends JPanel {
 
 		changeNameBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		changePasswordBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
-		changeBirthBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		changePhoneNumBtn = new JButton(new ImageIcon("img/editBtn.jpg"));
 		deleteInterestBtn = new JButton("관심 등록 해제");
 		deleteMyWriteBtn = new JButton("수정");
@@ -228,11 +228,6 @@ public class MyPage extends JPanel {
 		changePasswordBtn.setLocation(540, 213);
 		changePasswordBtn.setFont(font);
 		add(changePasswordBtn);
-
-		changeBirthBtn.setSize(80, 30);
-		changeBirthBtn.setLocation(540, 275);
-		changeBirthBtn.setFont(font);
-		add(changeBirthBtn);
 
 		changePhoneNumBtn.setSize(80, 30);
 		changePhoneNumBtn.setLocation(940, 80);
@@ -379,24 +374,27 @@ public class MyPage extends JPanel {
 		changeNameBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String changeName = JOptionPane.showInputDialog(null, "이름 변경", "변경하실 이름을 입력하세요");
+				MyPageDAO.updateInfo(Define.CHANGE_NAME, changeName, mContext.id);
+				nameField.setText(changeName);
 			}
 		});
 		
 		changePasswordBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		
-		changeBirthBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+				String changeName = JOptionPane.showInputDialog(null, "비밀번호 변경", "변경하실 비밀번호를 입력하세요");
+				MyPageDAO.updateInfo(Define.CHANGE_PASSWORD, changeName, mContext.id);
+				passwordField.setText(changeName);
 			}
 		});
 		
 		changePhoneNumBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String changeName = JOptionPane.showInputDialog(null, "핸드폰 번호 변경", "변경하실 번호를 입력하세요");
+				MyPageDAO.updateInfo(Define.CHANGE_PHONE_NUMBER, changeName, mContext.id);
+				phoneNum.setText(changeName);
 			}
 		});
 		

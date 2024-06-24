@@ -92,7 +92,5 @@ public class Define {
 	
 	public static final String CHANGE_PASSWORD = " update user set userPassWord = ? where userName = ? ";
 	
-	public static final String CHANGE_BIRTH = " update user set userBirth = ? where userName = ? ";
-	
 	public static final String CHANGE_PHONE_NUMBER = " update user set userTel = ? where userName = ? ";
 }

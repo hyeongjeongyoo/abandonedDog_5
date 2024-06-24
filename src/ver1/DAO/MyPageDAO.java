@@ -162,4 +162,17 @@ public class MyPageDAO {
 		return dtos;
 	}
 
+	public static void updateInfo(String query, String value, String userName) {
+		
+		try (Connection conn = DBConnectionManager.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, value);
+			pstmt.setString(2, userName);
+			int temp = pstmt.executeUpdate();
+			System.out.println(temp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
