@@ -104,4 +104,20 @@ public class Define {
 	public static final String UPDATE_MY_WRITE_CONTENT = " update freeboarddb set content = ? where userName = ? and id = ? ";
 	
 	public static final String SEARCH_SHELTER = " select s.careId from animal_details as a join shelter as s on a.careId = s.careId where a.id = ? ";
+	
+	public static final String ADD_ADOPT = " select a.id as id, a.permission as permission\r\n"
+											+ "from adopt_apply as a\r\n"
+											+ "join animal_details as ad\r\n"
+											+ "on a.careID = ad.id\r\n"
+											+ "join shelter as s\r\n"
+											+ "on ad.careId = s.careId\r\n"
+											+ "where a.name = ? ";
+	
+	public static final String MANAGER_ADOPT = " select a.*\r\n"
+											+ "from animal_details as ad\r\n"
+											+ "join adopt_apply as a\r\n"
+											+ "on a.careID = ad.id\r\n"
+											+ "join shelter as s\r\n"
+											+ "on ad.careId = s.careId\r\n"
+											+ "where s.careNm = ? ";
 }

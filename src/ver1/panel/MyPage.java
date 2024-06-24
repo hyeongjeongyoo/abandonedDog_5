@@ -21,8 +21,11 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import lombok.Data;
+import ver1.DAO.AdoptDAO;
 import ver1.DAO.FreeBoardDAO;
 import ver1.DAO.MyPageDAO;
+import ver1.DTO.AdoptDTO;
+import ver1.DTO.ApplyDTO;
 import ver1.DTO.FreeBoardDTO;
 import ver1.DTO.InterestDTO;
 import ver1.frame.BoardFrame;
@@ -103,6 +106,7 @@ public class MyPage extends JPanel {
 
 		if (mContext.manager) {
 			info = new ImageIcon("img/managerBtn.png");
+			permissionData = adoptApplyPermission();
 			memberNum = new JLabel();
 			memberName = new JLabel();
 			permissionBtn = new JButton(new ImageIcon("img/okBtn.jpg"));
@@ -116,6 +120,7 @@ public class MyPage extends JPanel {
 			permissionManagerPane = new JScrollPane(permissionManagerTable);
 		} else {
 			info = new ImageIcon("img/common.png");
+			applyData = adoptApplyState();
 			commonModel = new DefaultTableModel(applyData, permissionCommon);
 			permissionCommonTable = new JTable(commonModel) {
 				@Override
@@ -485,11 +490,23 @@ public class MyPage extends JPanel {
 	}
 
 	public void updateMyAdopt() {
-
+		DefaultTableModel newModel = new DefaultTableModel(adoptApplyState(), petColumnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		permissionCommonTable.setModel(newModel);
 	}
 
 	public void updateManagerAdopt() {
-
+		DefaultTableModel newModel = new DefaultTableModel(adoptApplyPermission(), petColumnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		permissionManagerTable.setModel(newModel);
 	}
 
 	public void updateInterestAnimal(Object[][] data) {
@@ -527,6 +544,29 @@ public class MyPage extends JPanel {
 			pageData[i][0] = dto.getId();
 			pageData[i][1] = dto.getTitle();
 			pageData[i][2] = dto.getCreate_date();
+		}
+		return pageData;
+	}
+	
+	public Object[][] adoptApplyState() {
+		List<ApplyDTO> currentPageData = AdoptDAO.addMyAdopt(mContext.name);
+		Object[][] pageData = new Object[currentPageData.size()][permissionCommon.length];
+		
+		for (int i = 0; i < currentPageData.size(); i++) {
+			ApplyDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getPermission();
+		}
+		return pageData;
+	}
+	
+	public Object[][] adoptApplyPermission() {
+		List<AdoptDTO> currentPageData = AdoptDAO.addMyAdoptManager(mContext.userDepartmentName);
+		Object[][] pageData = new Object[currentPageData.size()][permissionManager.length];
+		for (int i = 0; i < currentPageData.size(); i++) {
+			AdoptDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getCareId();
+			pageData[i][1] = dto.getName();
 		}
 		return pageData;
 	}

@@ -316,8 +316,9 @@ public class ApplyAdoptBoard extends JPanel {
 				try {
 					AdoptDAO.insertApplyAdopt(sendAdopt(Integer.parseInt(textFieldId.getText())));
 					JOptionPane.showMessageDialog(null, "신청이 완료되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					mContext.getMyPage().updateMyAdopt();
 				} catch (NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "나이와, 동물 ID는 숫자만 입력이 가능합니다.", "Fail", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "나이와 동물 ID는 숫자만 입력이 가능합니다.", "Fail", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
