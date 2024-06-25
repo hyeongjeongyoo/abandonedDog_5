@@ -17,7 +17,7 @@ public class HomePanel extends JPanel implements Runnable {
 
 	private JPanel imgBox;
 
-	private Image backgroundImage;
+	private ImageIcon backgroundImageIcon;
 	public Image image;
 
 	public HomePanel() {
@@ -36,7 +36,7 @@ public class HomePanel extends JPanel implements Runnable {
 			}
 		};
 
-		backgroundImage = new ImageIcon("img/backgroundBg.png").getImage();
+		backgroundImageIcon = new ImageIcon("img/backgroundBg.gif");
 
 	}
 
@@ -44,7 +44,7 @@ public class HomePanel extends JPanel implements Runnable {
 		setLayout(null);
 		setBackground(Color.white);
 
-		imgBox.setBounds(396, 224, 609, 450);
+		imgBox.setBounds(404, 260, 609, 450);
 		imgBox.setBorder(new LineBorder(Color.GRAY, 2));
 		imgBox.setBackground(Color.orange);
 		add(imgBox);
@@ -61,7 +61,7 @@ public class HomePanel extends JPanel implements Runnable {
 			}
 			repaint();
 			try {
-				Thread.sleep(2000); // 이미지 변경 간격을 2초로 설정
+				Thread.sleep(4000); // 이미지 변경 간격을 2초로 설정
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -71,8 +71,8 @@ public class HomePanel extends JPanel implements Runnable {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (backgroundImage != null) {
-			g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+		if (backgroundImageIcon != null) {
+			backgroundImageIcon.paintIcon(this, g, 0, 0);
 		}
 	}
 }

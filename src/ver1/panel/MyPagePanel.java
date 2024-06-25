@@ -119,6 +119,7 @@ public class MyPagePanel extends JPanel {
 			permissionManagerPane = new JScrollPane(permissionManagerTable);
 		} else {
 			info = new ImageIcon("img/common.png");
+			commonInfo = new JLabel(new ImageIcon("img/commonData.png"));
 			applyData = adoptApplyState();
 			commonModel = new DefaultTableModel(applyData, permissionCommon);
 			permissionCommonTable = new JTable(commonModel) {
@@ -147,7 +148,6 @@ public class MyPagePanel extends JPanel {
 		managerLabel = new JLabel(info);
 		commonLabel = new JLabel(info);
 
-		commonInfo = new JLabel(new ImageIcon("img/CommonData.png"));
 		managerInfo = new JLabel(new ImageIcon("img/Self.jpg"));
 		interestPet = new JPanel();
 
@@ -247,6 +247,10 @@ public class MyPagePanel extends JPanel {
 		deleteMyWriteBtn.setBounds(820, 370, 80, 30);
 		deleteMyWriteBtn.setFont(font);
 		add(deleteMyWriteBtn);
+		
+		commonInfo.setBounds(100, 100, 495, 225);
+		commonInfo.setBackground(Color.orange);
+		add(commonInfo);
 
 		if (mContext.manager) {
 			add(managerLabel);
