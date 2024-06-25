@@ -173,11 +173,8 @@ public class RegisterAnimalPanel extends JPanel {
 	            String specialMark = textSpecialMark.getText();
 	            String emp1 = boxEmp1.getText();
 		});
-		boxEmp1.addActionListener(e -> {
-			String input = JOptionPane.showInputDialog("보호소 이름을 입력하세요");
-		});
 		search.addActionListener(e -> {
-			 String input = JOptionPane.showInputDialog("보호소 이름을 입력하세요");
+			 String input = JOptionPane.showInputDialog("보호소 아이디를 입력하세요");
 			    if (input != null) {
 			        boxEmp1.setText(input);
 			    }
