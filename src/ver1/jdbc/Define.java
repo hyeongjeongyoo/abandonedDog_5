@@ -103,4 +103,11 @@ public class Define {
 	public static final String SELECT_REVIEW_BOARD = " SELECT * FROM reviewboarddb ORDER BY id DESC ";
 
 	public static final String SELECT_REVIEW_BOARD_USER_NAME = " SELECT * FROM reviewboarddb WHERE username = ? ";
+	
+	public static final String SHELTER_CARE_APPLY = " select c.careId "
+			+ "from care as c "
+			+ "join employee as e "
+			+ "on c.careId = e.emp_no "
+			+ "where c.careNm = ? "
+			+ "group by c.careNm ";
 }

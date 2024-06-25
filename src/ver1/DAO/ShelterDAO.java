@@ -50,4 +50,17 @@ public class ShelterDAO {
 		}
 		return 0;
 	}
+	
+	public static int searchCareIdApply(int id) {
+		try (Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(Define.SHELTER_CARE_APPLY);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.getInt("s.careId");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
 }
