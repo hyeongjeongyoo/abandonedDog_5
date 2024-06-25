@@ -104,10 +104,18 @@ public class Define {
 
 	public static final String SELECT_REVIEW_BOARD_USER_NAME = " SELECT * FROM reviewboarddb WHERE username = ? ";
 	
-	public static final String SHELTER_CARE_APPLY = " select c.careId "
-			+ "from care as c "
-			+ "join employee as e "
-			+ "on c.careId = e.emp_no "
-			+ "where c.careNm = ? "
-			+ "group by c.careNm ";
+	public static final String MANAGER_ADOPT = " select a.*\r\n"
+											+ "from animal_details as ad\r\n"
+											+ "join adopt_apply as a\r\n"
+											+ "on a.careID = ad.id\r\n"
+											+ "join shelter as s\r\n"
+											+ "on ad.careId = s.careId\r\n"
+											+ "where s.careNm = ? ";
+	
+	public static final String SHELTER_CARE_APPLY = " select c.careId"
+											+ "from care as c"
+											+ "join employee as e"
+											+ "on c.careId = e.emp_no"
+											+ "where c.careNm = ?"
+											+ "group by c.careNm ";
 }
