@@ -26,6 +26,7 @@ public class DBConnectionManager {
 		
 	}
 	
+	
 	// 정적 메소드(함수) 커넥션 객체를 리턴하는 함수를 만들어 보자.
 	public static Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
