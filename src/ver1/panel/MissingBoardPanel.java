@@ -273,7 +273,7 @@ public class MissingBoardPanel extends JPanel {
 		});
 	}
 
-	private void updateTable() {
+	public void updateTable() {
 		DefaultTableModel newModel = new DefaultTableModel(convertToPageData(), columnNames) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

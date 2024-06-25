@@ -12,12 +12,20 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import lombok.Data;
+import ver1.DAO.ShelterDAO;
+import ver1.DTO.ApplySubmitDTO;
+import ver1.frame.MainBoardFrame;
+
+@Data
 public class RegisterAnimalPanel extends JPanel {
+	
+	private MainBoardFrame mContext;
+	
 	private JPanel mainPanel;
 	private JPanel innerPanel;
 
@@ -46,7 +54,8 @@ public class RegisterAnimalPanel extends JPanel {
 	private Font font;
 	private Font font2;
 
-	public RegisterAnimalPanel() {
+	public RegisterAnimalPanel(MainBoardFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		addEventListener();
 		updateTable();
@@ -131,7 +140,7 @@ public class RegisterAnimalPanel extends JPanel {
 		boxEmp1.setEditable(false);
 		add(innerPanel);
 		add(innerPanel, BorderLayout.CENTER);
-		
+
 		search = new JButton(new ImageIcon("img/magnifier.png"));
 		innerPanel.add(search);
 		search.setBounds(330, 245, 34, 34);
@@ -163,21 +172,37 @@ public class RegisterAnimalPanel extends JPanel {
 
 	private void addEventListener() {
 		btn.addActionListener(e -> {
-			 String id = textId.getText();
-	            String kind = (String) boxKind.getSelectedItem();
-	            String color = textColor.getText();
-	            String age = textAge.getText();
-	            String weight = textWeight.getText();
-	            String sex = (String) boxSex.getSelectedItem();
-	            String neuter = (String) boxNeuter.getSelectedItem();
-	            String specialMark = textSpecialMark.getText();
-	            String emp1 = boxEmp1.getText();
+			int id = Integer.parseInt(textId.getText()); 
+			String kind = (String) boxKind.getSelectedItem();
+			String color = textColor.getText();
+			String age = textAge.getText();
+			String weight = textWeight.getText();
+			String sex = (String) boxSex.getSelectedItem();
+			String neuter = (String) boxNeuter.getSelectedItem();
+			String specialMark = textSpecialMark.getText();
+			int emp1 = ShelterDAO.searchShelter(boxEmp1.getText());
+			
+			 if (textId.equals(null) || kind.isEmpty() || color.isEmpty() || age.isEmpty() || weight.isEmpty() || sex.isEmpty() || neuter.isEmpty() || specialMark.isEmpty() || boxEmp1.equals(null)) {
+	                JOptionPane.showMessageDialog(null, "모든 필드를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+	                return;
+	            }else {
+				JOptionPane.showMessageDialog(null, "게시글이 작성되었습니다.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				ApplySubmitDTO dto = new ApplySubmitDTO(id, kind, color, age, weight, "보호중", sex, neuter, specialMark, 0, emp1);
+				ShelterDAO.addAnimalInfo(dto);
+				mContext.getMissingBoard().updateTable();
+			}
+
+
 		});
+
 		search.addActionListener(e -> {
-			 String input = JOptionPane.showInputDialog("보호소 아이디를 입력하세요");
-			    if (input != null) {
-			        boxEmp1.setText(input);
-			    }
+			String input = JOptionPane.showInputDialog("보호소 아이디를 입력하세요");
+			try {
+				boxEmp1.setText(ShelterDAO.searchShelter(Integer.parseInt(input)));
+			} catch (NumberFormatException e2) {
+				JOptionPane.showMessageDialog(null, "숫자만 입력하세요.", "보호소 ID 오류", JOptionPane.ERROR_MESSAGE);
+			}
+
 		});
 	}
 

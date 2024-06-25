@@ -105,7 +105,7 @@ public class MainBoardFrame extends JFrame {
 		adoptReviewBoard = new ReviewBoardPanel(this);
 		freeBoard = new FreeBoardPanel(this);
 		missingBoard = new MissingBoardPanel(this);
-		registerAnimal = new RegisterAnimalPanel();
+		registerAnimal = new RegisterAnimalPanel(this);
 		searchShelter = new ShelterSearchPanel();
 		myPage = new MyPagePanel(this);
 
@@ -241,6 +241,10 @@ public class MainBoardFrame extends JFrame {
 
 	public ReviewBoardPanel getAdoptReviewBoard() {
 		return adoptReviewBoard;
+	}
+
+	public MissingBoardPanel getMissingBoard() {
+		return missingBoard;
 	}
 
 }

@@ -108,10 +108,9 @@ public class Define {
 											+ "on ad.careId = s.careId\r\n"
 											+ "where s.careNm = ? ";
 	
-	public static final String SHELTER_CARE_APPLY = " select c.careId"
-											+ "from care as c"
-											+ "join employee as e"
-											+ "on c.careId = e.emp_no"
-											+ "where c.careNm = ?"
-											+ "group by c.careNm ";
+	public static final String SHELTER_CARE_APPLY = " select careNm from shelter where careId = ? group by careNm ";
+	
+	public static final String SHELTER_CARE_APPLY_CARE_ID = " select careId from shelter where careNm = ? group by careNm ";
+	
+	public static final String SHELTER_APPLY_SUBMIT = " insert into animal_details(id, kindCd, colorCd, age, weight, processState, sexCd, neuterYn, specialMark, careId) values(?, ?, ?, ?, ?, ?, ?, ? , ?, ?) ";
 }
