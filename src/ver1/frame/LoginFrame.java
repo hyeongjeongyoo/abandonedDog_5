@@ -145,14 +145,13 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				String enteredId = idField.getText();
-				String enteredPassword = passwordField.getText();
+				if (idField.getText().length() > 1) {
+					String enteredId = idField.getText();
+					String enteredPassword = passwordField.getText();
 
-				LoginDTO dto = LoginDAO.selectLogin(enteredId);
+					LoginDTO dto = LoginDAO.selectLogin(enteredId);
 
-				if (dto != null) {
-
-					if (!idField.equals(null) && !passwordField.equals(null)) {
+					if (dto != null) {
 
 						if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
 							JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
@@ -179,14 +178,13 @@ public class LoginFrame extends JFrame {
 		});
 
 		passwordField.addActionListener(e -> {
-			String enteredId = idField.getText();
-			String enteredPassword = passwordField.getText();
+			if (idField.getText().length() > 1) {
+				String enteredId = idField.getText();
+				String enteredPassword = passwordField.getText();
 
-			LoginDTO dto = LoginDAO.selectLogin(enteredId);
+				LoginDTO dto = LoginDAO.selectLogin(enteredId);
 
-			if (dto != null) {
-
-				if (!idField.equals(null) && !passwordField.equals(null)) {
+				if (dto != null) {
 
 					if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
 						JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
