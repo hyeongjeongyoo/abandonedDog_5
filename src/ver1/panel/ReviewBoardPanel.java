@@ -21,7 +21,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import ver1.DAO.ReviewBoardDAO;
-import ver1.DTO.FreeBoardDTO;
 import ver1.DTO.ReviewBoardDTO;
 import ver1.frame.CreateReviewBoardFrame;
 import ver1.frame.MainBoardFrame;
@@ -149,9 +148,9 @@ public class ReviewBoardPanel extends JPanel {
 				}
 			}
 		});
-		
+
 		registrationBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new CreateReviewBoardFrame(mContext);
@@ -169,15 +168,14 @@ public class ReviewBoardPanel extends JPanel {
 		};
 		animalTable.setModel(model);
 
-
 		column = animalTable.getColumnModel().getColumn(0);
 		column.setMinWidth(40);
 		column.setMaxWidth(40);
-		
+
 		column = animalTable.getColumnModel().getColumn(1);
 		column.setMinWidth(150);
 		column.setMaxWidth(150);
-		
+
 		column = animalTable.getColumnModel().getColumn(2);
 		column.setMinWidth(800); // 최소 너비 설정
 		column.setMaxWidth(800); // 최대 너비 설정

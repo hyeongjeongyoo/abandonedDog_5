@@ -18,18 +18,12 @@ public class HomePanel extends JPanel implements Runnable {
 	private JPanel imgBox;
 
 	private Image backgroundImage;
-	Image image;
+	public Image image;
 
 	public HomePanel() {
 		initData();
 		setInitLayout();
 	}
-	
-	// TODO 백그라운드 이미지
-	private void initBackgroundImage() {
-        backgroundImage = new ImageIcon("img/backgroundBg.png").getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
-
-    }
 
 	private void initData() {
 		imgBox = new JPanel() {
@@ -42,13 +36,15 @@ public class HomePanel extends JPanel implements Runnable {
 			}
 		};
 
+		backgroundImage = new ImageIcon("img/backgroundBg.png").getImage();
+
 	}
 
 	private void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);
 
-		imgBox.setBounds(396, 150, 609, 450);
+		imgBox.setBounds(396, 224, 609, 450);
 		imgBox.setBorder(new LineBorder(Color.GRAY, 2));
 		imgBox.setBackground(Color.orange);
 		add(imgBox);
@@ -69,6 +65,14 @@ public class HomePanel extends JPanel implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (backgroundImage != null) {
+			g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 		}
 	}
 }

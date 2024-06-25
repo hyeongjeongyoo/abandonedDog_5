@@ -16,66 +16,96 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ver1.DAO.ReviewBoardDAO;
-import ver1.frame.MainBoardFrame;
 
 public class CreateReviewBoardFrame extends JFrame {
 
 	private MainBoardFrame mContext;
 
+	private JPanel panel;
+
+	private JLabel logoLabel;
+	private ImageIcon logoIcon;
+
 	private JLabel titleLabel;
 	public JTextField titleField;
+
 	private JLabel contentLabel;
 	public JTextArea contentArea;
+	private JScrollPane scrollPane;
+
 	private JButton submitButton;
-	private JLabel logoLabel;
 
 	private Font font;
 
 	public CreateReviewBoardFrame(MainBoardFrame mContext) {
 		this.mContext = mContext;
 		initData();
+		setInitLayout();
+		addEventListener();
+	}
+
+	private void initData() {
+		panel = new JPanel();
+
+		logoIcon = new ImageIcon("img/logo.png");
+
+		logoLabel = new JLabel(logoIcon);
+
+		titleLabel = new JLabel("제목");
+
+		titleField = new JTextField();
+
+		contentLabel = new JLabel("내용");
+
+		contentArea = new JTextArea();
+
+		scrollPane = new JScrollPane(contentArea);
+
+		submitButton = new JButton(new ImageIcon("img/registerBtn.jpg"));
+
+		font = new Font("Noto Sans KR", Font.BOLD, 14);
+
+	}
+
+	private void setInitLayout() {
 		setLayout(null);
 		setBounds(300, 300, 600, 700);
 		setVisible(true);
 		setLocationRelativeTo(null);
-	}
+		setTitle("리뷰 게시판 글 작성");
+		setContentPane(panel);
 
-	private void initData() {
-		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 
-		setTitle("리뷰 게시판 글 작성");
-
-		ImageIcon logoIcon = new ImageIcon("img/logo.png");
-
-		logoLabel = new JLabel(logoIcon);
 		logoLabel.setBounds(240, 10, 100, 100);
 		panel.add(logoLabel);
 
-		titleLabel = new JLabel("제목");
 		titleLabel.setBounds(100, 100, 80, 25);
 		panel.add(titleLabel);
 
-		titleField = new JTextField();
 		titleField.setBounds(100, 125, 400, 25);
 		titleField.setBackground(new Color(240, 240, 240));
 		panel.add(titleField);
 
-		contentLabel = new JLabel("내용");
 		contentLabel.setBounds(100, 140, 80, 50);
 		panel.add(contentLabel);
 
-		contentArea = new JTextArea();
 		contentArea.setBackground(new Color(240, 240, 240));
-		JScrollPane scrollPane = new JScrollPane(contentArea);
+
 		scrollPane.setBounds(100, 180, 400, 400);
 		panel.add(scrollPane);
 
-		submitButton = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		submitButton.setBounds(250, 600, 100, 30);
 		panel.add(submitButton);
 
+		titleLabel.setFont(font);
+		titleField.setFont(font);
+		contentLabel.setFont(font);
+		contentArea.setFont(font);
+	}
+
+	private void addEventListener() {
 		submitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,14 +124,5 @@ public class CreateReviewBoardFrame extends JFrame {
 				}
 			}
 		});
-
-		font = new Font("Noto Sans KR", Font.BOLD, 14);
-		titleLabel.setFont(font);
-		titleField.setFont(font);
-		contentLabel.setFont(font);
-		contentArea.setFont(font);
-
-		// 패널을 프레임의 콘텐츠 패널로 설정
-		setContentPane(panel);
 	}
 }

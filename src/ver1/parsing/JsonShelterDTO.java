@@ -9,34 +9,34 @@ import lombok.Data;
 public class JsonShelterDTO {
 
 	response response;
-	
+
 	@Data
 	class response {
 		header header;
 		body body;
 	}
-	
+
 	@Data
 	class header {
 		int reqNo;
 		String resultCode;
 		String resultMsg;
 	}
-	
+
 	@Data
 	class body {
 		items items;
 	}
-	
+
 	@Data
 	class items {
 		List<item> item = new ArrayList<>();
 	}
-	
+
 	@Data
-	class item{
+	class item {
 		String careRegNo;
 		String careNm;
 	}
-	
+
 }

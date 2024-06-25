@@ -35,7 +35,7 @@ import ver1.jdbc.Define;
 import ver1.use.HeaderRenderer;
 
 public class MissingBoardPanel extends JPanel {
-	
+
 	private MainBoardFrame mContext;
 
 	private JButton nextPageBtn;
@@ -59,7 +59,7 @@ public class MissingBoardPanel extends JPanel {
 	String[] columnNames = { "접수 번호", "품종", "색깔", "나이", "무게", "보호상태", "성별", "중성화", "특이사항" };
 
 	private Font font;
-	
+
 	public MissingBoardPanel(MainBoardFrame mContext) {
 		this.mContext = mContext;
 		initData();
@@ -121,12 +121,13 @@ public class MissingBoardPanel extends JPanel {
 		add(nextPageBtn);
 
 		searchComboBox.setModel(new DefaultComboBoxModel<>(columnNames));
-        JTableHeader header = animalTable.getTableHeader();
-        header.setDefaultRenderer(new HeaderRenderer());
-        
+		JTableHeader header = animalTable.getTableHeader();
+		header.setDefaultRenderer(new HeaderRenderer());
+
 		// Font 설정
 		font = new Font("Noto Sans KR", Font.PLAIN, 12);
-		searchComboBox.setFont(font);;
+		searchComboBox.setFont(font);
+		;
 	}
 
 	public void addEventLayout() {
@@ -158,7 +159,7 @@ public class MissingBoardPanel extends JPanel {
 		});
 
 		refrashBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				animalData = MissingBoardDAO.getMissingDTOList(Define.ALL_VIEW_ANIMAL_DETAILS);
@@ -166,90 +167,110 @@ public class MissingBoardPanel extends JPanel {
 				updateTable();
 			}
 		});
-		
+
 		searchBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(searchComboBox.getSelectedIndex() == 0) {
+				if (searchComboBox.getSelectedIndex() == 0) {
 					try {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"),
+								Integer.parseInt(searchText.getText()));
 					} catch (NumberFormatException e2) {
 						JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} else if (searchComboBox.getSelectedIndex() == 1) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"),
+							searchText.getText());
 				} else if (searchComboBox.getSelectedIndex() == 2) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 3) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 4) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 5) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 6) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 7) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
-				}  else if (searchComboBox.getSelectedIndex() == 8) {
-					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 3) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 4) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 5) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 6) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 7) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"),
+							searchText.getText());
+				} else if (searchComboBox.getSelectedIndex() == 8) {
+					animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"),
+							searchText.getText());
 				}
 				currentPage = 0;
 				updateTable();
 			}
 		});
-		
+
 		searchText.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if(searchComboBox.getSelectedIndex() == 0) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (searchComboBox.getSelectedIndex() == 0) {
 						try {
-							animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"), Integer.parseInt(searchText.getText()));
+							animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("id"),
+									Integer.parseInt(searchText.getText()));
 						} catch (NumberFormatException e2) {
-							JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "ID는 숫자만 입력 가능합니다.", "알림",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
 					} else if (searchComboBox.getSelectedIndex() == 1) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"), searchText.getText());
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("kindCd"),
+								searchText.getText());
 					} else if (searchComboBox.getSelectedIndex() == 2) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 3) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 4) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 5) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 6) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 7) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"), searchText.getText());
-					}  else if (searchComboBox.getSelectedIndex() == 8) {
-						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("colorCd"),
+								searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 3) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("age"),
+								searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 4) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("weight"),
+								searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 5) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(
+								Define.JOIN_VIEW_ANIMAL_DETAILS("processState"), searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 6) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("sexCd"),
+								searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 7) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(Define.JOIN_VIEW_ANIMAL_DETAILS("neuterYn"),
+								searchText.getText());
+					} else if (searchComboBox.getSelectedIndex() == 8) {
+						animalData = MissingBoardDAO.getJoinMissingDTOList(
+								Define.JOIN_VIEW_ANIMAL_DETAILS("specialMark"), searchText.getText());
 					}
 					currentPage = 0;
 					updateTable();
 				}
 			}
 		});
-		
-		animalTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // 마우스가 두 번 클릭되었는지 확인
-                if (e.getClickCount() == 2) {
-                    // 클릭된 셀의 행과 열 가져오기
-                    int row = animalTable.rowAtPoint(e.getPoint());
-                    int column = animalTable.columnAtPoint(e.getPoint());
 
-                    // "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
-                    if (column == 0) {
-                        mContext.getMain().setSelectedIndex(3);
-                        mContext.getAbandonment().setSelectedIndex(1);
-                        mContext.getAbanAnimalListboard().searchCareAnimal((Integer) animalTable.getValueAt(row, column));
-                    }
-                }
-            }
-        });
+		animalTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 마우스가 두 번 클릭되었는지 확인
+				if (e.getClickCount() == 2) {
+					// 클릭된 셀의 행과 열 가져오기
+					int row = animalTable.rowAtPoint(e.getPoint());
+					int column = animalTable.columnAtPoint(e.getPoint());
+
+					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
+					if (column == 0) {
+						mContext.getMain().setSelectedIndex(3);
+						mContext.getAbandonment().setSelectedIndex(1);
+						mContext.getAbanAnimalListboard()
+								.searchCareAnimal((Integer) animalTable.getValueAt(row, column));
+					}
+				}
+			}
+		});
 	}
 
 	private void updateTable() {
@@ -268,9 +289,9 @@ public class MissingBoardPanel extends JPanel {
 		column.setMinWidth(65);
 		column.setMaxWidth(65);
 		DefaultTableCellRenderer genderRenderer = new DefaultTableCellRenderer();
-	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-	    column.setCellRenderer(genderRenderer);
-		
+		genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		column.setCellRenderer(genderRenderer);
+
 		// 품종
 		column = animalTable.getColumnModel().getColumn(1);
 		column.setMinWidth(130);
@@ -285,30 +306,30 @@ public class MissingBoardPanel extends JPanel {
 		column = animalTable.getColumnModel().getColumn(3);
 		column.setMinWidth(70);
 		column.setMaxWidth(70);
-		
+
 		// 무게
 		column = animalTable.getColumnModel().getColumn(4);
 		column.setMinWidth(65);
 		column.setMaxWidth(65);
-		
+
 		// 보호상태
 		column = animalTable.getColumnModel().getColumn(5);
 		column.setMinWidth(85);
 		column.setMaxWidth(85);
-		
+
 		// 성별
 		column = animalTable.getColumnModel().getColumn(6);
 		column.setMinWidth(35);
 		column.setMaxWidth(35);
-	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-	    column.setCellRenderer(genderRenderer);
-		
+		genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		column.setCellRenderer(genderRenderer);
+
 		// 중성화
 		column = animalTable.getColumnModel().getColumn(7);
 		column.setMinWidth(45);
 		column.setMaxWidth(45);
-	    genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-	    column.setCellRenderer(genderRenderer);
+		genderRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		column.setCellRenderer(genderRenderer);
 	}
 
 	private Object[][] convertToPageData() {
@@ -344,5 +365,5 @@ public class MissingBoardPanel extends JPanel {
 		}
 		return pageData;
 	}
-	
+
 }

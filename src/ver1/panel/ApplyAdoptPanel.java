@@ -23,7 +23,7 @@ import ver1.DTO.AdoptDTO;
 import ver1.frame.MainBoardFrame;
 
 public class ApplyAdoptPanel extends JPanel {
-	
+
 	private MainBoardFrame mContext;
 
 	private JComboBox<String> comboBoxAnimalType;
@@ -306,7 +306,7 @@ public class ApplyAdoptPanel extends JPanel {
 
 			}
 		});
-		
+
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -319,7 +319,7 @@ public class ApplyAdoptPanel extends JPanel {
 				}
 			}
 		});
-		
+
 	}
 
 	public AdoptDTO sendAdopt(int careId) {

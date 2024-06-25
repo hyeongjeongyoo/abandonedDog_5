@@ -20,31 +20,16 @@ public class ShelterDAO {
 			PreparedStatement pstmt = conn.prepareStatement(Define.SELECT_SHELTER);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if(sido.equals(rs.getString("sido")) && sigungu.equals(rs.getString("sigungu"))) {
-					dto.add(new ShelterDTO(
-							rs.getString("sido"), 
-							rs.getString("sigungu"),
-							rs.getString("careNm"),
-							rs.getString("careTel"),
-							rs.getString("careAddr")
-							));
+				if (sido.equals(rs.getString("sido")) && sigungu.equals(rs.getString("sigungu"))) {
+					dto.add(new ShelterDTO(rs.getString("sido"), rs.getString("sigungu"), rs.getString("careNm"),
+							rs.getString("careTel"), rs.getString("careAddr")));
 				} else if (sido.equals(rs.getString("sido")) && sigungu.equals("전체")) {
-					dto.add(new ShelterDTO(
-							rs.getString("sido"), 
-							rs.getString("sigungu"),
-							rs.getString("careNm"),
-							rs.getString("careTel"),
-							rs.getString("careAddr")
-							));
+					dto.add(new ShelterDTO(rs.getString("sido"), rs.getString("sigungu"), rs.getString("careNm"),
+							rs.getString("careTel"), rs.getString("careAddr")));
 				} else if (sido.equals("전국")) {
-					dto.add(new ShelterDTO(
-							rs.getString("sido"), 
-							rs.getString("sigungu"),
-							rs.getString("careNm"),
-							rs.getString("careTel"),
-							rs.getString("careAddr")
-							));
-					
+					dto.add(new ShelterDTO(rs.getString("sido"), rs.getString("sigungu"), rs.getString("careNm"),
+							rs.getString("careTel"), rs.getString("careAddr")));
+
 				}
 			}
 		} catch (SQLException e) {
@@ -53,9 +38,9 @@ public class ShelterDAO {
 
 		return dto;
 	}
-	
+
 	public static int searchCareId(int id) {
-		try (Connection conn = DBConnectionManager.getConnection()){
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.SEARCH_SHELTER);
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();

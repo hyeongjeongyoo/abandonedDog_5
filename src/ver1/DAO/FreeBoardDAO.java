@@ -9,103 +9,83 @@ import java.util.List;
 
 import ver1.DTO.FreeBoardDTO;
 import ver1.jdbc.DBConnectionManager;
+import ver1.jdbc.Define;
 
 public class FreeBoardDAO {
 
 	public static void addFreeBoardDAO(String title, String username, String content) {
-		String query = " insert into freeboarddb(title, username, content, create_date) values (?, ?, ?, CURRENT_DATE()) ";
-		
-		try(Connection conn = DBConnectionManager.getConnection();) {
 
-			PreparedStatement pstmt = conn.prepareStatement(query);
+		try (Connection conn = DBConnectionManager.getConnection();) {
+
+			PreparedStatement pstmt = conn.prepareStatement(Define.INSERT_FREE_BOARD);
 			pstmt.setString(1, title);
 			pstmt.setString(2, username);
 			pstmt.setString(3, content);
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static List<FreeBoardDTO> getFreeBoard() {
 		List<FreeBoardDTO> list = new ArrayList<>();
-		String query = " select * from freeboarddb order by id desc ";
-		try (Connection conn = DBConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement(query);
+		try (Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(Define.SELECT_FREE_BOARD);
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				list.add(new FreeBoardDTO(
-								rs.getInt("id"),
-								rs.getString("title"),
-								rs.getString("username"),
-								rs.getString("content"),
-								rs.getString("create_date")));
+			while (rs.next()) {
+				list.add(new FreeBoardDTO(rs.getInt("id"), rs.getString("title"), rs.getString("username"),
+						rs.getString("content"), rs.getString("create_date")));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return list;
 	}
-	
+
 	public static FreeBoardDTO getBoardDto(String username) {
 		FreeBoardDTO dto = null;
-		String query = " select * from freeboarddb where username = ? ";
-		
-		try(Connection conn = DBConnectionManager.getConnection()) {
-			PreparedStatement pstmt = conn.prepareStatement(query);
+
+		try (Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(Define.UPDATE_MY_WRITE);
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				dto = new FreeBoardDTO(
-						rs.getInt("id"),
-						rs.getString("title"),
-						rs.getString("username"),
-						rs.getString("content"),
-						rs.getString("create_date"));
+
+			if (rs.next()) {
+				dto = new FreeBoardDTO(rs.getInt("id"), rs.getString("title"), rs.getString("username"),
+						rs.getString("content"), rs.getString("create_date"));
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return dto;
 	}
-	
+
 	public static List<FreeBoardDTO> getBoardDtos(String username) {
 		List<FreeBoardDTO> dtos = new ArrayList<>();
 		FreeBoardDTO dto = null;
-		String query = " select * from freeboarddb where username = ? ";
-		
-		try(Connection conn = DBConnectionManager.getConnection()) {
-			PreparedStatement pstmt = conn.prepareStatement(query);
+
+		try (Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(Define.UPDATE_MY_WRITE);
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				dto = new FreeBoardDTO(
-						rs.getInt("id"),
-						rs.getString("title"),
-						rs.getString("username"),
-						rs.getString("content"),
-						rs.getString("create_date"));
+				dto = new FreeBoardDTO(rs.getInt("id"), rs.getString("title"), rs.getString("username"),
+						rs.getString("content"), rs.getString("create_date"));
 				dtos.add(dto);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return dtos;
 	}
-	
-	
+
 }

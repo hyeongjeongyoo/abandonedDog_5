@@ -27,74 +27,73 @@ public class ShelterParsing {
 	public static void main(String[] args) throws IOException {
 
 		List<String> list = addShelter();
-		
+
 		for (int i = 0; i < list.size(); i++) {
-			
-		StringTokenizer st = new StringTokenizer(list.get(i), ",");
-		String orgCd = st.nextToken();
-		String uprCd = st.nextToken();
-		URL url = new URL(shelter(uprCd, orgCd));
 
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			StringTokenizer st = new StringTokenizer(list.get(i), ",");
+			String orgCd = st.nextToken();
+			String uprCd = st.nextToken();
+			URL url = new URL(shelter(uprCd, orgCd));
 
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/json");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-		System.out.println("Response code: " + conn.getResponseCode());
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Content-type", "application/json");
 
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-		}
+			System.out.println("Response code: " + conn.getResponseCode());
 
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = rd.readLine()) != null) {
-			sb.append(line);
-		}
-
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-		JsonShelterDTO dto = gson.fromJson(sb.toString(), JsonShelterDTO.class);
-		try (Connection connect = DBConnectionManager.getConnection()) {
-
-			int count = 0;
-			for (JsonShelterDTO.item item : dto.response.body.items.item) {
-				PreparedStatement pstmt = connect.prepareStatement(Define.SHELTER);
-				pstmt.setString(1, orgCd);
-				pstmt.setString(2, item.careRegNo);
-				pstmt.setString(3, item.careNm);
-				pstmt.executeUpdate();
-				count++;
+			BufferedReader rd;
+			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			} else {
+				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
 			}
-			System.out.println("저장된 행 : " + count);
-		} catch (Exception e) {
-			e.printStackTrace();
-			continue;
+
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+			JsonShelterDTO dto = gson.fromJson(sb.toString(), JsonShelterDTO.class);
+			try (Connection connect = DBConnectionManager.getConnection()) {
+
+				int count = 0;
+				for (JsonShelterDTO.item item : dto.response.body.items.item) {
+					PreparedStatement pstmt = connect.prepareStatement(Define.INSERT_SHELTER);
+					pstmt.setString(1, orgCd);
+					pstmt.setString(2, item.careRegNo);
+					pstmt.setString(3, item.careNm);
+					pstmt.executeUpdate();
+					count++;
+				}
+				System.out.println("저장된 행 : " + count);
+			} catch (Exception e) {
+				e.printStackTrace();
+				continue;
+			}
+
+			rd.close();
+			conn.disconnect();
 		}
-		
-		rd.close();
-        conn.disconnect();
-		}
-		
+
 	}
-	
+
 	public static String shelter(String uprCd, String orgCd) {
-		String url = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter"
-				+ "?upr_cd=" + uprCd
-				+ "&org_cd=" + orgCd
+		String url = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/shelter" + "?upr_cd=" + uprCd + "&org_cd="
+				+ orgCd
 				+ "&serviceKey=palsG47GgfoxfBI5IvepO%2Bs%2BzSWEnnxl74qGa%2FkxbmgoHz4R%2BNYSYXYxeaPeMmUgYDU1V%2BevDZ3g6IoveoEGHQ%3D%3D"
 				+ "&_type=json";
-		
+
 		return url;
 	}
 
 	public static List<String> addShelter() {
-		
+
 		List<String> list = new ArrayList<>();
-		
+
 		Map<String, String> sigungu = new HashMap<>();
 		try {
 			Connection conn = DBConnectionManager.getConnection();
@@ -106,19 +105,18 @@ public class ShelterParsing {
 			}
 
 			Iterator<Map.Entry<String, String>> itr = sigungu.entrySet().iterator();
-			
-			while(itr.hasNext()) {
+
+			while (itr.hasNext()) {
 				Map.Entry<String, String> entry = itr.next();
-				list.add(String.format(entry.getKey())+ "," + String.format(entry.getValue()));
+				list.add(String.format(entry.getKey()) + "," + String.format(entry.getValue()));
 			}
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
-		
+
 	}
 
 }

@@ -13,18 +13,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-import ver1.panel.ViewAnimalPanel;
 import ver1.panel.ApplyAdoptPanel;
 import ver1.panel.FreeBoardPanel;
+import ver1.panel.HomePanel;
 import ver1.panel.MissingBoardPanel;
 import ver1.panel.MyPagePanel;
 import ver1.panel.RegisterAnimalPanel;
 import ver1.panel.ReviewBoardPanel;
 import ver1.panel.ShelterSearchPanel;
-import ver1.panel.HomePanel;
+import ver1.panel.ViewAnimalPanel;
 
 public class MainBoardFrame extends JFrame {
-	
+
 	public boolean manager;
 	public String name;
 	public String id;
@@ -42,24 +42,23 @@ public class MainBoardFrame extends JFrame {
 	private JTabbedPane board;
 	private JTabbedPane missing;
 	private JTabbedPane abandonment;
-	
-	private Image backgroundImage;
 
-	private HomePanel visitAnimal;
-	
+	private HomePanel homePanel;
+
 	private FreeBoardPanel freeBoard;
 	private MissingBoardPanel missingBoard;
-	
+
 	private ApplyAdoptPanel applyAdoptBoard;
 	private ReviewBoardPanel adoptReviewBoard;
-	
+
 	private ViewAnimalPanel abanAnimalListboard;
 	private RegisterAnimalPanel registerAnimal;
 	private ShelterSearchPanel searchShelter;
-	
+
 	private MyPagePanel myPage;
-	
-	public MainBoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority, String phoneNum) {
+
+	public MainBoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority,
+			String phoneNum) {
 		this.manager = manager;
 		this.name = name;
 		this.id = id;
@@ -70,8 +69,9 @@ public class MainBoardFrame extends JFrame {
 		initData();
 		setInitLayout();
 	}
-	
-	public MainBoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority, String phoneNum, String userDepartmentNo, String userDepartmentName) {
+
+	public MainBoardFrame(boolean manager, String name, String id, String password, String birthDay, String authority,
+			String phoneNum, String userDepartmentNo, String userDepartmentName) {
 		this.manager = manager;
 		this.name = name;
 		this.id = id;
@@ -85,15 +85,6 @@ public class MainBoardFrame extends JFrame {
 		setInitLayout();
 	}
 
-    private void initBackgroundImage() {
-        backgroundImage = new ImageIcon("img/backgroundBg.png").getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
-    }
-    
-	
-    public void paintComponent(Graphics g) {
-        g.drawImage(backgroundImage, 0, 0, this); // 배경 이미지 그리기
-    }
-    
 	private void initData() {
 
 		font = new Font("Noto Sans KR", Font.BOLD, 15);
@@ -106,9 +97,9 @@ public class MainBoardFrame extends JFrame {
 
 		applyAdoptBoard = new ApplyAdoptPanel(this);
 		abanAnimalListboard = new ViewAnimalPanel(this);
-		visitAnimal = new HomePanel();
+		homePanel = new HomePanel();
 
-		Thread thread = new Thread(visitAnimal);
+		Thread thread = new Thread(homePanel);
 		thread.start();
 
 		adoptReviewBoard = new ReviewBoardPanel(this);
@@ -128,16 +119,16 @@ public class MainBoardFrame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		UIManager.put("TabbedPane.contentAreaColor", Color.white);
+		UIManager.put("TabbedPane.selected", Color.white);
+		UIManager.put("TabbedPane.background", Color.white);
+		UIManager.put("TabbedPane.tabInsets", new Insets(50, 5, 0, 0));
+
 		main.setFont(font);
 		board.setFont(font);
 		missing.setFont(font);
 		abandonment.setFont(font);
 		myPage.setFont(font);
-
-		UIManager.put("TabbedPane.contentAreaColor", Color.white);
-		UIManager.put("TabbedPane.selected", Color.white);
-		UIManager.put("TabbedPane.background", Color.white);
-		UIManager.put("TabbedPane.tabInsets", new Insets(50, 5, 0, 0));
 
 		main.setOpaque(true);
 		board.setOpaque(true);
@@ -150,7 +141,7 @@ public class MainBoardFrame extends JFrame {
 		missing.setBackground(Color.white);
 		abandonment.setBackground(Color.white);
 
-		main.addTab(null, new ImageIcon("img/Home.png"), visitAnimal, null);
+		main.addTab(null, new ImageIcon("img/Home.png"), homePanel, null);
 
 		main.addTab(null, new ImageIcon("img/Board.png"), board, null);
 		board.addTab("", null, null, null);
@@ -195,7 +186,7 @@ public class MainBoardFrame extends JFrame {
 		board.setSelectedIndex(1);
 		missing.setSelectedIndex(1);
 		abandonment.setSelectedIndex(1);
-		
+
 		board.setFocusable(false);
 		missing.setFocusable(false);
 		abandonment.setFocusable(false);
@@ -203,27 +194,27 @@ public class MainBoardFrame extends JFrame {
 		add(main);
 	}
 
-
 	private BasicTabbedPaneUI addUI() {
 
 		return new BasicTabbedPaneUI() {
-		    @Override
-		    protected void installDefaults() {
-		        super.installDefaults();
-		        tabInsets = new Insets(0, 10, 0, 10); // 탭의 내부 여백 설정
-		    }
+			@Override
+			protected void installDefaults() {
+				super.installDefaults();
+				tabInsets = new Insets(0, 10, 0, 10); // 탭의 내부 여백 설정
+			}
 
-		    @Override
-		    protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-		        // 탭의 배경을 그리는 부분
-		    }
+			@Override
+			protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
+					boolean isSelected) {
+				// 탭의 배경을 그리는 부분
+			}
 		};
 	}
-	
+
 	public JTabbedPane getMain() {
 		return main;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -235,11 +226,11 @@ public class MainBoardFrame extends JFrame {
 	public ViewAnimalPanel getAbanAnimalListboard() {
 		return abanAnimalListboard;
 	}
-	
+
 	public FreeBoardPanel getFreeBoard() {
 		return freeBoard;
 	}
-	
+
 	public MyPagePanel getMyPage() {
 		return myPage;
 	}

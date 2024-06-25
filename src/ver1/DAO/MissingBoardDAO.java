@@ -35,6 +35,24 @@ public class MissingBoardDAO {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
+				String sexCd = "";
+				String neuterYn = "";
+				if(rs.getString("sexCd").equalsIgnoreCase("M")) {
+					sexCd = "수컷";
+				} else if (rs.getString("sexCd").equalsIgnoreCase("F")) {
+					sexCd = "암컷";
+				} else {
+					sexCd = "미상";
+				}
+				
+				if(rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "예";
+				} else if (rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "아니오";
+				} else {
+					neuterYn = "미상";
+				}
+				
 				dto.add(new MissingBoardDTO(
 										rs.getInt("id"), 
 										rs.getString("kindCd"), 
@@ -42,8 +60,8 @@ public class MissingBoardDAO {
 										rs.getString("age"), 
 										rs.getString("weight"), 
 										rs.getString("processState"), 
-										rs.getString("sexCd"), 
-										rs.getString("neuterYn"), 
+										sexCd, 
+										neuterYn, 
 										rs.getString("specialMark"), 
 										rs.getInt("emp_no"), 
 										rs.getInt("careId")));
@@ -80,6 +98,24 @@ public class MissingBoardDAO {
 			pstmt.setString(1, value);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
+				String sexCd = "";
+				String neuterYn = "";
+				if(rs.getString("sexCd").equalsIgnoreCase("M")) {
+					sexCd = "수컷";
+				} else if (rs.getString("sexCd").equalsIgnoreCase("F")) {
+					sexCd = "암컷";
+				} else {
+					sexCd = "미상";
+				}
+				
+				if(rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "예";
+				} else if (rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "아니오";
+				} else {
+					neuterYn = "미상";
+				}
+				
 				dto.add(new MissingBoardDTO(
 										rs.getInt("id"), 
 										rs.getString("kindCd"), 
@@ -87,8 +123,8 @@ public class MissingBoardDAO {
 										rs.getString("age"), 
 										rs.getString("weight"), 
 										rs.getString("processState"), 
-										rs.getString("sexCd"), 
-										rs.getString("neuterYn"), 
+										sexCd, 
+										neuterYn, 
 										rs.getString("specialMark"), 
 										rs.getInt("emp_no"), 
 										rs.getInt("careId")));
@@ -108,18 +144,36 @@ public class MissingBoardDAO {
 			pstmt.setInt(1, value);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
+				String sexCd = "";
+				String neuterYn = "";
+				if(rs.getString("sexCd").equalsIgnoreCase("M")) {
+					sexCd = "수컷";
+				} else if (rs.getString("sexCd").equalsIgnoreCase("F")) {
+					sexCd = "암컷";
+				} else {
+					sexCd = "미상";
+				}
+				
+				if(rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "예";
+				} else if (rs.getString("neuterYn").equalsIgnoreCase("Y")) {
+					neuterYn = "아니오";
+				} else {
+					neuterYn = "미상";
+				}
+				
 				dto.add(new MissingBoardDTO(
-						rs.getInt("id"), 
-						rs.getString("kindCd"), 
-						rs.getString("colorCd"), 
-						rs.getString("age"), 
-						rs.getString("weight"), 
-						rs.getString("processState"), 
-						rs.getString("sexCd"), 
-						rs.getString("neuterYn"), 
-						rs.getString("specialMark"), 
-						rs.getInt("emp_no"), 
-						rs.getInt("careId")));
+										rs.getInt("id"), 
+										rs.getString("kindCd"), 
+										rs.getString("colorCd"), 
+										rs.getString("age"), 
+										rs.getString("weight"), 
+										rs.getString("processState"), 
+										sexCd, 
+										neuterYn, 
+										rs.getString("specialMark"), 
+										rs.getInt("emp_no"), 
+										rs.getInt("careId")));
 			}
 			
 		} catch (SQLException e) {

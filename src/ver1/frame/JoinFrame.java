@@ -33,7 +33,7 @@ public class JoinFrame extends JFrame {
 	private JTextField phoneNumField;
 	private JTextField memberNumField;
 	private JTextField memberNameField;
-	
+
 	private JLabel nameLabel;
 	private JLabel idLabel;
 	private JLabel passwordLabel;
@@ -66,7 +66,7 @@ public class JoinFrame extends JFrame {
 		phoneNumField = new JTextField(50);
 		memberNumField = new JTextField(50);
 		memberNameField = new JTextField(50);
-		
+
 		nameLabel = new JLabel("이름");
 		idLabel = new JLabel("아이디");
 		passwordLabel = new JLabel("비밀번호");
@@ -76,7 +76,6 @@ public class JoinFrame extends JFrame {
 		mamberNameLabel = new JLabel("소속이름");
 
 		checkBox = new JCheckBox("관리자");
-		
 
 	}
 
@@ -92,9 +91,9 @@ public class JoinFrame extends JFrame {
 		setVisible(true);
 
 		joinBackgroundImg.setBackground(Color.white);
-		
+
 		Font font = new Font("Noto Sans KR", Font.BOLD, 15);
-		
+
 		nameLabel.setBounds(95, 126, 100, 40);
 		idLabel.setBounds(95, 170, 100, 40);
 		passwordLabel.setBounds(95, 213, 100, 40);
@@ -102,7 +101,7 @@ public class JoinFrame extends JFrame {
 		phoneNumLabel.setBounds(95, 300, 100, 40);
 		memberNumLabel.setBounds(95, 345, 100, 40);
 		mamberNameLabel.setBounds(95, 390, 100, 40);
-		
+
 		nameLabel.setFont(font);
 		idLabel.setFont(font);
 		passwordLabel.setFont(font);
@@ -110,7 +109,7 @@ public class JoinFrame extends JFrame {
 		phoneNumLabel.setFont(font);
 		memberNumLabel.setFont(font);
 		mamberNameLabel.setFont(font);
-		
+
 		add(nameLabel);
 		add(idLabel);
 		add(passwordLabel);
@@ -134,7 +133,7 @@ public class JoinFrame extends JFrame {
 		phoneNumField.setForeground(Color.DARK_GRAY);
 		memberNumField.setForeground(Color.DARK_GRAY);
 		memberNameField.setForeground(Color.DARK_GRAY);
-		
+
 		nameField.setFont(font);
 		idField.setFont(font);
 		passwordField.setFont(font);
@@ -142,10 +141,10 @@ public class JoinFrame extends JFrame {
 		phoneNumField.setFont(font);
 		memberNumField.setFont(font);
 		memberNameField.setFont(font);
-		
+
 		memberNumField.setEnabled(false);
 		memberNameField.setEnabled(false);
-		
+
 		add(nameField);
 		add(idField);
 		add(passwordField);
@@ -199,7 +198,8 @@ public class JoinFrame extends JFrame {
 						JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					boolean flag = JoinDAO.booleanSelectJoin(enteredId, enteredName, enteredPassword, enteredBrith, enteredPhoneNum);
+					boolean flag = JoinDAO.booleanSelectJoin(enteredId, enteredName, enteredPassword, enteredBrith,
+							enteredPhoneNum);
 					if (flag) {
 						JOptionPane.showMessageDialog(null, "[일반회원]" + enteredName + "님 회원가입 감사합니다.", "회원가입 성공",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -226,10 +226,6 @@ public class JoinFrame extends JFrame {
 				}
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		new JoinFrame();
 	}
 
 }

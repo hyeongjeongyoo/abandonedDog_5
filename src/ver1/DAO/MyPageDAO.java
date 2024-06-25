@@ -63,89 +63,77 @@ public class MyPageDAO {
 		} catch (Exception e) {
 		}
 	}
-	
+
 	public static MissingBoardDTO interestAnimal(int animalId) {
 		MissingBoardDTO boardDTO = null;
-		String query = " select * from animal_details where id = ? ";
-		try (Connection conn = DBConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement(query);
+		try (Connection conn = DBConnectionManager.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(Define.SEARCH_ANIMAL_DETAILS_ID);
 			pstmt.setInt(1, animalId);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				boardDTO = new MissingBoardDTO(
-										rs.getInt("id"), 
-										rs.getString("kindCd"), 
-										rs.getString("colorCd"), 
-										rs.getString("age"), 
-										rs.getString("weight"), 
-										rs.getString("processState"), 
-										rs.getString("sexCd"), 
-										rs.getString("neuterYn"), 
-										rs.getString("specialMark"), 
-										rs.getInt("emp_no"), 
-										rs.getInt("careId"));
+				boardDTO = new MissingBoardDTO(rs.getInt("id"), rs.getString("kindCd"), rs.getString("colorCd"),
+						rs.getString("age"), rs.getString("weight"), rs.getString("processState"),
+						rs.getString("sexCd"), rs.getString("neuterYn"), rs.getString("specialMark"),
+						rs.getInt("emp_no"), rs.getInt("careId"));
 			}
-			
+
 		} catch (SQLException e) {
 		}
-		
+
 		return boardDTO;
 	}
-	
+
 	public static void insertInterestAnimal(int animalId, String userName) {
 		MissingBoardDTO boardDTO = interestAnimal(animalId);
-		try (Connection conn = DBConnectionManager.getConnection()){
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.INSERT_MY_INTEREST);
 			pstmt.setInt(1, boardDTO.getId());
 			pstmt.setString(2, boardDTO.getKindCd());
 			pstmt.setString(3, userName);
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 		}
 	}
-	
+
 	public static List<InterestDTO> addInterestAnimal(String userName) {
 		List<InterestDTO> dtos = new ArrayList<>();
-		try (Connection conn = DBConnectionManager.getConnection()){
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.MY_INTEREST_BOARD);
 			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				dtos.add(new InterestDTO(rs.getInt("id"), rs.getString("kindCd"), rs.getString("addDate"), rs.getString("userName")));
+
+			while (rs.next()) {
+				dtos.add(new InterestDTO(rs.getInt("id"), rs.getString("kindCd"), rs.getString("addDate"),
+						rs.getString("userName")));
 			}
 		} catch (SQLException e) {
 		}
-		
+
 		return dtos;
 	}
-	
+
 	public static List<FreeBoardDTO> addMyWrite(String userName) {
 		List<FreeBoardDTO> dtos = new ArrayList<>();
-		try (Connection conn = DBConnectionManager.getConnection()){
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.MY_WRITER_BOARD);
 			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				dtos.add(new FreeBoardDTO(
-						rs.getInt("id"),
-						rs.getString("title"),
-						rs.getString("username"),
-						rs.getString("content"),
-						rs.getString("create_date")));
+
+			while (rs.next()) {
+				dtos.add(new FreeBoardDTO(rs.getInt("id"), rs.getString("title"), rs.getString("username"),
+						rs.getString("content"), rs.getString("create_date")));
 			}
 		} catch (SQLException e) {
 		}
-		
+
 		return dtos;
 	}
 
 	public static void updateInfo(String query, String value, String userName) {
-		
-		try (Connection conn = DBConnectionManager.getConnection()){
+
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, value);
 			pstmt.setString(2, userName);
@@ -153,12 +141,12 @@ public class MyPageDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void deleteInterest(int id, String userName) {
-		
-		try (Connection conn = DBConnectionManager.getConnection()){
+
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.DELETE_INTEREST);
 			pstmt.setInt(1, id);
 			pstmt.setString(2, userName);
@@ -166,12 +154,12 @@ public class MyPageDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void deleteMyWrite(int id, String userName) {
-		
-		try (Connection conn = DBConnectionManager.getConnection()){
+
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(Define.DELETE_MY_WRITE);
 			pstmt.setInt(1, id);
 			pstmt.setString(2, userName);
@@ -179,11 +167,11 @@ public class MyPageDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void updateMyWrite(String query, String changeValue, String userName, int id) {
-		try (Connection conn = DBConnectionManager.getConnection()){
+		try (Connection conn = DBConnectionManager.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, changeValue);
 			pstmt.setString(2, userName);

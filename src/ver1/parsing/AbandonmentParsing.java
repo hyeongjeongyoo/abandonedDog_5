@@ -16,35 +16,35 @@ import ver1.jdbc.Define;
 
 public class AbandonmentParsing {
 
-	public static void main(String[] args) throws IOException{
-		for(int i = 1; i < 339; i++) {
+	public static void main(String[] args) throws IOException {
+		for (int i = 1; i < 339; i++) {
 			URL url = new URL(ParsingUrl.AbandonmentPublic(20210101, 20240618, i));
-	
+
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	
+
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-type", "application/json");
-	
+
 			System.out.println("Response code: " + conn.getResponseCode());
-	
+
 			BufferedReader rd;
 			if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			} else {
 				rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
 			}
-	
+
 			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = rd.readLine()) != null) {
 				sb.append(line);
 			}
-	
+
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	
+
 			JsonAbandonmentDTO dto = gson.fromJson(sb.toString(), JsonAbandonmentDTO.class);
 			try (Connection connect = DBConnectionManager.getConnection()) {
-	
+
 				int count = 0;
 				for (JsonAbandonmentDTO.item item : dto.response.body.items.item) {
 					PreparedStatement pstmt = connect.prepareStatement(Define.DETAILS_PARSING_DATA);
@@ -78,11 +78,11 @@ public class AbandonmentParsing {
 				e.printStackTrace();
 				return;
 			}
-			
+
 			rd.close();
-	        conn.disconnect();
-			
-			}
+			conn.disconnect();
+
+		}
 	}
-	
+
 }

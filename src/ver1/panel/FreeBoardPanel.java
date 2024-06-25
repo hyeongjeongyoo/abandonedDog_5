@@ -2,14 +2,11 @@ package ver1.panel;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,8 +24,8 @@ import javax.swing.table.TableColumn;
 import lombok.Data;
 import ver1.DAO.FreeBoardDAO;
 import ver1.DTO.FreeBoardDTO;
-import ver1.frame.MainBoardFrame;
 import ver1.frame.CreateFreeBoardFrame;
+import ver1.frame.MainBoardFrame;
 import ver1.frame.ViewFreeBoardFrame;
 import ver1.use.HeaderRenderer;
 
@@ -75,11 +72,9 @@ public class FreeBoardPanel extends JPanel {
 
 	}
 
-
 	public void setInitLayout() {
 		setLayout(null);
 		setBackground(Color.white);
-		
 
 		column.setPreferredWidth(500); // 원하는 기본 너비 설정
 		column.setMinWidth(300); // 최소 너비 설정
@@ -148,7 +143,7 @@ public class FreeBoardPanel extends JPanel {
 				new CreateFreeBoardFrame(mContext);
 			}
 		});
-		
+
 		freeTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -161,10 +156,11 @@ public class FreeBoardPanel extends JPanel {
 					// "접수 번호" 컬럼(첫 번째 컬럼)을 클릭했는지 확인
 					if (column == 1) {
 						ViewFreeBoardFrame viewBoard = new ViewFreeBoardFrame(mContext);
-						List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos((String)freeTable.getValueAt(row, column+1));
-						String title = (String)freeTable.getValueAt(row, column);
+						List<FreeBoardDTO> dtos = FreeBoardDAO
+								.getBoardDtos((String) freeTable.getValueAt(row, column + 1));
+						String title = (String) freeTable.getValueAt(row, column);
 						for (FreeBoardDTO dto : dtos) {
-							if(title.equals(dto.getTitle())) {
+							if (title.equals(dto.getTitle())) {
 								viewBoard.setTitle(dto.getUsername() + "님의 게시물");
 								viewBoard.titleField.setText(dto.getTitle());
 								viewBoard.nameField.setText(dto.getUsername());

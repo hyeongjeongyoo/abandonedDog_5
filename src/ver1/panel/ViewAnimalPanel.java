@@ -31,7 +31,7 @@ import ver1.DTO.PhotoDTO;
 import ver1.frame.MainBoardFrame;
 
 public class ViewAnimalPanel extends JPanel {
-	
+
 	private MainBoardFrame mContext;
 
 	private JTextField searchText;
@@ -78,7 +78,7 @@ public class ViewAnimalPanel extends JPanel {
 
 		searchText = new JTextField();
 		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
-		
+
 		interestBtn = new JButton(new ImageIcon("img/interBtn.jpg"));
 
 		petImage = new JPanel();
@@ -137,7 +137,7 @@ public class ViewAnimalPanel extends JPanel {
 
 		searchBtn.setBounds(1099, 700, 59, 20);
 		add(searchBtn);
-		
+
 		interestBtn.setBounds(20, 15, 118, 25);
 		interestBtn.setBackground(Color.GRAY);
 		add(interestBtn);
@@ -257,13 +257,16 @@ public class ViewAnimalPanel extends JPanel {
 				}
 			}
 		});
-		
+
 		interestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MyPageDAO.insertInterestAnimal(Integer.parseInt(textFieldID.getText()), mContext.name);
-				mContext.getMyPage().updateInterestAnimal(mContext.getMyPage().interestConvertToPageData(mContext.name));
-				JOptionPane.showMessageDialog(null, "관심등록되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				if (!textFieldID.getText().equalsIgnoreCase(null)) {
+					MyPageDAO.insertInterestAnimal(Integer.parseInt(textFieldID.getText()), mContext.name);
+					mContext.getMyPage()
+							.updateInterestAnimal(mContext.getMyPage().interestConvertToPageData(mContext.name));
+					JOptionPane.showMessageDialog(null, "관심등록되었습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 	}

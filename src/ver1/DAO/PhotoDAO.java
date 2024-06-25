@@ -49,7 +49,7 @@ public class PhotoDAO {
 
 		} catch (Exception e) {
 		}
-		if(dto == null) {
+		if (dto == null) {
 			JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "조회 실패", JOptionPane.ERROR_MESSAGE);
 		}
 		return dto;

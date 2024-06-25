@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,8 +15,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
-import ver1.frame.MainBoardFrame;
 
 public class RegisterAnimalPanel extends JPanel {
 	private JPanel mainPanel;
@@ -162,16 +159,16 @@ public class RegisterAnimalPanel extends JPanel {
 
 	private void addEventListener() {
 		btn.addActionListener(e -> {
-			 String id = textId.getText();
-	            String kind = (String) boxKind.getSelectedItem();
-	            String color = textColor.getText();
-	            String age = textAge.getText();
-	            String weight = textWeight.getText();
-	            String sex = (String) boxSex.getSelectedItem();
-	            String neuter = (String) boxNeuter.getSelectedItem();
-	            String specialMark = textSpecialMark.getText();
-	            String emp1 = boxEmp1.isSelected() ? "사용함" : "사용안함";
-	            String emp2 = boxEmp2.isSelected() ? "사용함" : "사용안함";
+			String id = textId.getText();
+			String kind = (String) boxKind.getSelectedItem();
+			String color = textColor.getText();
+			String age = textAge.getText();
+			String weight = textWeight.getText();
+			String sex = (String) boxSex.getSelectedItem();
+			String neuter = (String) boxNeuter.getSelectedItem();
+			String specialMark = textSpecialMark.getText();
+			String emp1 = boxEmp1.isSelected() ? "사용함" : "사용안함";
+			String emp2 = boxEmp2.isSelected() ? "사용함" : "사용안함";
 		});
 		boxEmp1.addActionListener(e -> {
 			String input = JOptionPane.showInputDialog("보호소 이름을 입력하세요");
@@ -182,5 +179,4 @@ public class RegisterAnimalPanel extends JPanel {
 		// 테이블 업데이트 관련 로직 추가
 	}
 
-	
 }

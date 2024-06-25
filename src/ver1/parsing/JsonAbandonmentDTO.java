@@ -11,20 +11,20 @@ import lombok.ToString;
 public class JsonAbandonmentDTO {
 
 	response response;
-	
+
 	@Data
 	class response {
 		header header;
 		body body;
 	}
-	
+
 	@Data
 	class header {
 		int reqNo;
 		String resultCode;
 		String resultMsg;
 	}
-	
+
 	@Data
 	class body {
 		items items;
@@ -32,12 +32,12 @@ public class JsonAbandonmentDTO {
 		int pageNo;
 		int totalCount;
 	}
-	
+
 	@Data
 	class items {
 		List<item> item = new ArrayList<>();
 	}
-	
+
 	@Data
 	class item {
 		String desertionNo;

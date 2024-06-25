@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -172,7 +171,6 @@ public class MyPagePanel extends JPanel {
 		};
 		animalScroll = new JScrollPane(interestAnimal);
 
-		// TODO 컬럼쓰는 법 다시 확인 - 형정
 		column = myWriter.getColumnModel().getColumn(0);
 		column.setMaxWidth(50);
 		column.setMinWidth(50);
@@ -245,7 +243,7 @@ public class MyPagePanel extends JPanel {
 		updateMyWriteBtn.setBounds(730, 370, 80, 30);
 		updateMyWriteBtn.setFont(font);
 		add(updateMyWriteBtn);
-		
+
 		deleteMyWriteBtn.setBounds(820, 370, 80, 30);
 		deleteMyWriteBtn.setFont(font);
 		add(deleteMyWriteBtn);
@@ -275,16 +273,16 @@ public class MyPagePanel extends JPanel {
 			header = permissionManagerTable.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer());
 			add(permissionManagerPane);
-			
+
 			permissionBtn.setBounds(1245, 290, 80, 30);
 			permissionBtn.setFont(font);
 			add(permissionBtn);
-			
+
 			managerLabel.setSize(103, 24);
 			managerLabel.setLocation(50, 30);
 		} else {
 			add(commonLabel);
-			
+
 			permissionCommonPane.setBounds(1125, 80, 200, 200);
 			permissionCommonPane.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
 			permissionCommonPane.getViewport().setBackground(Color.white);
@@ -294,7 +292,7 @@ public class MyPagePanel extends JPanel {
 			header = permissionCommonTable.getTableHeader();
 			header.setDefaultRenderer(new HeaderRenderer());
 			add(permissionCommonPane);
-			
+
 			commonLabel.setSize(103, 24);
 			commonLabel.setLocation(50, 30);
 		}
@@ -413,8 +411,7 @@ public class MyPagePanel extends JPanel {
 					MyPageDAO.deleteInterest(value, mContext.name);
 					updateInterestAnimal(interestConvertToPageData(mContext.name));
 				} catch (ArrayIndexOutOfBoundsException e2) {
-					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -423,22 +420,21 @@ public class MyPagePanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int choice = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "게시글 삭제", JOptionPane.YES_NO_OPTION);
-				if(choice == 0) {
+				if (choice == 0) {
 					List<FreeBoardDTO> dtos = FreeBoardDAO.getBoardDtos(mContext.name);
 					try {
 						int row = myWriter.rowAtPoint(e.getPoint());
 						int value = (Integer) myWriter.getValueAt(row, 0);
 						for (FreeBoardDTO dto : dtos) {
-							if(dto.getId() == value) {
+							if (dto.getId() == value) {
 								MyPageDAO.deleteMyWrite(dto.getId(), mContext.name);
 								updateMyWrite();
 								mContext.getFreeBoard().updateTable();
 							}
-							
+
 						}
 					} catch (ArrayIndexOutOfBoundsException e2) {
-						JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -452,21 +448,21 @@ public class MyPagePanel extends JPanel {
 					int row = myWriter.rowAtPoint(e.getPoint());
 					int value = (Integer) myWriter.getValueAt(row, 0);
 					for (FreeBoardDTO dto : dtos) {
-						if(dto.getId() == value) {
-							UpdateAdoptBoardFrame uab = new UpdateAdoptBoardFrame(mContext, dto.getTitle(), dto.getContent(), value);
+						if (dto.getId() == value) {
+							UpdateAdoptBoardFrame uab = new UpdateAdoptBoardFrame(mContext, dto.getTitle(),
+									dto.getContent(), value);
 							uab.titleField.setText(dto.getTitle());
 							uab.contentArea.setText(dto.getContent());
 						}
-						
+
 					}
 				} catch (ArrayIndexOutOfBoundsException e2) {
-					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "잠시 후 다시 시도해주세요.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
-		if(permissionBtn != null) {
+		if (permissionBtn != null) {
 			permissionBtn.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -547,11 +543,11 @@ public class MyPagePanel extends JPanel {
 		}
 		return pageData;
 	}
-	
+
 	public Object[][] adoptApplyState() {
 		List<ApplyDTO> currentPageData = AdoptDAO.addMyAdopt(mContext.name);
 		Object[][] pageData = new Object[currentPageData.size()][permissionCommon.length];
-		
+
 		for (int i = 0; i < currentPageData.size(); i++) {
 			ApplyDTO dto = currentPageData.get(i);
 			pageData[i][0] = dto.getId();
@@ -559,7 +555,7 @@ public class MyPagePanel extends JPanel {
 		}
 		return pageData;
 	}
-	
+
 	public Object[][] adoptApplyPermission() {
 		List<AdoptDTO> currentPageData = AdoptDAO.addMyAdoptManager(mContext.userDepartmentName);
 		Object[][] pageData = new Object[currentPageData.size()][permissionManager.length];
@@ -571,15 +567,4 @@ public class MyPagePanel extends JPanel {
 		return pageData;
 	}
 
-	public static void main(String[] args) {
-
-		JFrame frame = new JFrame("Sand Animation");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new MyPagePanel(new MainBoardFrame(false, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY,
-				TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY)));
-		frame.setSize(1400, 900);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-
-	}
 }

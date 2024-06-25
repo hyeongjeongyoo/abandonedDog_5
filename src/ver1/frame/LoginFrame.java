@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -31,7 +30,7 @@ public class LoginFrame extends JFrame {
 	private JLabel logo;
 
 	private JTextField idField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 
 	private JLabel idLabel;
 	private JLabel passwordLabel;
@@ -57,7 +56,7 @@ public class LoginFrame extends JFrame {
 		logo = new JLabel(new ImageIcon("img/logo.png"));
 
 		idField = new JTextField(10);
-		passwordField = new JTextField(50);
+		passwordField = new JPasswordField(50);
 
 		idLabel = new JLabel("아이디");
 		passwordLabel = new JLabel("비밀번호");
@@ -218,12 +217,8 @@ public class LoginFrame extends JFrame {
 		return passwordField;
 	}
 
-	public void setPasswordField(JTextField passwordField) {
+	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
-	}
-
-	public static void main(String[] args) {
-		new LoginFrame();
 	}
 
 }
