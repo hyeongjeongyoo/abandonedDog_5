@@ -117,6 +117,7 @@ public class MyPagePanel extends JPanel {
 				}
 			};
 			permissionManagerPane = new JScrollPane(permissionManagerTable);
+			managerInfo = new JLabel(new ImageIcon("img/managerData.png"));
 		} else {
 			info = new ImageIcon("img/common.png");
 			commonInfo = new JLabel(new ImageIcon("img/commonData.png"));
@@ -148,7 +149,6 @@ public class MyPagePanel extends JPanel {
 		managerLabel = new JLabel(info);
 		commonLabel = new JLabel(info);
 
-		managerInfo = new JLabel(new ImageIcon("img/Self.jpg"));
 		interestPet = new JPanel();
 
 		myWriteData = myWriteConvertToPageData(mContext.name);
@@ -248,9 +248,6 @@ public class MyPagePanel extends JPanel {
 		deleteMyWriteBtn.setFont(font);
 		add(deleteMyWriteBtn);
 		
-		commonInfo.setBounds(100, 100, 495, 225);
-		commonInfo.setBackground(Color.orange);
-		add(commonInfo);
 
 		if (mContext.manager) {
 			add(managerLabel);
@@ -284,6 +281,9 @@ public class MyPagePanel extends JPanel {
 
 			managerLabel.setSize(103, 24);
 			managerLabel.setLocation(50, 30);
+			
+			managerInfo.setBounds(310, 80, 495, 225);
+			add(managerInfo);
 		} else {
 			add(commonLabel);
 
@@ -299,6 +299,9 @@ public class MyPagePanel extends JPanel {
 
 			commonLabel.setSize(103, 24);
 			commonLabel.setLocation(50, 30);
+			
+			commonInfo.setBounds(310, 80, 495, 225);
+			add(commonInfo);
 		}
 
 		animalScroll.setBounds(50, 410, 600, 330);

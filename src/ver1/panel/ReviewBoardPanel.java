@@ -31,7 +31,6 @@ public class ReviewBoardPanel extends JPanel {
 	private JButton registrationBtn;
 	private JButton nextPageBtn;
 	private JButton prevPageBtn;
-	private JButton refrashBtn;
 
 	private JTable animalTable;
 	private JScrollPane animalScroll;
@@ -42,10 +41,6 @@ public class ReviewBoardPanel extends JPanel {
 
 	private DefaultTableModel model;
 	private Object[][] reviewData;
-
-	private JTextField searchText;
-	private JButton searchBtn;
-	private JLabel title;
 
 	String[] columnNames = { "id", "제목", "내용", "작성자" };
 
@@ -58,14 +53,9 @@ public class ReviewBoardPanel extends JPanel {
 	}
 
 	public void initData() {
-		searchText = new JTextField();
-		title = new JLabel("Title");
-
-		searchBtn = new JButton(new ImageIcon("img/serchBtn.jpg"));
 		registrationBtn = new JButton(new ImageIcon("img/registerBtn.jpg"));
 		nextPageBtn = new JButton(new ImageIcon("img/nextPageBtn.jpg"));
 		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
-		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
 		reviewData = getPageData();
 
@@ -88,23 +78,9 @@ public class ReviewBoardPanel extends JPanel {
 		// 컬럼 헤더 이동 불가
 		animalTable.getTableHeader().setReorderingAllowed(false);
 
-		searchText.setBounds(895, 700, 200, 22);
-		add(searchText);
-
-		searchBtn.setBounds(1099, 700, 59, 20);
-		add(searchBtn);
-
-		title.setBounds(860, 700, 80, 20);
-		add(title);
 
 		registrationBtn.setBounds(1099, 560, 60, 30);
 		add(registrationBtn);
-
-		refrashBtn.setBounds(20, 700, 50, 50);
-		refrashBtn.setBorderPainted(false);
-		refrashBtn.setContentAreaFilled(false);
-		refrashBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		add(refrashBtn);
 
 		animalScroll.setBounds(20, 13, 1140, 503);
 		animalScroll.setBorder(new TitledBorder(new LineBorder(new Color(13, 170, 93), 3), null));
