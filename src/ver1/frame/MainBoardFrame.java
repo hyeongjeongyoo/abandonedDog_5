@@ -244,4 +244,8 @@ public class MainBoardFrame extends JFrame {
 		return myPage;
 	}
 
+	public ReviewBoardPanel getAdoptReviewBoard() {
+		return adoptReviewBoard;
+	}
+
 }

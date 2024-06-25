@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import ver1.DAO.ReviewBoardDAO;
+import ver1.DTO.FreeBoardDTO;
+import ver1.DTO.ReviewBoardDTO;
 import ver1.frame.CreateReviewBoardFrame;
 import ver1.frame.MainBoardFrame;
 import ver1.use.HeaderRenderer;
@@ -44,7 +48,7 @@ public class ReviewBoardPanel extends JPanel {
 	private JButton searchBtn;
 	private JLabel title;
 
-	String[] columnNames = { "id", "title", "contents", "writer", "date" };
+	String[] columnNames = { "id", "제목", "내용", "작성자" };
 
 	public ReviewBoardPanel(MainBoardFrame mContext) {
 		this.mContext = mContext;
@@ -64,11 +68,7 @@ public class ReviewBoardPanel extends JPanel {
 		prevPageBtn = new JButton(new ImageIcon("img/backPageBtn.jpg"));
 		refrashBtn = new JButton(new ImageIcon("img/refrash.png"));
 
-		reviewData = new Object[][] { { 1, "우리 푸푸", "푸푸는 잘먹고 잘싸고 잘지내고있엉요", "푸푸맘", "2024-06-20" },
-				{ 2, "세상에서 가장 귀여운 놈", "3개월전에 데려온 놈놈이 너무 귀여워요 ", "샤넬백", "2024-01-13" },
-				{ 3, "누룽지의 성장일기 ", "누룽지는 점점 누래지고 있어용", "숭늉", "2023-12-25" },
-
-		};
+		reviewData = getPageData();
 
 		model = new DefaultTableModel(reviewData, columnNames);
 
@@ -147,7 +147,6 @@ public class ReviewBoardPanel extends JPanel {
 				if (currentPage > 0) {
 					currentPage--;
 				}
-				updateTable();
 			}
 		});
 		
@@ -156,35 +155,44 @@ public class ReviewBoardPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new CreateReviewBoardFrame(mContext);
+				updateTable();
 			}
 		});
 	}
 
-	private void updateTable() {
-		DefaultTableModel newModel = new DefaultTableModel(getPageData(), new String[] { "id", "title", "contents" }) {
+	public void updateTable() {
+		model = new DefaultTableModel(getPageData(), columnNames) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false; // 모든 셀을 편집 불가능하게 설정
 			}
 		};
-		animalTable.setModel(newModel);
+		animalTable.setModel(model);
 
-		column = animalTable.getColumnModel().getColumn(2); // "specialMark" 컬럼
-		column.setPreferredWidth(800); // 원하는 기본 너비 설정
-		column.setMinWidth(300); // 최소 너비 설정
-		column.setMaxWidth(800); // 최대 너비 설정
 
 		column = animalTable.getColumnModel().getColumn(0);
 		column.setMinWidth(40);
 		column.setMaxWidth(40);
+		
+		column = animalTable.getColumnModel().getColumn(1);
+		column.setMinWidth(150);
+		column.setMaxWidth(150);
+		
+		column = animalTable.getColumnModel().getColumn(2);
+		column.setMinWidth(800); // 최소 너비 설정
+		column.setMaxWidth(800); // 최대 너비 설정
 	}
 
 	private Object[][] getPageData() {
-		int start = currentPage * rowsPerPage;
-		int end = Math.min(start + rowsPerPage, reviewData.length);
-		Object[][] pageData = new Object[end - start][];
-		for (int i = start; i < end; i++) {
-			pageData[i - start] = reviewData[i];
+		List<ReviewBoardDTO> currentPageData = ReviewBoardDAO.getReviewBoard();
+		Object[][] pageData = new Object[currentPageData.size()][columnNames.length];
+
+		for (int i = 0; i < currentPageData.size(); i++) {
+			ReviewBoardDTO dto = currentPageData.get(i);
+			pageData[i][0] = dto.getId();
+			pageData[i][1] = dto.getTitle();
+			pageData[i][2] = dto.getContent();
+			pageData[i][3] = dto.getUsername();
 		}
 		return pageData;
 	}
