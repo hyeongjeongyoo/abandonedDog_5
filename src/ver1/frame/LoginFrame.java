@@ -152,6 +152,42 @@ public class LoginFrame extends JFrame {
 
 				if (dto != null) {
 
+					if (!idField.equals(null) && !passwordField.equals(null)) {
+
+						if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
+							JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
+							setVisible(false);
+							if (dto.getAuthority().equals("common")) {
+								new MainBoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(),
+										dto.getUserBirth(), dto.getAuthority(), dto.getUserTel());
+							} else {
+								new MainBoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(),
+										dto.getUserBirth(), dto.getAuthority(), dto.getUserTel(),
+										dto.getUserDepartmentNo(), dto.getUserDepartmentName());
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패",
+									JOptionPane.ERROR_MESSAGE);
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
+					}
+
+				}
+			}
+		});
+
+		passwordField.addActionListener(e -> {
+			String enteredId = idField.getText();
+			String enteredPassword = passwordField.getText();
+
+			LoginDTO dto = LoginDAO.selectLogin(enteredId);
+
+			if (dto != null) {
+
+				if (!idField.equals(null) && !passwordField.equals(null)) {
+
 					if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
 						JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
@@ -164,42 +200,12 @@ public class LoginFrame extends JFrame {
 									dto.getUserDepartmentName());
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 잘못되었습니다.", "로그인 실패",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {
 					JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 				}
-
-			}
-		});
-
-		passwordField.addActionListener(e -> {
-			String enteredId = idField.getText();
-			String enteredPassword = passwordField.getText();
-
-			LoginDTO dto = LoginDAO.selectLogin(enteredId);
-
-			if (dto != null) {
-
-				if (enteredId.equals(dto.getUserName()) && enteredPassword.equals(dto.getUserPassWord())) {
-					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인", JOptionPane.INFORMATION_MESSAGE);
-					setVisible(false);
-					if (dto.getAuthority().equals("common")) {
-						new MainBoardFrame(false, dto.getName(), dto.getUserName(), dto.getUserPassWord(),
-								dto.getUserBirth(), dto.getAuthority(), dto.getUserTel());
-					} else {
-						new MainBoardFrame(true, dto.getName(), dto.getUserName(), dto.getUserPassWord(),
-								dto.getUserBirth(), dto.getAuthority(), dto.getUserTel(), dto.getUserDepartmentNo(),
-								dto.getUserDepartmentName());
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "비밀번호가 잘못되었습니다.", "로그인 실패", JOptionPane.ERROR_MESSAGE);
-				}
-
-			} else {
-				JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "로그인", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 

@@ -151,12 +151,16 @@ public class MainBoardFrame extends JFrame {
 		main.addTab(null, new ImageIcon("img/Adopt.png"), missing, null);
 		missing.addTab("", null, null, null);
 		missing.addTab(null, new ImageIcon("img/AdoptApply.png"), applyAdoptBoard, null);
-		missing.addTab(null, new ImageIcon("img/AdoptReview.png"), adoptReviewBoard, null);
+		if(!manager) {
+			missing.addTab(null, new ImageIcon("img/AdoptReview.png"), adoptReviewBoard, null);
+		}
 
 		main.addTab(null, new ImageIcon("img/Shelter.png"), abandonment, null);
 		abandonment.addTab("", null, null, null);
 		abandonment.addTab(null, new ImageIcon("img/CareAnimal.png"), abanAnimalListboard, null);
-		abandonment.addTab(null, new ImageIcon("img/CareApply.png"), registerAnimal, null);
+		if(manager) {
+			abandonment.addTab(null, new ImageIcon("img/CareApply.png"), registerAnimal, null);
+		}
 		abandonment.addTab(null, new ImageIcon("img/CareSearch.png"), searchShelter, null);
 
 		main.addTab(null, new ImageIcon("img/MyPage.png"), myPage, null);
