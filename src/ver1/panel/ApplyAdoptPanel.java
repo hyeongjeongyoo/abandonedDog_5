@@ -319,6 +319,14 @@ public class ApplyAdoptPanel extends JPanel {
 				}
 			}
 		});
+		
+//		search.addActionListener(e -> {
+//			 String input = JOptionPane.showInputDialog("보호소 이름을 입력하세요");
+//			    if (input != null) {
+//			        boxEmp1.setText(input);
+//			    }
+//		});
+
 
 	}
 
