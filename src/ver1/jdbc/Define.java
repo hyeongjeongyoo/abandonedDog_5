@@ -76,10 +76,6 @@ public class Define {
 			+ "from adopt_apply as a\r\n" + "join animal_details as ad\r\n" + "on a.careID = ad.id\r\n"
 			+ "join shelter as s\r\n" + "on ad.careId = s.careId\r\n" + "where a.name = ? ";
 
-	public static final String MANAGER_ADOPT = " select a.*\r\n" + "from animal_details as ad\r\n"
-			+ "join adopt_apply as a\r\n" + "on a.careID = ad.id\r\n" + "join shelter as s\r\n"
-			+ "on ad.careId = s.careId\r\n" + "where s.careNm = ? ";
-
 	public static final String UPDATE_MY_WRITE = " select * from freeboarddb where username = ? ";
 
 	public static final String SELECT_FREE_BOARD = " select * from freeboarddb order by id desc ";
